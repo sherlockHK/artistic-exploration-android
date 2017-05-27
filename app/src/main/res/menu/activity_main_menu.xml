@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_activity"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="1.Activity" />
+        <item
+            android:id="@+id/nav_ipc"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="2.IPC" />
+        <item
+            android:id="@+id/nav_view_touch"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="3.View事件体系" />
+        <item
+            android:id="@+id/nav_view_principle"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="4.View工作原理" />
+        <item
+            android:id="@+id/nav_remote_views"
+            android:title="5.Remote view" />
+        <item
+            android:id="@+id/nav_drawable"
+            android:title="6.Drawable" />
+        <item
+            android:id="@+id/nav_animation"
+            android:title="7.Animation" />
+    </group>
+
+    <item android:title="@string/action_settings">
+        <menu>
+            <item
+                android:id="@+id/nav_window"
+                android:checkable="true"
+                android:icon="@drawable/ic_menu_share"
+                android:title="8.Window和WindowManager" />
+            <item
+                android:id="@+id/nav_four_component"
+                android:checkable="true"
+                android:icon="@drawable/ic_menu_send"
+                android:title="9.四大组件工作过程" />
+            <item
+                android:id="@+id/nav_handler"
+                android:checkable="true"
+                android:icon="@drawable/ic_menu_share"
+                android:title="10.Handler" />
+            <item
+                android:id="@+id/nav_thread"
+                android:checkable="true"
+                android:icon="@drawable/ic_menu_send"
+                android:title="11.Thread和ThreadPool" />
+            <item
+                android:id="@+id/nav_bitmap"
+                android:checkable="true"
+                android:icon="@drawable/ic_menu_share"
+                android:title="12.Bitmap" />
+            <item
+                android:id="@+id/nav_performance"
+                android:checkable="true"
+                android:icon="@drawable/ic_menu_send"
+                android:title="13.性能优化" />
+        </menu>
+
+    </item>
+
+</menu>
