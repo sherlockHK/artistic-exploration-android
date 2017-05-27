@@ -20,12 +20,15 @@
             android:title="4.View工作原理" />
         <item
             android:id="@+id/nav_remote_views"
+            android:icon="@drawable/ic_menu_manage"
             android:title="5.Remote view" />
         <item
             android:id="@+id/nav_drawable"
+            android:icon="@drawable/ic_menu_manage"
             android:title="6.Drawable" />
         <item
             android:id="@+id/nav_animation"
+            android:icon="@drawable/ic_menu_manage"
             android:title="7.Animation" />
     </group>
 
