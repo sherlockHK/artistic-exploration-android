@@ -12,7 +12,7 @@ import com.gakki.hk.artistic_exploration_android.R;
  * Email: kaihu1989@gmail.com.
  */
 
-public class TestActivity extends AppCompatActivity {
+public class IntentFilterTestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

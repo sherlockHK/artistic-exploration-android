@@ -3,6 +3,7 @@
     package="com.gakki.hk.artistic_exploration_android">
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.gakki.hk.artistic_exploration_android.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -20,7 +21,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.TestActivity">
+        <activity android:name="com.gakki.hk.artistic_exploration_android.activity.IntentFilterTestActivity">
             <intent-filter>
                 <action android:name="artistic_exploration_android"/>
                 <action android:name="artistic_exploration_android_1"/>
@@ -31,6 +32,9 @@
                 <data android:scheme="http" android:mimeType="video/*" />
             </intent-filter>
         </activity>
+
+        <activity android:name="com.gakki.hk.artistic_exploration_android.activity.IpcTestActivity"
+            android:process="com.gakki.hk.artistic_exploration_android.remote"/>
     </application>
 
 </manifest>
