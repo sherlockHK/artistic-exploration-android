@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
-        android:textAlignment="center"
         android:layout_height="wrap_content"
-        android:text="Ipc"/>
+        android:text="Ipc"
+        android:textAlignment="center" />
 
     <Button
         android:id="@+id/btn_activity_process"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="activity多进程"/>
+        android:text="activity多进程" />
+
+    <Button
+        android:id="@+id/btn_serialize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="serialize" />
+
+    <Button
+        android:id="@+id/btn_parcelable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="parcelable" />
 </LinearLayout>

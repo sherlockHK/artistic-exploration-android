@@ -11,6 +11,13 @@ import android.widget.Button;
 
 import com.gakki.hk.artistic_exploration_android.R;
 import com.gakki.hk.artistic_exploration_android.activity.IpcTestActivity;
+import com.gakki.hk.artistic_exploration_android.model.UserSerializable;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * Created by hcc on 16/8/4 21:18
@@ -21,24 +28,52 @@ import com.gakki.hk.artistic_exploration_android.activity.IpcTestActivity;
 public class IpcFragment extends Fragment implements View.OnClickListener {
 
 
-  public static IpcFragment newInstance() {
-    return new IpcFragment();
-  }
+    public static IpcFragment newInstance() {
+        return new IpcFragment();
+    }
 
-  @Nullable
-  @Override
-  public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-    return inflater.inflate(R.layout.fragment_ipc, null);
-  }
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_ipc, null);
+    }
 
-  @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-    Button btn = (Button) view.findViewById(R.id.btn_activity_process);
-    btn.setOnClickListener(this);
-  }
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        Button activityProcess = (Button) view.findViewById(R.id.btn_activity_process);
+        Button serialize = (Button) view.findViewById(R.id.btn_serialize);
+        activityProcess.setOnClickListener(this);
+        serialize.setOnClickListener(this);
+    }
 
-  @Override
-  public void onClick(View v) {
-    startActivity(new Intent(getContext(), IpcTestActivity.class));
-  }
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_activity_process:
+                startActivity(new Intent(getContext(), IpcTestActivity.class));
+                break;
+            case R.id.btn_serialize:
+                tesSerialize();
+                break;
+        }
+    }
+
+    private void tesSerialize() {
+        UserSerializable hk = new UserSerializable("hk", "18");
+        try {
+            ObjectOutputStream obs = new ObjectOutputStream(new FileOutputStream(getActivity().getExternalCacheDir() + "/user.txt"));
+            obs.writeObject(hk);
+            obs.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            ObjectInputStream obi = new ObjectInputStream(new FileInputStream(getActivity().getExternalCacheDir() + "/user.txt"));
+            UserSerializable user = (UserSerializable) obi.readObject();
+            obi.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }
