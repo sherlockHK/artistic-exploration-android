@@ -19,6 +19,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".activity.TestActivity">
+            <intent-filter>
+                <action android:name="artistic_exploration_android"/>
+                <action android:name="artistic_exploration_android_1"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT_1"/>
+
+                <data android:scheme="http" android:mimeType="video/*" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
