@@ -1,4 +1,4 @@
-package com.gakki.hk.artistic_exploration_android.fragment;
+package com.gakki.hk.artistic_exploration_android.intent_filter;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -13,19 +13,16 @@ import android.widget.Button;
 import com.gakki.hk.artistic_exploration_android.R;
 
 /**
- * Created by hcc on 16/8/4 21:18
- * 100332338@qq.com
- * <p/>
- * 首页模块主界面
+ *
  */
-public class ActivityFragment extends Fragment implements View.OnClickListener {
+public class IntentFilterFragment extends Fragment implements View.OnClickListener {
 
 
   private Button btn;
 
-  public static ActivityFragment newInstance() {
+  public static IntentFilterFragment newInstance() {
 
-    return new ActivityFragment();
+    return new IntentFilterFragment();
   }
 
   @Nullable

@@ -1,4 +1,4 @@
-package com.gakki.hk.artistic_exploration_android.fragment;
+package com.gakki.hk.artistic_exploration_android.ipc;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,8 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.gakki.hk.artistic_exploration_android.R;
-import com.gakki.hk.artistic_exploration_android.activity.IpcTestActivity;
-import com.gakki.hk.artistic_exploration_android.model.UserSerializable;
+import com.gakki.hk.artistic_exploration_android.ipc.model.UserSerializable;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

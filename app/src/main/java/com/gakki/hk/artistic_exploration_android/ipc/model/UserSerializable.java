@@ -1,4 +1,4 @@
-package com.gakki.hk.artistic_exploration_android.model;
+package com.gakki.hk.artistic_exploration_android.ipc.model;
 
 import java.io.Serializable;
 

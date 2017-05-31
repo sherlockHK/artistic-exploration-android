@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.gakki.hk.artistic_exploration_android.activity.IntentFilterTestActivity">
+        <activity android:name="com.gakki.hk.artistic_exploration_android.intent_filter.IntentFilterTestActivity">
             <intent-filter>
                 <action android:name="artistic_exploration_android"/>
                 <action android:name="artistic_exploration_android_1"/>
@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.gakki.hk.artistic_exploration_android.activity.IpcTestActivity"
+        <activity android:name="com.gakki.hk.artistic_exploration_android.ipc.IpcTestActivity"
             android:process="com.gakki.hk.artistic_exploration_android.remote"/>
     </application>
 

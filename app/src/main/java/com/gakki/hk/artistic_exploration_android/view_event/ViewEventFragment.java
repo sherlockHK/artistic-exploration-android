@@ -1,4 +1,4 @@
-package com.gakki.hk.artistic_exploration_android.fragment;
+package com.gakki.hk.artistic_exploration_android.view_event;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,16 +10,13 @@ import android.view.ViewGroup;
 import com.gakki.hk.artistic_exploration_android.R;
 
 /**
- * Created by hcc on 16/8/4 21:18
- * 100332338@qq.com
- * <p/>
- * 首页模块主界面
+ *
  */
-public class ViewTouchFragment extends Fragment {
+public class ViewEventFragment extends Fragment {
 
 
-  public static ViewTouchFragment newInstance() {
-    return new ViewTouchFragment();
+  public static ViewEventFragment newInstance() {
+    return new ViewEventFragment();
   }
 
   @Nullable

@@ -2,7 +2,7 @@
 package com.gakki.hk.artistic_exploration_android;
 
 // Declare any non-default types here with import statements
-import com.gakki.hk.artistic_exploration_android.model.Book;
+import com.gakki.hk.artistic_exploration_android.ipc.model.Book;
 
 interface IBookManager {
     List<Book> getBookList();

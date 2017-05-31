@@ -1,4 +1,4 @@
-package com.gakki.hk.artistic_exploration_android.model;
+package com.gakki.hk.artistic_exploration_android.ipc.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

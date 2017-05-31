@@ -1,4 +1,4 @@
-package com.gakki.hk.artistic_exploration_android.activity;
+package com.gakki.hk.artistic_exploration_android.intent_filter;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

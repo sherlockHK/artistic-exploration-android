@@ -12,9 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.gakki.hk.artistic_exploration_android.fragment.ActivityFragment;
-import com.gakki.hk.artistic_exploration_android.fragment.IpcFragment;
-import com.gakki.hk.artistic_exploration_android.fragment.ViewTouchFragment;
+import com.gakki.hk.artistic_exploration_android.intent_filter.IntentFilterFragment;
+import com.gakki.hk.artistic_exploration_android.ipc.IpcFragment;
+import com.gakki.hk.artistic_exploration_android.view_event.ViewEventFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -77,9 +77,9 @@ public class MainActivity extends AppCompatActivity
      */
     private void initFragments() {
 
-        ActivityFragment activityFragment = ActivityFragment.newInstance();
+        IntentFilterFragment activityFragment = IntentFilterFragment.newInstance();
         IpcFragment ipcFragment = IpcFragment.newInstance();
-        ViewTouchFragment viewTouchFragment = ViewTouchFragment.newInstance();
+        ViewEventFragment viewTouchFragment = ViewEventFragment.newInstance();
 
         fragments = new Fragment[]{
                 activityFragment,

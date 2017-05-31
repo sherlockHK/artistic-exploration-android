@@ -1,4 +1,4 @@
-package com.gakki.hk.artistic_exploration_android.activity;
+package com.gakki.hk.artistic_exploration_android.ipc;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
