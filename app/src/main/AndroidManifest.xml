@@ -35,6 +35,11 @@
 
         <activity android:name="com.gakki.hk.artistic_exploration_android.ipc.IpcTestActivity"
             android:process="com.gakki.hk.artistic_exploration_android.remote"/>
+
+        <activity android:name=".ipc.MessengerActivity"/>
+
+        <service android:name=".ipc.MessengerService"
+            android:process=":remote"/>
     </application>
 
 </manifest>
