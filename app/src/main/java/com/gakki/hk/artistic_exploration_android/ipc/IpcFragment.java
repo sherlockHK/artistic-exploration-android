@@ -42,9 +42,11 @@ public class IpcFragment extends Fragment implements View.OnClickListener {
         Button activityProcess = (Button) view.findViewById(R.id.btn_activity_process);
         Button serialize = (Button) view.findViewById(R.id.btn_serialize);
         Button messenger = (Button) view.findViewById(R.id.btn_messenger);
+        Button aidl = (Button) view.findViewById(R.id.btn_aidl);
         activityProcess.setOnClickListener(this);
         serialize.setOnClickListener(this);
         messenger.setOnClickListener(this);
+        aidl.setOnClickListener(this);
     }
 
     @Override
@@ -58,6 +60,9 @@ public class IpcFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.btn_messenger:
                 startActivity(new Intent(getContext(), MessengerActivity.class));
+                break;
+            case R.id.btn_aidl:
+                startActivity(new Intent(getContext(), AIDLBookManagerActivity.class));
                 break;
         }
     }

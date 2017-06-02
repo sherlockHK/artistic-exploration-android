@@ -23,23 +23,33 @@
 
         <activity android:name="com.gakki.hk.artistic_exploration_android.intent_filter.IntentFilterTestActivity">
             <intent-filter>
-                <action android:name="artistic_exploration_android"/>
-                <action android:name="artistic_exploration_android_1"/>
+                <action android:name="artistic_exploration_android" />
+                <action android:name="artistic_exploration_android_1" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.DEFAULT_1"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT_1" />
 
-                <data android:scheme="http" android:mimeType="video/*" />
+                <data
+                    android:mimeType="video/*"
+                    android:scheme="http" />
             </intent-filter>
         </activity>
 
-        <activity android:name="com.gakki.hk.artistic_exploration_android.ipc.IpcTestActivity"
-            android:process="com.gakki.hk.artistic_exploration_android.remote"/>
+        <activity
+            android:name="com.gakki.hk.artistic_exploration_android.ipc.IpcTestActivity"
+            android:process="com.gakki.hk.artistic_exploration_android.remote" />
 
-        <activity android:name=".ipc.MessengerActivity"/>
+        <activity android:name=".ipc.MessengerActivity" />
+        <activity android:name=".ipc.AIDLBookManagerActivity"/>
 
-        <service android:name=".ipc.MessengerService"
-            android:process=":remote"/>
+        <service
+            android:name=".ipc.MessengerService"
+            android:process=":remote" />
+
+        <service
+            android:name=".ipc.AIDLBookManagerService"
+            android:process=":remote" />
+
     </application>
 
 </manifest>
