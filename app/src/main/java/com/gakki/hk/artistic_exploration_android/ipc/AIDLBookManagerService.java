@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
 
@@ -23,7 +24,8 @@ public class AIDLBookManagerService extends Service {
     private static final String TAG = "AIDLBookManagerService";
     //CopyOnWriteArrayList支持并发读/写
     private CopyOnWriteArrayList<Book> mBookList = new CopyOnWriteArrayList<>();
-    private CopyOnWriteArrayList<IOnNewBookArrivedListener> mListeners = new CopyOnWriteArrayList<>();
+    //使用RemoteCallbackList存listener
+    private RemoteCallbackList<IOnNewBookArrivedListener> remoteCallbackList = new RemoteCallbackList<>();
 
     @Override
     public void onCreate() {
@@ -46,25 +48,43 @@ public class AIDLBookManagerService extends Service {
 
         @Override
         public void addBook(Book book) throws RemoteException {
+            /**
+             * 客户端调用远程服务方法，被调用的addBook运行在服务端的binder线程池中，同时客户端线程会被挂起，
+             * 如果服务端执行耗时操作，会导致客户端线程长时间阻塞，如果客户端线程是UI线程，会导致ANR。
+             *
+             * SystemClock.sleep(10 * 1000);
+             * */
+
             mBookList.add(book);
-            for (IOnNewBookArrivedListener listener : mListeners) {
-                listener.onNewBookArrived(book);
-            }
+
+            notifyAllObserver(book);
         }
 
         @Override
         public void registerListener(IOnNewBookArrivedListener listener) throws RemoteException {
-            if (!mListeners.contains(listener)) {
-                mListeners.add(listener);
-            }
+            remoteCallbackList.register(listener);
         }
 
         @Override
         public void unregisterListener(IOnNewBookArrivedListener listener) throws RemoteException {
-            if (mListeners.contains(listener)) {
-                mListeners.remove(listener);
-            }
+            remoteCallbackList.unregister(listener);
         }
     };
 
+    //通知所有的订阅者
+    private void notifyAllObserver(Book book) throws RemoteException {
+        int n = remoteCallbackList.beginBroadcast();
+        for (int i = 0; i < n; i++) {
+            IOnNewBookArrivedListener listener = remoteCallbackList.getBroadcastItem(i);
+            if (listener != null){
+                listener.onNewBookArrived(book);
+            }
+        }
+        remoteCallbackList.finishBroadcast();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 }

@@ -17,14 +17,6 @@ public class Book implements Parcelable {
         this.bookName = bookName;
     }
 
-    public int getBookId() {
-        return bookId;
-    }
-
-    public String getBookName() {
-        return bookName;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -55,4 +47,9 @@ public class Book implements Parcelable {
             return new Book[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "id:"+ bookId + "name:" + bookName;
+    }
 }

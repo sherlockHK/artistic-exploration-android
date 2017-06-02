@@ -14,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 
+import com.blankj.utilcode.utils.LogUtils;
 import com.blankj.utilcode.utils.TimeUtils;
 import com.blankj.utilcode.utils.ToastUtils;
 import com.gakki.hk.artistic_exploration_android.IBookManager;
@@ -64,7 +65,7 @@ public class AIDLBookManagerActivity extends Activity implements View.OnClickLis
         }
     };
 
-    // TODO: 2017/6/2  IOnNewBookArrivedListener的onNewBookArrived方法是在客户端的binder线程池中执行的，用handler将它切换到主线程执行???
+    // TODO: 2017/6/2  IOnNewBookArrivedListener的onNewBookArrived方法是在运行在客户端的binder线程池中，用handler将它切换到主线程执行???
     private IOnNewBookArrivedListener mOnNewBookArrivedListener = new IOnNewBookArrivedListener.Stub(){
         @Override
         public void onNewBookArrived(Book newBook) throws RemoteException {
@@ -80,7 +81,7 @@ public class AIDLBookManagerActivity extends Activity implements View.OnClickLis
             switch (msg.what){
                 case MSG_NEW_BOOK_ARRIVED:
                     Book book = (Book) msg.obj;
-                    ToastUtils.showLongToast(AIDLBookManagerActivity.this, "received new book:" + book.getBookName());
+                    ToastUtils.showLongToast(AIDLBookManagerActivity.this, "received new book:" + book.toString());
                     break;
             }
         }
@@ -107,6 +108,7 @@ public class AIDLBookManagerActivity extends Activity implements View.OnClickLis
     protected void onDestroy() {
         if (mRemoteBookManager != null && mRemoteBookManager.asBinder().isBinderAlive()){
             try {
+                LogUtils.i("unregister listener:" + mOnNewBookArrivedListener);
                 mRemoteBookManager.unregisterListener(mOnNewBookArrivedListener);
             } catch (RemoteException e) {
                 e.printStackTrace();
