@@ -8,6 +8,7 @@ import android.os.RemoteException;
 import android.support.annotation.Nullable;
 
 import com.gakki.hk.artistic_exploration_android.IBookManager;
+import com.gakki.hk.artistic_exploration_android.IOnNewBookArrivedListener;
 import com.gakki.hk.artistic_exploration_android.ipc.model.Book;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class AIDLBookManagerService extends Service {
     private static final String TAG = "AIDLBookManagerService";
     //CopyOnWriteArrayList支持并发读/写
     private CopyOnWriteArrayList<Book> mBookList = new CopyOnWriteArrayList<>();
+    private CopyOnWriteArrayList<IOnNewBookArrivedListener> mListeners = new CopyOnWriteArrayList<>();
 
     @Override
     public void onCreate() {
@@ -36,7 +38,7 @@ public class AIDLBookManagerService extends Service {
         return mBinder;
     }
 
-    private Binder mBinder = new IBookManager.Stub(){
+    private Binder mBinder = new IBookManager.Stub() {
         @Override
         public List<Book> getBookList() throws RemoteException {
             return mBookList;
@@ -45,6 +47,23 @@ public class AIDLBookManagerService extends Service {
         @Override
         public void addBook(Book book) throws RemoteException {
             mBookList.add(book);
+            for (IOnNewBookArrivedListener listener : mListeners) {
+                listener.onNewBookArrived(book);
+            }
+        }
+
+        @Override
+        public void registerListener(IOnNewBookArrivedListener listener) throws RemoteException {
+            if (!mListeners.contains(listener)) {
+                mListeners.add(listener);
+            }
+        }
+
+        @Override
+        public void unregisterListener(IOnNewBookArrivedListener listener) throws RemoteException {
+            if (mListeners.contains(listener)) {
+                mListeners.remove(listener);
+            }
         }
     };
 
