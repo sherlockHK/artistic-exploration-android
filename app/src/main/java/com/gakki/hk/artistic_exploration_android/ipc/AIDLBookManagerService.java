@@ -2,11 +2,13 @@ package com.gakki.hk.artistic_exploration_android.ipc;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.gakki.hk.artistic_exploration_android.IBookManager;
 import com.gakki.hk.artistic_exploration_android.IOnNewBookArrivedListener;
@@ -37,6 +39,14 @@ public class AIDLBookManagerService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+        /**
+         * AIDL权限验证
+         * */
+        int check = checkCallingOrSelfPermission("com.gakki.hk.artistic_exploration_android.permission.ACCESS_BOOK_SERVICE");
+        Log.d(TAG, "onbind check=" + check);
+        if (check == PackageManager.PERMISSION_DENIED) {
+            return null;
+        }
         return mBinder;
     }
 

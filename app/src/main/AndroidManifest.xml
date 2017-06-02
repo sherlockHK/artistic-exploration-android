@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gakki.hk.artistic_exploration_android">
 
+    <permission
+        android:name="com.gakki.hk.artistic_exploration_android.permission.ACCESS_BOOK_SERVICE"
+        android:protectionLevel="normal" />
+    <uses-permission android:name="com.gakki.hk.artistic_exploration_android.permission.ACCESS_BOOK_SERVICE" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -40,7 +45,7 @@
             android:process="com.gakki.hk.artistic_exploration_android.remote" />
 
         <activity android:name=".ipc.MessengerActivity" />
-        <activity android:name=".ipc.AIDLBookManagerActivity"/>
+        <activity android:name=".ipc.AIDLBookManagerActivity" />
 
         <service
             android:name=".ipc.MessengerService"
