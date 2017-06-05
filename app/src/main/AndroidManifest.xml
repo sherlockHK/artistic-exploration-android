@@ -45,6 +45,7 @@
 
         <activity android:name=".ipc.MessengerActivity" />
         <activity android:name=".ipc.AIDLBookManagerActivity" />
+        <activity android:name=".ipc.TcpClientActivity" />
 
         <service
             android:name=".ipc.MessengerService"
@@ -53,6 +54,9 @@
         <service
             android:name=".ipc.AIDLBookManagerService"
             android:process=":remote" />
+
+        <service android:name=".ipc.TcpServerService"
+            android:process=":tcpServer"/>
 
     </application>
 
