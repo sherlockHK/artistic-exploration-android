@@ -25,8 +25,6 @@ import java.io.ObjectOutputStream;
  * 首页模块主界面
  */
 public class IpcFragment extends Fragment implements View.OnClickListener {
-
-
     public static IpcFragment newInstance() {
         return new IpcFragment();
     }
@@ -43,11 +41,13 @@ public class IpcFragment extends Fragment implements View.OnClickListener {
         Button serialize = (Button) view.findViewById(R.id.btn_serialize);
         Button messenger = (Button) view.findViewById(R.id.btn_messenger);
         Button aidl = (Button) view.findViewById(R.id.btn_aidl);
+        Button contentProvider = (Button) view.findViewById(R.id.btn_content_provider);
         Button socket = (Button) view.findViewById(R.id.btn_socket);
         activityProcess.setOnClickListener(this);
         serialize.setOnClickListener(this);
         messenger.setOnClickListener(this);
         aidl.setOnClickListener(this);
+        contentProvider.setOnClickListener(this);
         socket.setOnClickListener(this);
     }
 
@@ -66,8 +66,13 @@ public class IpcFragment extends Fragment implements View.OnClickListener {
             case R.id.btn_aidl:
                 startActivity(new Intent(getContext(), AIDLBookManagerActivity.class));
                 break;
+            case R.id.btn_content_provider:
+                startActivity(new Intent(getContext(), BookContentProviderActivity.class));
+                break;
             case R.id.btn_socket:
                 startActivity(new Intent(getContext(), TcpClientActivity.class));
+                break;
+            default:
                 break;
         }
     }

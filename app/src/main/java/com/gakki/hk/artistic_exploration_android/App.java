@@ -3,6 +3,7 @@ package com.gakki.hk.artistic_exploration_android;
 import android.app.Application;
 import android.util.Log;
 
+import com.facebook.stetho.Stetho;
 import com.gakki.hk.artistic_exploration_android.util.Util;
 
 /**
@@ -15,5 +16,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         Log.d("app onCreate: process=" , Util.getCurProcessName(this));
+        Stetho.initializeWithDefaults(this);
     }
 }
