@@ -66,6 +66,7 @@ public class AIDLBookManagerActivity extends Activity implements View.OnClickLis
     };
 
     // TODO: 2017/6/2  IOnNewBookArrivedListener的onNewBookArrived方法是在运行在客户端的binder线程池中，用handler将它切换到主线程执行???
+    // TODO: 2017/6/6  Binder连接池:多个aidl一个remote service
     private IOnNewBookArrivedListener mOnNewBookArrivedListener = new IOnNewBookArrivedListener.Stub(){
         @Override
         public void onNewBookArrived(Book newBook) throws RemoteException {
