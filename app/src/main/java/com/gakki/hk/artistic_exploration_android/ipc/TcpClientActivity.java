@@ -1,17 +1,26 @@
 package com.gakki.hk.artistic_exploration_android.ipc;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.blankj.utilcode.utils.LogUtils;
+import com.blankj.utilcode.utils.StringUtils;
+import com.blankj.utilcode.utils.TimeUtils;
 import com.gakki.hk.artistic_exploration_android.R;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -21,12 +30,52 @@ import java.net.Socket;
  * Email: kaihu1989@gmail.com.
  */
 
-public class TcpClientActivity extends Activity {
+public class TcpClientActivity extends Activity implements View.OnClickListener {
     private static final int MESSAGE_SOCKET_CONNECTED = 0x01;
     private static final int MESSAGE_RECEIVE_NEW_MSG = 0x02;
 
     private Socket mClientSocket;
     private PrintWriter mPrintWriter;
+    private TextView chatContent;
+    private Button sendBtn;
+    private EditText etSend;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_tcp_client);
+        chatContent = (TextView) findViewById(R.id.tv_chat_content);
+        sendBtn = (Button) findViewById(R.id.btn_send_msg);
+        etSend = (EditText) findViewById(R.id.et_send);
+        sendBtn.setOnClickListener(this);
+
+        Intent intent = new Intent(this, TcpServerService.class);
+        startService(intent);
+
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    connectTCPServer();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if(mClientSocket != null){
+            try {
+                mClientSocket.shutdownInput();
+                mClientSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        super.onDestroy();
+    }
 
     @SuppressWarnings("HandlerLeak")
     private Handler mHandler = new Handler(){
@@ -34,8 +83,10 @@ public class TcpClientActivity extends Activity {
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case MESSAGE_RECEIVE_NEW_MSG:
+                    chatContent.setText(chatContent.getText().toString() + msg.obj);
                     break;
                 case MESSAGE_SOCKET_CONNECTED:
+                    sendBtn.setEnabled(true);
                     break;
                 default:
                     break;
@@ -43,15 +94,7 @@ public class TcpClientActivity extends Activity {
         }
     };
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tcp_client);
-
-        connectTCPServer();
-    }
-
-    private void connectTCPServer() {
+    private void connectTCPServer() throws IOException {
         Socket socket = null;
         //连接tcp服务器
         while (socket == null) {
@@ -68,7 +111,36 @@ public class TcpClientActivity extends Activity {
             }
         }
 
-        // TODO: 2017/6/5 0005
         //接收服务器端的消息
+        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        while (!TcpClientActivity.this.isFinishing()){
+            String msgFromServer = in.readLine();
+            LogUtils.i("receive msg from server:" + msgFromServer);
+            if (!StringUtils.isEmpty(msgFromServer)){
+                String showedMsg = "server time " + TimeUtils.getCurTimeString() + msgFromServer + "\n";
+                mHandler.obtainMessage(MESSAGE_RECEIVE_NEW_MSG, showedMsg).sendToTarget();
+            }
+        }
+        LogUtils.i("quit...");
+        mPrintWriter.close();
+        in.close();
+        socket.close();
+    }
+
+    @Override
+    public void onClick(View v) {
+        //向服务器发送消息
+        final String msg = etSend.getText().toString();
+        if (!StringUtils.isEmpty(msg) && mPrintWriter != null){
+            new Thread(){
+                @Override
+                public void run() {
+                    mPrintWriter.println(msg);
+                }
+            }.start();
+            etSend.setText("");
+            String showedMsg = "client time:" + TimeUtils.getCurTimeString() + msg + "\n";
+            chatContent.setText(chatContent.getText().toString() + showedMsg);
+        }
     }
 }
