@@ -14,7 +14,8 @@ import android.view.MenuItem;
 
 import com.gakki.hk.artistic_exploration_android.intent_filter.IntentFilterFragment;
 import com.gakki.hk.artistic_exploration_android.ipc.IpcFragment;
-import com.gakki.hk.artistic_exploration_android.view_event.ViewEventFragment;
+import com.gakki.hk.artistic_exploration_android.view_event_architecture.ViewEventArchitectureFragment;
+import com.gakki.hk.artistic_exploration_android.view_theory.ViewTheoryFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity
         initView();
         initFragments();
 
-        switchFragment(1);
+        switchFragment(2);
     }
 
     private void initView() {
@@ -79,13 +80,14 @@ public class MainActivity extends AppCompatActivity
 
         IntentFilterFragment activityFragment = IntentFilterFragment.newInstance();
         IpcFragment ipcFragment = IpcFragment.newInstance();
-        ViewEventFragment viewTouchFragment = ViewEventFragment.newInstance();
+        ViewEventArchitectureFragment viewEventFragment = ViewEventArchitectureFragment.newInstance();
+        ViewTheoryFragment viewTheoryFragment = ViewTheoryFragment.newInstance();
 
         fragments = new Fragment[]{
                 activityFragment,
                 ipcFragment,
-                viewTouchFragment,
-                activityFragment,
+                viewEventFragment,
+                viewTheoryFragment,
                 activityFragment,
                 activityFragment,
                 activityFragment,

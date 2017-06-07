@@ -1,4 +1,4 @@
-package com.gakki.hk.artistic_exploration_android.view_event;
+package com.gakki.hk.artistic_exploration_android.view_theory;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,16 +12,16 @@ import com.gakki.hk.artistic_exploration_android.R;
 /**
  *
  */
-public class ViewEventFragment extends Fragment {
+public class ViewTheoryFragment extends Fragment {
 
 
-  public static ViewEventFragment newInstance() {
-    return new ViewEventFragment();
+  public static ViewTheoryFragment newInstance() {
+    return new ViewTheoryFragment();
   }
 
   @Nullable
   @Override
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-    return inflater.inflate(R.layout.fragment_ipc, null);
+    return inflater.inflate(R.layout.fragment_view_theory, null);
   }
 }
