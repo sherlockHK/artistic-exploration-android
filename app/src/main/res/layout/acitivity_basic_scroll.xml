@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.gakki.hk.artistic_exploration_android.view_event_architecture.BasicScrollView
+    <com.gakki.hk.artistic_exploration_android.view_event_mechanism.BasicScrollView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center"

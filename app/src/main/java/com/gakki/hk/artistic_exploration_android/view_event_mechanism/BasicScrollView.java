@@ -1,4 +1,4 @@
-package com.gakki.hk.artistic_exploration_android.view_event_architecture;
+package com.gakki.hk.artistic_exploration_android.view_event_mechanism;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;

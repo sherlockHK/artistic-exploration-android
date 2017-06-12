@@ -14,7 +14,7 @@ import android.view.MenuItem;
 
 import com.gakki.hk.artistic_exploration_android.intent_filter.IntentFilterFragment;
 import com.gakki.hk.artistic_exploration_android.ipc.IpcFragment;
-import com.gakki.hk.artistic_exploration_android.view_event_architecture.ViewEventArchitectureFragment;
+import com.gakki.hk.artistic_exploration_android.view_event_mechanism.ViewEventMechanismFragment;
 import com.gakki.hk.artistic_exploration_android.view_theory.ViewTheoryFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity
 
         IntentFilterFragment activityFragment = IntentFilterFragment.newInstance();
         IpcFragment ipcFragment = IpcFragment.newInstance();
-        ViewEventArchitectureFragment viewEventFragment = ViewEventArchitectureFragment.newInstance();
+        ViewEventMechanismFragment viewEventFragment = ViewEventMechanismFragment.newInstance();
         ViewTheoryFragment viewTheoryFragment = ViewTheoryFragment.newInstance();
 
         fragments = new Fragment[]{

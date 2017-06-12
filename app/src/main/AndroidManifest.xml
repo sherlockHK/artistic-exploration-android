@@ -50,7 +50,8 @@
         <activity android:name=".ipc.AIDLBookManagerActivity" />
         <activity android:name=".ipc.BookContentProviderActivity"/>
         <activity android:name=".ipc.TcpClientActivity" />
-        <activity android:name=".view_event_architecture.BasicScrollActivity" />
+        <activity android:name=".view_event_mechanism.BasicScrollActivity" />
+        <activity android:name=".view_event_mechanism.ScrollConflictActivity" />
 
         <service
             android:name=".ipc.MessengerService"
