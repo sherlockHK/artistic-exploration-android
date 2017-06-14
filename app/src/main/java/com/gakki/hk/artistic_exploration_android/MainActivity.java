@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity
         initView();
         initFragments();
 
-        switchFragment(2);
+        switchFragment(3);
     }
 
     private void initView() {
