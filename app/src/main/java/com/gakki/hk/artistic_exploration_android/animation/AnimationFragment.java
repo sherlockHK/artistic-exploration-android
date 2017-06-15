@@ -1,5 +1,6 @@
 package com.gakki.hk.artistic_exploration_android.animation;
 
+import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
@@ -19,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.blankj.utilcode.utils.ToastUtils;
 import com.gakki.hk.artistic_exploration_android.R;
 
 /**
@@ -70,12 +72,15 @@ public class AnimationFragment extends Fragment implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_view_animation:
+                //view动画
                 viewAnimation();
                 break;
             case R.id.btn_frame_animation:
+                //帧动画
                 frameAnimation();
                 break;
             case R.id.btn_property_animation:
+                //属性动画
                 propertyAnimation();
                 break;
         }
@@ -103,6 +108,30 @@ public class AnimationFragment extends Fragment implements View.OnClickListener 
         valueAnimator.start();
 
         AnimatorSet animatorSet = new AnimatorSet();
+        //添加属性动画监听
+        animatorSet.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                ToastUtils.showShortToast(getContext(), "onAnimationStart");
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                ToastUtils.showShortToast(getContext(), "onAnimationEnd");
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                ToastUtils.showShortToast(getContext(), "onAnimationCancel");
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+                ToastUtils.showShortToast(getContext(), "onAnimationRepeat");
+            }
+        });
+
+
         animatorSet.playSequentially(
                 ObjectAnimator.ofFloat(demo4, "translationX", 0, 100,0),
                 ObjectAnimator.ofFloat(demo4, "rotationX", 0, 50,0),
@@ -111,5 +140,6 @@ public class AnimationFragment extends Fragment implements View.OnClickListener 
                 ObjectAnimator.ofFloat(demo4, "alpha", 1f, 0.5f, 1f)
         );
         animatorSet.setDuration(1000).start();
+
     }
 }
