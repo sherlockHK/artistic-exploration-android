@@ -1,6 +1,7 @@
 package com.gakki.hk.artistic_exploration_android.view_event_mechanism;
 
 import android.content.Intent;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.gakki.hk.artistic_exploration_android.R;
 
@@ -33,6 +35,9 @@ public class ViewEventMechanismFragment extends Fragment implements View.OnClick
         basicScroll.setOnClickListener(this);
         Button conflictScroll = (Button) view.findViewById(R.id.btn_conflict_scroll);
         conflictScroll.setOnClickListener(this);
+        LinearLayout ll = (LinearLayout) view.findViewById(R.id.ll_view_event);
+        TransitionDrawable background = (TransitionDrawable) ll.getBackground();
+        background.startTransition(1000);
     }
 
     @Override
