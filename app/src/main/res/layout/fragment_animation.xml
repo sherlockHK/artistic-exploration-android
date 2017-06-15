@@ -11,7 +11,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="200dp"
             android:orientation="vertical">
 
             <Button
@@ -63,8 +63,15 @@
                 android:id="@+id/iv_demo3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:src="@mipmap/ic_launcher" />
+                android:layout_gravity="left"
+                android:src="@mipmap/ic_launcher"/>
+
+            <ImageView
+                android:id="@+id/iv_demo4"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/robin"
+                android:scaleType="centerCrop"/>
         </LinearLayout>
 
 

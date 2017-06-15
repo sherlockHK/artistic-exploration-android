@@ -1,5 +1,9 @@
 package com.gakki.hk.artistic_exploration_android.animation;
 
+import android.animation.AnimatorSet;
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -27,6 +31,7 @@ public class AnimationFragment extends Fragment implements View.OnClickListener 
     private ImageView demo1;
     private ImageView demo2;
     private ImageView demo3;
+    private ImageView demo4;
 
     public static AnimationFragment newInstance() {
         return new AnimationFragment();
@@ -47,6 +52,7 @@ public class AnimationFragment extends Fragment implements View.OnClickListener 
         demo1 = (ImageView) view.findViewById(R.id.iv_demo1);
         demo2 = (ImageView) view.findViewById(R.id.iv_demo2);
         demo3 = (ImageView) view.findViewById(R.id.iv_demo3);
+        demo4 = (ImageView) view.findViewById(R.id.iv_demo4);
         viewAnimation.setOnClickListener(this);
         frameAnimation.setOnClickListener(this);
         propertyAnimation.setOnClickListener(this);
@@ -70,6 +76,7 @@ public class AnimationFragment extends Fragment implements View.OnClickListener 
                 frameAnimation();
                 break;
             case R.id.btn_property_animation:
+                propertyAnimation();
                 break;
         }
     }
@@ -84,5 +91,25 @@ public class AnimationFragment extends Fragment implements View.OnClickListener 
         Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.view_animation);
         animation.setInterpolator(new AccelerateDecelerateInterpolator());
         demo1.startAnimation(animation);
+    }
+
+    private void propertyAnimation() {
+        ObjectAnimator.ofFloat(demo3, "translationX", demo3.getWidth()).start();
+        ValueAnimator valueAnimator = ObjectAnimator.ofInt(demo3, "backgroundColor", /*red*/0XFFFF8080, /*blue*/0xFF8080FF);
+        valueAnimator.setDuration(3000);
+        valueAnimator.setEvaluator(new ArgbEvaluator());
+        valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        valueAnimator.setRepeatMode(ValueAnimator.REVERSE);
+        valueAnimator.start();
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playSequentially(
+                ObjectAnimator.ofFloat(demo4, "translationX", 0, 100,0),
+                ObjectAnimator.ofFloat(demo4, "rotationX", 0, 50,0),
+                ObjectAnimator.ofFloat(demo4, "rotation", 0, 90,0),
+                ObjectAnimator.ofFloat(demo4, "scaleX", 0.8f, 1.2f, 1f),
+                ObjectAnimator.ofFloat(demo4, "alpha", 1f, 0.5f, 1f)
+        );
+        animatorSet.setDuration(1000).start();
     }
 }
