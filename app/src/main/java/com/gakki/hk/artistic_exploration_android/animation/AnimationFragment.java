@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.blankj.utilcode.utils.SizeUtils;
 import com.blankj.utilcode.utils.ToastUtils;
 import com.gakki.hk.artistic_exploration_android.R;
 
@@ -34,6 +35,7 @@ public class AnimationFragment extends Fragment implements View.OnClickListener 
     private ImageView demo2;
     private ImageView demo3;
     private ImageView demo4;
+    private Button propertyAnimationBtn;
 
     public static AnimationFragment newInstance() {
         return new AnimationFragment();
@@ -49,7 +51,7 @@ public class AnimationFragment extends Fragment implements View.OnClickListener 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         Button viewAnimation = (Button) view.findViewById(R.id.btn_view_animation);
         Button frameAnimation = (Button) view.findViewById(R.id.btn_frame_animation);
-        Button propertyAnimation = (Button) view.findViewById(R.id.btn_property_animation);
+        propertyAnimationBtn = (Button) view.findViewById(R.id.btn_property_animation);
         LinearLayout container = (LinearLayout) view.findViewById(R.id.ll_animation_container);
         demo1 = (ImageView) view.findViewById(R.id.iv_demo1);
         demo2 = (ImageView) view.findViewById(R.id.iv_demo2);
@@ -57,7 +59,7 @@ public class AnimationFragment extends Fragment implements View.OnClickListener 
         demo4 = (ImageView) view.findViewById(R.id.iv_demo4);
         viewAnimation.setOnClickListener(this);
         frameAnimation.setOnClickListener(this);
-        propertyAnimation.setOnClickListener(this);
+        propertyAnimationBtn.setOnClickListener(this);
 
         //设置layoutAnimation
         Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.anim_item);
@@ -99,7 +101,7 @@ public class AnimationFragment extends Fragment implements View.OnClickListener 
     }
 
     private void propertyAnimation() {
-        ObjectAnimator.ofFloat(demo3, "translationX", demo3.getWidth()).start();
+        //颜色动画
         ValueAnimator valueAnimator = ObjectAnimator.ofInt(demo3, "backgroundColor", /*red*/0XFFFF8080, /*blue*/0xFF8080FF);
         valueAnimator.setDuration(3000);
         valueAnimator.setEvaluator(new ArgbEvaluator());
@@ -131,15 +133,33 @@ public class AnimationFragment extends Fragment implements View.OnClickListener 
             }
         });
 
-
         animatorSet.playSequentially(
-                ObjectAnimator.ofFloat(demo4, "translationX", 0, 100,0),
-                ObjectAnimator.ofFloat(demo4, "rotationX", 0, 50,0),
-                ObjectAnimator.ofFloat(demo4, "rotation", 0, 90,0),
-                ObjectAnimator.ofFloat(demo4, "scaleX", 0.8f, 1.2f, 1f),
-                ObjectAnimator.ofFloat(demo4, "alpha", 1f, 0.5f, 1f)
+                ObjectAnimator.ofFloat(demo4, "translationX", 0, 200,0),  //位移
+                ObjectAnimator.ofFloat(demo4, "rotationX", 0, 50,0),      //x轴旋转
+                ObjectAnimator.ofFloat(demo4, "rotation", 0, 90,0),       //旋转
+                ObjectAnimator.ofFloat(demo4, "scaleX", 0.5f, 1.5f, 1f),  //放大缩小
+                ObjectAnimator.ofFloat(demo4, "alpha", 1f, 0.5f, 1f)      //透明度
         );
         animatorSet.setDuration(1000).start();
 
+        ObjectAnimator.ofInt(new ViewWrapper(propertyAnimationBtn), "width", SizeUtils.dp2px(getContext(), 360)).setDuration(1000).start();
+    }
+
+    private static class ViewWrapper{
+        private View mTarget;
+
+        public ViewWrapper(View target) {
+            mTarget = target;
+        }
+
+        public int getWidth(){
+            return mTarget.getLayoutParams().width;
+        }
+
+        public void setWidth(int width){
+            ViewGroup.LayoutParams layoutParams = mTarget.getLayoutParams();
+            layoutParams.width = width;
+            mTarget.setLayoutParams(layoutParams);
+        }
     }
 }
