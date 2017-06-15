@@ -20,7 +20,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.blankj.utilcode.utils.SizeUtils;
 import com.blankj.utilcode.utils.ToastUtils;
 import com.gakki.hk.artistic_exploration_android.R;
 
@@ -142,6 +141,7 @@ public class AnimationFragment extends Fragment implements View.OnClickListener 
         );
         animatorSet.setDuration(1000).start();
 
+        //改变button的width属性，但是button的setWidth方法不能真的改变width属性
         ObjectAnimator.ofInt(new ViewWrapper(propertyAnimationBtn), "width", SizeUtils.dp2px(getContext(), 360)).setDuration(1000).start();
     }
 
