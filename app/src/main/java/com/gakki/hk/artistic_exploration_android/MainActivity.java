@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.gakki.hk.artistic_exploration_android.animation.AnimationFragment;
 import com.gakki.hk.artistic_exploration_android.intent_filter.IntentFilterFragment;
 import com.gakki.hk.artistic_exploration_android.ipc.IpcFragment;
 import com.gakki.hk.artistic_exploration_android.view_event_mechanism.ViewEventMechanismFragment;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity
         initView();
         initFragments();
 
-        switchFragment(3);
+        switchFragment(4);
     }
 
     private void initView() {
@@ -82,13 +83,14 @@ public class MainActivity extends AppCompatActivity
         IpcFragment ipcFragment = IpcFragment.newInstance();
         ViewEventMechanismFragment viewEventFragment = ViewEventMechanismFragment.newInstance();
         ViewTheoryFragment viewTheoryFragment = ViewTheoryFragment.newInstance();
+        AnimationFragment animationFragment = AnimationFragment.newInstance();
 
         fragments = new Fragment[]{
                 activityFragment,
                 ipcFragment,
                 viewEventFragment,
                 viewTheoryFragment,
-                activityFragment,
+                animationFragment,
                 activityFragment,
                 activityFragment,
                 activityFragment,
