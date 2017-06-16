@@ -16,10 +16,13 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.blankj.utilcode.utils.LogUtils;
+import com.blankj.utilcode.utils.SizeUtils;
 import com.blankj.utilcode.utils.ToastUtils;
 import com.gakki.hk.artistic_exploration_android.R;
 
@@ -100,14 +103,16 @@ public class AnimationFragment extends Fragment implements View.OnClickListener 
     }
 
     private void propertyAnimation() {
-        //颜色动画
+        //1.属性动画：改变颜色
         ValueAnimator valueAnimator = ObjectAnimator.ofInt(demo3, "backgroundColor", /*red*/0XFFFF8080, /*blue*/0xFF8080FF);
-        valueAnimator.setDuration(3000);
-        valueAnimator.setEvaluator(new ArgbEvaluator());
+        valueAnimator.setDuration(1000);
+        valueAnimator.setInterpolator(new LinearInterpolator());
+        valueAnimator.setEvaluator(new ArgbEvaluator());  //设置Argb估值器
         valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
         valueAnimator.setRepeatMode(ValueAnimator.REVERSE);
         valueAnimator.start();
 
+        //2.属性动画（translationX/Y, rotationX/Y, scaleX/Y, alpha等等）
         AnimatorSet animatorSet = new AnimatorSet();
         //添加属性动画监听
         animatorSet.addListener(new Animator.AnimatorListener() {
@@ -131,9 +136,17 @@ public class AnimationFragment extends Fragment implements View.OnClickListener 
                 ToastUtils.showShortToast(getContext(), "onAnimationRepeat");
             }
         });
-
-        animatorSet.playSequentially(
-                ObjectAnimator.ofFloat(demo4, "translationX", 0, 200,0),  //位移
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(demo4, "translationX", 0, 200, 0);
+        //属性动画更新监听
+        objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                LogUtils.i("getAnimatedValue:" + animation.getAnimatedValue());
+                LogUtils.i("getAnimatedFraction:" + animation.getAnimatedFraction());
+            }
+        });
+        animatorSet.playTogether(
+                objectAnimator,  //位移
                 ObjectAnimator.ofFloat(demo4, "rotationX", 0, 50,0),      //x轴旋转
                 ObjectAnimator.ofFloat(demo4, "rotation", 0, 90,0),       //旋转
                 ObjectAnimator.ofFloat(demo4, "scaleX", 0.5f, 1.5f, 1f),  //放大缩小
@@ -141,7 +154,7 @@ public class AnimationFragment extends Fragment implements View.OnClickListener 
         );
         animatorSet.setDuration(1000).start();
 
-        //改变button的width属性，但是button的setWidth方法不能真的改变width属性
+        //3.属性动画：改变button的width属性，但是button的setWidth方法不能真的改变width属性
         ObjectAnimator.ofInt(new ViewWrapper(propertyAnimationBtn), "width", SizeUtils.dp2px(getContext(), 360)).setDuration(1000).start();
     }
 
