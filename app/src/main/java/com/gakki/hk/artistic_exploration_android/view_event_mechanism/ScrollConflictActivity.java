@@ -1,10 +1,10 @@
 package com.gakki.hk.artistic_exploration_android.view_event_mechanism;
 
 import android.app.Activity;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewCompat;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ListView;
@@ -43,7 +43,6 @@ public class ScrollConflictActivity extends Activity {
         int[] to = {R.id.tv_left, R.id.tv_right};
         listview.setAdapter(new SimpleAdapter(this, mData, R.layout.item_inner_scroll_view, from, to));
 
-
         resolveScrollConflict();
     }
 
@@ -52,16 +51,16 @@ public class ScrollConflictActivity extends Activity {
      * 在scrollview滑到底部且listview未滑动到顶部，禁止scrollview截止滑动事件
      * */
     private void resolveScrollConflict() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-                @Override
-                public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                    //scrollview滑动到了底部
-                    int realViewHeight = scrollView.getChildAt(0).getMeasuredHeight();
-                    isScrolledToBottom = scrollY + scrollView.getHeight() >= realViewHeight;
-                }
-            });
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+//                @Override
+//                public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+//                    //scrollview滑动到了底部
+//                    int realViewHeight = scrollView.getChildAt(0).getMeasuredHeight();
+//                    isScrolledToBottom = scrollY + scrollView.getHeight() >= realViewHeight;
+//                }
+//            });
+//        }
 
         listview.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -74,10 +73,10 @@ public class ScrollConflictActivity extends Activity {
                 if (action == MotionEvent.ACTION_MOVE){
                     int top = listview.getChildAt(0).getTop();
                     float nowY = event.getY();
-                    if (!isScrolledToBottom){
+                    if (!isScrollToBottom()){
                         //scrollview未滑倒底部，拦截触摸事件
                         scrollView.requestDisallowInterceptTouchEvent(false);
-                    }else if (top == 0 && nowY - mLastY >= 0){
+                    }else if (/*top == 0 && */ nowY - mLastY > 0 && !ViewCompat.canScrollVertically(listview, -1)){
                         //scrollview滑到底部且listview在顶部，继续向下滑动，则拦截事件
                         scrollView.requestDisallowInterceptTouchEvent(false);
                     }else {
@@ -87,6 +86,10 @@ public class ScrollConflictActivity extends Activity {
                 return false;
             }
         });
+    }
+
+    private boolean isScrollToBottom(){
+        return !ViewCompat.canScrollVertically(scrollView, 1);
     }
 
     @NonNull
