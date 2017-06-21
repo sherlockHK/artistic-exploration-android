@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.gakki.hk.artistic_exploration_android.animation.AnimationFragment;
+import com.gakki.hk.artistic_exploration_android.handler.HandlerMechanismFragment;
 import com.gakki.hk.artistic_exploration_android.intent_filter.IntentFilterFragment;
 import com.gakki.hk.artistic_exploration_android.ipc.IpcFragment;
 import com.gakki.hk.artistic_exploration_android.view_event_mechanism.ViewEventMechanismFragment;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity
         initView();
         initFragments();
 
-        switchFragment(4);
+        switchFragment(9);
     }
 
     private void initView() {
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity
         ViewEventMechanismFragment viewEventFragment = ViewEventMechanismFragment.newInstance();
         ViewTheoryFragment viewTheoryFragment = ViewTheoryFragment.newInstance();
         AnimationFragment animationFragment = AnimationFragment.newInstance();
+        HandlerMechanismFragment handlerMechanismFragment = HandlerMechanismFragment.newInstance();
 
         fragments = new Fragment[]{
                 activityFragment,
@@ -95,7 +97,7 @@ public class MainActivity extends AppCompatActivity
                 animationFragment,
                 activityFragment,
                 activityFragment,
-                activityFragment,
+                handlerMechanismFragment,
                 activityFragment,
                 activityFragment,
                 activityFragment
