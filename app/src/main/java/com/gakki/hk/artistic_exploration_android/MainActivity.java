@@ -16,6 +16,7 @@ import com.gakki.hk.artistic_exploration_android.animation.AnimationFragment;
 import com.gakki.hk.artistic_exploration_android.handler.HandlerMechanismFragment;
 import com.gakki.hk.artistic_exploration_android.intent_filter.IntentFilterFragment;
 import com.gakki.hk.artistic_exploration_android.ipc.IpcFragment;
+import com.gakki.hk.artistic_exploration_android.thread_and_threadPool.ThreadAndThreadPoolFragment;
 import com.gakki.hk.artistic_exploration_android.view_event_mechanism.ViewEventMechanismFragment;
 import com.gakki.hk.artistic_exploration_android.view_theory.ViewTheoryFragment;
 
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity
         initView();
         initFragments();
 
-        switchFragment(9);
+        switchFragment(10);
     }
 
     private void initView() {
@@ -86,6 +87,7 @@ public class MainActivity extends AppCompatActivity
         ViewTheoryFragment viewTheoryFragment = ViewTheoryFragment.newInstance();
         AnimationFragment animationFragment = AnimationFragment.newInstance();
         HandlerMechanismFragment handlerMechanismFragment = HandlerMechanismFragment.newInstance();
+        ThreadAndThreadPoolFragment threadAndThreadPoolFragment = ThreadAndThreadPoolFragment.newInstance();
 
         fragments = new Fragment[]{
                 activityFragment,
@@ -98,7 +100,7 @@ public class MainActivity extends AppCompatActivity
                 activityFragment,
                 activityFragment,
                 handlerMechanismFragment,
-                activityFragment,
+                threadAndThreadPoolFragment,
                 activityFragment,
                 activityFragment
         };

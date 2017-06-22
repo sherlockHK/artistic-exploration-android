@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_update_ui"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AsyncTask update UI"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AsyncTask cancel"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+    <SeekBar
+        android:id="@+id/seek_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_serial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="串行执行(serial execute)"
+        android:textAllCaps="false" />
+
+    <TextView
+        android:id="@+id/tv_serial_execute"
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
+
+    <Button
+        android:id="@+id/btn_parallel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="并行执行(parallel execute)"
+        android:textAllCaps="false" />
+
+    <TextView
+        android:id="@+id/tv_parallel_execute"
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
+</LinearLayout>

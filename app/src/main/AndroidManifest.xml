@@ -52,6 +52,9 @@
         <activity android:name=".ipc.TcpClientActivity" />
         <activity android:name=".view_event_mechanism.BasicScrollActivity" />
         <activity android:name=".view_event_mechanism.ScrollConflictActivity" />
+        <activity android:name=".thread_and_threadPool.HandlerThreadActivity" />
+        <activity android:name=".thread_and_threadPool.AsyncTaskActivity" />
+        <activity android:name=".thread_and_threadPool.IntentServiceActivity" />
 
         <service
             android:name=".ipc.MessengerService"
