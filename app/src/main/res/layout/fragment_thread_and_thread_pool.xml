@@ -24,4 +24,11 @@
         android:layout_height="wrap_content"
         android:text="IntentService"
         android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_thread_pool"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thread Pool"
+        android:textAllCaps="false" />
 </LinearLayout>
