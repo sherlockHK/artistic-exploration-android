@@ -1,4 +1,4 @@
-package com.gakki.hk.artistic_exploration_android.ipc;
+package com.gakki.hk.artistic_exploration_android.ipc.AIDL;
 
 import android.app.Activity;
 import android.content.ComponentName;

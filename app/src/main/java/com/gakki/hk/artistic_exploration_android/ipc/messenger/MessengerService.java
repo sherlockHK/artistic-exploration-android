@@ -1,4 +1,4 @@
-package com.gakki.hk.artistic_exploration_android.ipc;
+package com.gakki.hk.artistic_exploration_android.ipc.messenger;
 
 import android.app.Service;
 import android.content.Intent;

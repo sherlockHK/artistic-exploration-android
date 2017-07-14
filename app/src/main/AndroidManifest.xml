@@ -46,10 +46,10 @@
             android:name="com.gakki.hk.artistic_exploration_android.ipc.IpcTestActivity"
             android:process="com.gakki.hk.artistic_exploration_android.remote" />
 
-        <activity android:name=".ipc.MessengerActivity" />
-        <activity android:name=".ipc.AIDLBookManagerActivity" />
-        <activity android:name=".ipc.BookContentProviderActivity"/>
-        <activity android:name=".ipc.TcpClientActivity" />
+        <activity android:name=".ipc.messenger.MessengerActivity" />
+        <activity android:name=".ipc.AIDL.AIDLBookManagerActivity" />
+        <activity android:name=".ipc.content_provider.BookContentProviderActivity"/>
+        <activity android:name=".ipc.socket.TcpClientActivity" />
         <activity android:name=".view_event_mechanism.BasicScrollActivity" />
         <activity android:name=".view_event_mechanism.ScrollConflictActivity" />
         <activity android:name=".thread_and_threadPool.HandlerThreadActivity" />
@@ -57,20 +57,20 @@
         <activity android:name=".thread_and_threadPool.IntentServiceActivity" />
 
         <service
-            android:name=".ipc.MessengerService"
+            android:name=".ipc.messenger.MessengerService"
             android:process=":remote" />
 
         <service
-            android:name=".ipc.AIDLBookManagerService"
+            android:name=".ipc.AIDL.AIDLBookManagerService"
             android:process=":remote" />
 
-        <service android:name=".ipc.TcpServerService"
+        <service android:name=".ipc.socket.TcpServerService"
             android:process=":tcpServer"/>
 
         <service android:name=".thread_and_threadPool.IntentServiceActivity$MyIntentService" />
 
         <provider
-            android:name=".ipc.BookContentProvider"
+            android:name=".ipc.content_provider.BookContentProvider"
             android:authorities="com.gakki.hk.artistic_exploration_android.provider"
             android:permission="com.gakki.hk.artistic_exploration_android.permission"
             android:process=":provider"/>

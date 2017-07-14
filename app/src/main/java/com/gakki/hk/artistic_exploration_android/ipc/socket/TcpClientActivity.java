@@ -1,4 +1,4 @@
-package com.gakki.hk.artistic_exploration_android.ipc;
+package com.gakki.hk.artistic_exploration_android.ipc.socket;
 
 import android.app.Activity;
 import android.content.Intent;

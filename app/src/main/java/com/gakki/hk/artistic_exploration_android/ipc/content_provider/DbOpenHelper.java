@@ -1,4 +1,4 @@
-package com.gakki.hk.artistic_exploration_android.ipc;
+package com.gakki.hk.artistic_exploration_android.ipc.content_provider;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

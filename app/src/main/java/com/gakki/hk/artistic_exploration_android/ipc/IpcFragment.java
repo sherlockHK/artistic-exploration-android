@@ -10,7 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.gakki.hk.artistic_exploration_android.R;
+import com.gakki.hk.artistic_exploration_android.ipc.AIDL.AIDLBookManagerActivity;
+import com.gakki.hk.artistic_exploration_android.ipc.content_provider.BookContentProviderActivity;
+import com.gakki.hk.artistic_exploration_android.ipc.messenger.MessengerActivity;
 import com.gakki.hk.artistic_exploration_android.ipc.model.UserSerializable;
+import com.gakki.hk.artistic_exploration_android.ipc.socket.TcpClientActivity;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
