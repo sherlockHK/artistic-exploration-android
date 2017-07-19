@@ -41,6 +41,12 @@
         android:text="aild" />
 
     <Button
+        android:id="@+id/btn_service_practice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="service" />
+
+    <Button
         android:id="@+id/btn_content_provider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

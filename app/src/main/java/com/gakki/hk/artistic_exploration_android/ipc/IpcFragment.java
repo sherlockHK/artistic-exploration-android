@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import com.gakki.hk.artistic_exploration_android.R;
 import com.gakki.hk.artistic_exploration_android.ipc.AIDL.AIDLBookManagerActivity;
+import com.gakki.hk.artistic_exploration_android.ipc.AIDL.RemoteServiceActivity;
 import com.gakki.hk.artistic_exploration_android.ipc.content_provider.BookContentProviderActivity;
 import com.gakki.hk.artistic_exploration_android.ipc.messenger.MessengerActivity;
 import com.gakki.hk.artistic_exploration_android.ipc.model.UserSerializable;
@@ -45,12 +46,14 @@ public class IpcFragment extends Fragment implements View.OnClickListener {
         Button serialize = (Button) view.findViewById(R.id.btn_serialize);
         Button messenger = (Button) view.findViewById(R.id.btn_messenger);
         Button aidl = (Button) view.findViewById(R.id.btn_aidl);
+        Button service = (Button) view.findViewById(R.id.btn_service_practice);
         Button contentProvider = (Button) view.findViewById(R.id.btn_content_provider);
         Button socket = (Button) view.findViewById(R.id.btn_socket);
         activityProcess.setOnClickListener(this);
         serialize.setOnClickListener(this);
         messenger.setOnClickListener(this);
         aidl.setOnClickListener(this);
+        service.setOnClickListener(this);
         contentProvider.setOnClickListener(this);
         socket.setOnClickListener(this);
     }
@@ -69,6 +72,9 @@ public class IpcFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.btn_aidl:
                 startActivity(new Intent(getContext(), AIDLBookManagerActivity.class));
+                break;
+            case R.id.btn_service_practice:
+                startActivity(new Intent(getContext(), RemoteServiceActivity.class));
                 break;
             case R.id.btn_content_provider:
                 startActivity(new Intent(getContext(), BookContentProviderActivity.class));

@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity
         initView();
         initFragments();
 
-        switchFragment(10);
+        switchFragment(1);
     }
 
     private void initView() {

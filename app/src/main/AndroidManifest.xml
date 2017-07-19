@@ -55,6 +55,7 @@
         <activity android:name=".thread_and_threadPool.HandlerThreadActivity" />
         <activity android:name=".thread_and_threadPool.AsyncTaskActivity" />
         <activity android:name=".thread_and_threadPool.IntentServiceActivity" />
+        <activity android:name=".ipc.AIDL.RemoteServiceActivity" />
 
         <service
             android:name=".ipc.messenger.MessengerService"
@@ -68,6 +69,11 @@
             android:process=":tcpServer"/>
 
         <service android:name=".thread_and_threadPool.IntentServiceActivity$MyIntentService" />
+
+        <service android:name=".ipc.AIDL.MyRemoteService"
+            android:process=":DaemonService"
+            android:exported="false"
+            android:description="@string/remote_service_desc"/>
 
         <provider
             android:name=".ipc.content_provider.BookContentProvider"
