@@ -40,8 +40,8 @@ public class DataStructureFragment extends Fragment {
         console = (TextView) view.findViewById(R.id.tv_console);
 
         linked.setOnClickListener(v -> linkedTest());
-        stack_and_queue.setOnClickListener(v -> linkedTest());
-        string.setOnClickListener(v -> linkedTest());
+        stack_and_queue.setOnClickListener(v -> stackAndQueueTest());
+        string.setOnClickListener(v -> stackAndQueueTest());
         tree.setOnClickListener(v -> linkedTest());
         graph.setOnClickListener(v -> linkedTest());
         btn_clear.setOnClickListener(v -> clearLog());
@@ -65,8 +65,36 @@ public class DataStructureFragment extends Fragment {
         log("linkedTest" + " first: " + deleted.data);
     }
 
-    private void log(String text){
-        console.setText(console.getText() + "\n"+ text);
+    private void stackAndQueueTest() {
+        //入栈
+        StackAndQueue.Stack stack = new StackAndQueue.Stack();
+        stack.push(2);
+        stack.push(3);
+        log(" stack push: " + " first: " + stack.first.data + "length: " + stack.length);
+
+        //出栈
+        int popData = 0;
+        try {
+            popData = stack.pop();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        log(" stack pop: " + popData + "length: " + stack.length);
+
+        //入队列
+        StackAndQueue.Queue queue = new StackAndQueue.Queue();
+        queue.enqueue(2);
+        queue.enqueue(3);
+        queue.enqueue(4);
+        log("enqueue: " + " rear: " + queue.rear.data +" length: " + queue.length);
+
+        //出队列
+        int dequeue = queue.dequeue();
+        log("enqueue: " + " dequeue: " + dequeue + " front: " + queue.front.data +" length: " + queue.length);
+    }
+
+    private void log(String text) {
+        console.setText(console.getText() + "\n" + text);
     }
 
     private void clearLog() {
