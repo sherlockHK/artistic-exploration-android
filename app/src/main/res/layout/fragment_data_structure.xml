@@ -5,27 +5,56 @@
     android:orientation="vertical">
 
     <Button
+        android:id="@+id/btn_linked_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="linked list" />
 
     <Button
+        android:id="@+id/stack_and_queue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="stack and queue" />
 
     <Button
+        android:id="@+id/string"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="string" />
 
     <Button
+        android:id="@+id/tree"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="tree" />
 
     <Button
+        android:id="@+id/graph"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="graph" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|right"
+                android:text="clear" />
+
+            <TextView
+                android:id="@+id/tv_console"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+        </FrameLayout>
+
+    </ScrollView>
 </LinearLayout>
