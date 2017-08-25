@@ -19,13 +19,13 @@
             android:icon="@drawable/ic_menu_manage"
             android:title="4.View工作原理" />
         <item
-            android:id="@+id/nav_remote_views"
+            android:id="@+id/nav_data_structure"
             android:icon="@drawable/ic_menu_manage"
-            android:title="5.Remote view" />
+            android:title="5.Data structure" />
         <item
-            android:id="@+id/nav_drawable"
+            android:id="@+id/nav_algorithm"
             android:icon="@drawable/ic_menu_manage"
-            android:title="6.Drawable" />
+            android:title="6.Algorithm" />
         <item
             android:id="@+id/nav_animation"
             android:icon="@drawable/ic_menu_manage"

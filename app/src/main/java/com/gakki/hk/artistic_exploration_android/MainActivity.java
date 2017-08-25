@@ -12,7 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.gakki.hk.artistic_exploration_android.algorithm.AlgorithmFragment;
 import com.gakki.hk.artistic_exploration_android.animation.AnimationFragment;
+import com.gakki.hk.artistic_exploration_android.data_structure.DataStructureFragment;
 import com.gakki.hk.artistic_exploration_android.handler.HandlerMechanismFragment;
 import com.gakki.hk.artistic_exploration_android.intent_filter.IntentFilterFragment;
 import com.gakki.hk.artistic_exploration_android.ipc.IpcFragment;
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity
         initView();
         initFragments();
 
-        switchFragment(1);
+        switchFragment(4);
     }
 
     private void initView() {
@@ -85,6 +87,8 @@ public class MainActivity extends AppCompatActivity
         IpcFragment ipcFragment = IpcFragment.newInstance();
         ViewEventMechanismFragment viewEventFragment = ViewEventMechanismFragment.newInstance();
         ViewTheoryFragment viewTheoryFragment = ViewTheoryFragment.newInstance();
+        DataStructureFragment dataStructureFragment = DataStructureFragment.newInstance();
+        AlgorithmFragment algorithmFragment = AlgorithmFragment.newInstance();
         AnimationFragment animationFragment = AnimationFragment.newInstance();
         HandlerMechanismFragment handlerMechanismFragment = HandlerMechanismFragment.newInstance();
         ThreadAndThreadPoolFragment threadAndThreadPoolFragment = ThreadAndThreadPoolFragment.newInstance();
@@ -94,8 +98,8 @@ public class MainActivity extends AppCompatActivity
                 ipcFragment,
                 viewEventFragment,
                 viewTheoryFragment,
-                animationFragment,
-                animationFragment,
+                dataStructureFragment,
+                algorithmFragment,
                 animationFragment,
                 activityFragment,
                 activityFragment,
@@ -124,10 +128,10 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_view_principle:
                 switchFragment(3);
                 break;
-            case R.id.nav_remote_views:
+            case R.id.nav_data_structure:
                 switchFragment(4);
                 break;
-            case R.id.nav_drawable:
+            case R.id.nav_algorithm:
                 switchFragment(5);
                 break;
             case R.id.nav_animation:
