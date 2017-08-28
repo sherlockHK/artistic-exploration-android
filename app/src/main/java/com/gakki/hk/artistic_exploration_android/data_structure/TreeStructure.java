@@ -2,6 +2,8 @@ package com.gakki.hk.artistic_exploration_android.data_structure;
 
 import android.util.Log;
 
+import java.util.Queue;
+
 /**
  * Created by HK on 2017/8/28.
  * Email: kaihu1989@gmail.com.
@@ -70,7 +72,9 @@ public class TreeStructure {
 
         //前序遍历
         static void preOrderTraverse(TreeNode node) {
-            if (node == null) {return;}
+            if (node == null) {
+                return;
+            }
 
             Log.i("preOrderTraverse", node.data);
             preOrderTraverse(node.lChild);
@@ -79,7 +83,9 @@ public class TreeStructure {
 
         //中序遍历
         static void inOrderTraverse(TreeNode node) {
-            if (node == null) {return;}
+            if (node == null) {
+                return;
+            }
 
             inOrderTraverse(node.lChild);
             Log.i("inOrderTraverse", node.data);
@@ -88,11 +94,34 @@ public class TreeStructure {
 
         //前序遍历
         static void postOrderTraverse(TreeNode node) {
-            if (node == null) {return;}
+            if (node == null) {
+                return;
+            }
 
             postOrderTraverse(node.lChild);
             postOrderTraverse(node.rChild);
             Log.i("postOrderTraverse", node.data);
+        }
+
+        /*
+        * 层序遍历
+        * 利用Queue
+        * */
+        static void levelTraverse(TreeNode node) {
+            if (node == null) {return;}
+
+            Queue<TreeNode> queue = new java.util.LinkedList<>();
+            queue.add(node);
+            while (!queue.isEmpty()) {
+                TreeNode temp = queue.poll();
+                Log.i("levelTraverse", temp.data);
+                if (temp.lChild != null) {
+                    queue.add(temp.lChild);
+                }
+                if (temp.rChild != null) {
+                    queue.add(temp.rChild);
+                }
+            }
         }
     }
 }

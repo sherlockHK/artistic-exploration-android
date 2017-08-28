@@ -103,10 +103,12 @@ public class DataStructureFragment extends Fragment {
         TreeStructure.BinaryTree binaryTree = new TreeStructure.BinaryTree();
         binaryTree.generateBinaryTree();
 
-        //前、中、后序遍历
+        //前、中、后序遍历(递归)
         TreeStructure.BinaryTree.preOrderTraverse(binaryTree.root);
         TreeStructure.BinaryTree.inOrderTraverse(binaryTree.root);
         TreeStructure.BinaryTree.postOrderTraverse(binaryTree.root);
+        //层序遍历
+        TreeStructure.BinaryTree.levelTraverse(binaryTree.root);
     }
 
     private void graphTest() {
