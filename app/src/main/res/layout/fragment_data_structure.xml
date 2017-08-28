@@ -16,11 +16,6 @@
         android:layout_height="wrap_content"
         android:text="stack and queue" />
 
-    <Button
-        android:id="@+id/string"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="string" />
 
     <Button
         android:id="@+id/tree"
@@ -33,6 +28,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="graph" />
+
+
 
     <ScrollView
         android:layout_width="match_parent"

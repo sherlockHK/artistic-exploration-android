@@ -33,7 +33,6 @@ public class DataStructureFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         Button linked = (Button) view.findViewById(R.id.btn_linked_list);
         Button stack_and_queue = (Button) view.findViewById(R.id.stack_and_queue);
-        Button string = (Button) view.findViewById(R.id.string);
         Button tree = (Button) view.findViewById(R.id.tree);
         Button graph = (Button) view.findViewById(R.id.graph);
         Button btn_clear = (Button) view.findViewById(R.id.btn_clear);
@@ -41,10 +40,17 @@ public class DataStructureFragment extends Fragment {
 
         linked.setOnClickListener(v -> linkedTest());
         stack_and_queue.setOnClickListener(v -> stackAndQueueTest());
-        string.setOnClickListener(v -> stackAndQueueTest());
-        tree.setOnClickListener(v -> linkedTest());
-        graph.setOnClickListener(v -> linkedTest());
+        tree.setOnClickListener(v -> treeTest());
+        graph.setOnClickListener(v -> graphTest());
         btn_clear.setOnClickListener(v -> clearLog());
+    }
+
+    private void log(String text) {
+        console.setText(console.getText() + "\n" + text);
+    }
+
+    private void clearLog() {
+        console.setText("");
     }
 
     private void linkedTest() {
@@ -86,18 +92,24 @@ public class DataStructureFragment extends Fragment {
         queue.enqueue(2);
         queue.enqueue(3);
         queue.enqueue(4);
-        log("enqueue: " + " rear: " + queue.rear.data +" length: " + queue.length);
+        log("enqueue: " + " rear: " + queue.rear.data + " length: " + queue.length);
 
         //出队列
         int dequeue = queue.dequeue();
-        log("enqueue: " + " dequeue: " + dequeue + " front: " + queue.front.data +" length: " + queue.length);
+        log("enqueue: " + " dequeue: " + dequeue + " front: " + queue.front.data + " length: " + queue.length);
     }
 
-    private void log(String text) {
-        console.setText(console.getText() + "\n" + text);
+    private void treeTest() {
+        TreeStructure.BinaryTree binaryTree = new TreeStructure.BinaryTree();
+        binaryTree.generateBinaryTree();
+
+        //前、中、后序遍历
+        TreeStructure.BinaryTree.preOrderTraverse(binaryTree.root);
+        TreeStructure.BinaryTree.inOrderTraverse(binaryTree.root);
+        TreeStructure.BinaryTree.postOrderTraverse(binaryTree.root);
     }
 
-    private void clearLog() {
-        console.setText("");
+    private void graphTest() {
+
     }
 }

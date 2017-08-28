@@ -12,4 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="search"/>
+
+    <Button
+        android:id="@+id/btn_string"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="字符串" />
+
+    <Button
+        android:id="@+id/btn_array"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="数组" />
 </LinearLayout>
