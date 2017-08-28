@@ -107,6 +107,10 @@ public class DataStructureFragment extends Fragment {
         TreeStructure.BinaryTree.preOrderTraverse(binaryTree.root);
         TreeStructure.BinaryTree.inOrderTraverse(binaryTree.root);
         TreeStructure.BinaryTree.postOrderTraverse(binaryTree.root);
+
+        //非递归实现前序遍历
+        TreeStructure.BinaryTree.preOrderTravNoRecur(binaryTree.root);
+
         //层序遍历
         TreeStructure.BinaryTree.levelTraverse(binaryTree.root);
     }

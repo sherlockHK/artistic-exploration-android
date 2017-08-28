@@ -2,7 +2,8 @@ package com.gakki.hk.artistic_exploration_android.data_structure;
 
 import android.util.Log;
 
-import java.util.Queue;
+import java.util.*;
+import java.util.LinkedList;
 
 /**
  * Created by HK on 2017/8/28.
@@ -92,7 +93,7 @@ public class TreeStructure {
             inOrderTraverse(node.rChild);
         }
 
-        //前序遍历
+        //后序遍历
         static void postOrderTraverse(TreeNode node) {
             if (node == null) {
                 return;
@@ -101,6 +102,25 @@ public class TreeStructure {
             postOrderTraverse(node.lChild);
             postOrderTraverse(node.rChild);
             Log.i("postOrderTraverse", node.data);
+        }
+
+        /*
+        * 前序遍历的非递归实现
+        * */
+        static void preOrderTravNoRecur(TreeNode node){
+            LinkedList<TreeNode> stack = new java.util.LinkedList<>();
+            TreeNode current = node;
+            while (current != null || !stack.isEmpty()){
+                //1.先遍历所有的左子树(左子树的左子树..)，然后放入栈中
+                while (current != null){
+                    Log.i("前序遍历非递归实现", current.data);
+                    stack.push(current);
+                    current = current.lChild;
+                }
+                //2.再处理右子树
+                current = stack.pop();
+                current = current.rChild;
+            }
         }
 
         /*
