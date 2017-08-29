@@ -4,14 +4,16 @@
     android:layout_height="match_parent">
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="sort"/>
-
-    <Button
+        android:id="@+id/btn_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="search"/>
+
+    <Button
+        android:id="@+id/btn_sort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="sort"/>
 
     <Button
         android:id="@+id/btn_string"

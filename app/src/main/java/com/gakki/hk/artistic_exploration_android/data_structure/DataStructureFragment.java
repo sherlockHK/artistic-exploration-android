@@ -113,6 +113,10 @@ public class DataStructureFragment extends Fragment {
 
         //层序遍历
         TreeStructure.BinaryTree.levelTraverse(binaryTree.root);
+
+        //翻转二叉树
+        TreeStructure.BinaryTree.invertBinaryTree(binaryTree.root);
+        TreeStructure.BinaryTree.levelTraverse(binaryTree.root);
     }
 
     private void graphTest() {
