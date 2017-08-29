@@ -143,5 +143,21 @@ public class TreeStructure {
                 }
             }
         }
+
+        /*
+        * 翻转二叉树
+        * */
+        static void invertBinaryTree(TreeNode node){
+            if (node == null){
+                return;
+            }
+
+            TreeNode left = node.lChild;
+            node.lChild = node.rChild;
+            node.rChild = left;
+
+            invertBinaryTree(node.lChild);
+            invertBinaryTree(node.rChild);
+        }
     }
 }
