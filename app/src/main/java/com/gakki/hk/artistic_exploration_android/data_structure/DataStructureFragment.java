@@ -59,16 +59,19 @@ public class DataStructureFragment extends Fragment {
         //读取
         LinkedList.Node first = LinkedList.get(node, 0);
         LinkedList.Node last = LinkedList.get(node, 9);
-        log("linkedTest" + " first: " + first.data + " last: " + last.data);
+        log("get linkedList" + " first: " + first.data + " last: " + last.data);
 
         //插入和删除
         LinkedList.insert(node, 5, 101);
         LinkedList.Node insertedNode = LinkedList.get(node, 5);
-        log("linkedTest" + " insert: " + insertedNode.data);
+        log("insert linkedList" + " insert: " + insertedNode.data);
 
         LinkedList.delete(node, 1);
         LinkedList.Node deleted = LinkedList.get(node, 1);
-        log("linkedTest" + " first: " + deleted.data);
+        log("delete linkedList" + " first: " + deleted.data);
+
+        LinkedList.Node reverse = LinkedList.reverse(LinkedList.generateNode(10));
+        log("reverse linkedList" + " first: " + reverse.data);
     }
 
     private void stackAndQueueTest() {

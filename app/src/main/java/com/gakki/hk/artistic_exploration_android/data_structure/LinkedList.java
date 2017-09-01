@@ -55,7 +55,7 @@ public class LinkedList {
         }
 
         Node p = node;
-        for (int i = 0; i < index-1; i++) {
+        for (int i = 0; i < index - 1; i++) {
             if (p == null) {
                 return false;
             }
@@ -72,8 +72,8 @@ public class LinkedList {
         }
 
         Node p = node;
-        for (int i = 0; i < index-1; i++) {
-            if (p == null){
+        for (int i = 0; i < index - 1; i++) {
+            if (p == null) {
                 return false;
             }
             p = p.next;
@@ -82,6 +82,24 @@ public class LinkedList {
         Node n = p.next;
         p.next = n.next;
         return true;
+    }
+
+    public static Node reverse(Node node) {
+        if (node == null) {
+            return null;
+        }
+
+        Node p = node;
+        Node q = node.next;
+        node.next = null;
+        Node r;
+        while (q != null) {
+            r = q.next;
+            q.next = p;
+            p = q;
+            q = r;
+        }
+        return p;
     }
 
 }
