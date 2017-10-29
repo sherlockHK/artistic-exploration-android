@@ -43,15 +43,37 @@ public class AIDLBookManagerActivity extends Activity implements View.OnClickLis
         getBook.setOnClickListener(this);
         addBook.setOnClickListener(this);
 
-        Intent intent = new Intent(this, AIDLBookManagerService.class);
+        bindRemoteService();
+    }
+
+    private void bindRemoteService() {
+        Intent intent = new Intent(AIDLBookManagerActivity.this, AIDLBookManagerService.class);
         bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
-    private ServiceConnection mServiceConnection = new ServiceConnection() {
-
+    //binder设置死亡代理，服务端进程异常终止时，binder会死亡时，收到回调
+    private IBinder.DeathRecipient mDeathRecipient = new IBinder.DeathRecipient() {
         @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            mRemoteBookManager = IBookManager.Stub.asInterface(service);
+        public void binderDied() {
+            if (mRemoteBookManager == null){
+                return;
+            }
+            mRemoteBookManager.asBinder().unlinkToDeath(mDeathRecipient, 0);
+            mRemoteBookManager = null;
+            //重新绑定remote service
+            bindRemoteService();
+        }
+    };
+
+    private ServiceConnection mServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder binder) {
+            mRemoteBookManager = IBookManager.Stub.asInterface(binder);
+            try {
+                binder.linkToDeath(mDeathRecipient, 0);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
             try {
                 mRemoteBookManager.registerListener(mOnNewBookArrivedListener);
             } catch (RemoteException e) {
@@ -65,8 +87,7 @@ public class AIDLBookManagerActivity extends Activity implements View.OnClickLis
         }
     };
 
-    // TODO: 2017/6/2  IOnNewBookArrivedListener的onNewBookArrived方法是在运行在客户端的binder线程池中，用handler将它切换到主线程执行???
-    // TODO: 2017/6/6  Binder连接池:多个aidl一个remote service
+    // IOnNewBookArrivedListener的onNewBookArrived方法是在运行在客户端的binder线程池中，用handler将它切换到主线程执行???
     private IOnNewBookArrivedListener mOnNewBookArrivedListener = new IOnNewBookArrivedListener.Stub(){
         @Override
         public void onNewBookArrived(Book newBook) throws RemoteException {
@@ -74,7 +95,6 @@ public class AIDLBookManagerActivity extends Activity implements View.OnClickLis
             mHandler.sendMessage(msg);
         }
     };
-
 
     private Handler mHandler = new Handler(){
         @Override
@@ -90,6 +110,7 @@ public class AIDLBookManagerActivity extends Activity implements View.OnClickLis
 
     private void getBookList() {
         try {
+            //服务端的方法如果是耗时操作，最好在子线程中调用，防止ANR
             List<Book> bookList = mRemoteBookManager.getBookList();
             ToastUtils.showLongToast(this,"class: " +  bookList.getClass().getCanonicalName() + " size:" + bookList.size());
         } catch (RemoteException e) {

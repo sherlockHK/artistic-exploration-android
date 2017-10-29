@@ -59,10 +59,10 @@ public class AIDLBookManagerService extends Service {
         @Override
         public void addBook(Book book) throws RemoteException {
             /**
-             * 客户端调用远程服务方法，被调用的addBook运行在服务端的binder线程池中，同时客户端线程会被挂起，
-             * 如果服务端执行耗时操作，会导致客户端线程长时间阻塞，如果客户端线程是UI线程，会导致ANR。
-             *
+             * 1.客户端调用远程服务方法，同时客户端线程会被挂起，如果服务端执行耗时操作，会导致客户端线程长时间阻塞，如果客户端线程是UI线程，会导致ANR。
              * SystemClock.sleep(10 * 1000);
+             *
+             * 2.由于服务端的Binder方法运行在Binder线程池中，所以Binder方法应该采用同步的方式实现；
              * */
 
             mBookList.add(book);
