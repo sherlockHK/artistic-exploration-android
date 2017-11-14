@@ -11,7 +11,9 @@ import android.widget.Button;
 
 import com.gakki.hk.artistic_exploration_android.R;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -37,8 +39,8 @@ public class AlgorithmFragment extends Fragment {
         Button array = (Button) view.findViewById(R.id.btn_array);
         btn_search.setOnClickListener(v -> searchTest());
         btn_sort.setOnClickListener(v -> sortTest());
-        string.setOnClickListener(v -> stringTest());
-        array.setOnClickListener(v -> arrayTest());
+//        string.setOnClickListener(v -> stringTest());
+//        array.setOnClickListener(v -> arrayTest());
     }
 
     /*
@@ -107,6 +109,7 @@ public class AlgorithmFragment extends Fragment {
         return a;
     }
 
+    //通过一趟排序将序列分成两部分，其中一部分均比另一部分小，再分别对这两部分进行排序
     private int[] quickSort(int[] a, int low, int high) {
         if (low < high) {
             int pivot = partition(a, low, high);
@@ -145,14 +148,51 @@ public class AlgorithmFragment extends Fragment {
     /*
     * 字符串
     * */
-    private void stringTest() {
+    //每个字符取出来反转
+    private String reverseString1(String str) {
+        if (str == null || str.length() <= 1) {
+            return str;
+        }
 
+        char[] chars = str.toCharArray();
+        int length = chars.length;
+        char[] reversedChars = new char[length];
+        for (int i = 0; i < length; i++) {
+            reversedChars[length - 1 - i] = chars[i];
+        }
+        return new String(reversedChars);
     }
+
+    //利用递归和迭代
+    private String reverseString2(String str) {
+        if (str == null || str.length() <= 1) {
+            return str;
+        }
+
+        return reverseString2(str.substring(1)) + str.charAt(0);
+    }
+
 
     /*
     * 数组
     * */
-    private void arrayTest() {
+    private String[] unique_arr(String[] arr) {
+        List<String> list = new ArrayList<>();
+        boolean flag;
+        for (String s : arr) {
+            flag = false;
+            for (int i = 0; i < list.size(); i++) {
+                if (s.equals(list.get(i))) {
+                    flag = true;
+                    break;
+                }
+            }
 
+            if (!flag) {
+                list.add(s);
+            }
+        }
+
+        return list.toArray(new String[list.size()]);
     }
 }
