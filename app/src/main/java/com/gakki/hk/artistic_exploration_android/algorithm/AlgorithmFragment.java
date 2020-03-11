@@ -109,7 +109,11 @@ public class AlgorithmFragment extends Fragment {
         return a;
     }
 
-    //通过一趟排序将序列分成两部分，其中一部分均比另一部分小，再分别对这两部分进行排序
+    /**
+     * 快速排序的本质就是把基准数大的都放在基准数的左边,把比基准数小的放在基准数的右边,这样就找到了该数据在数组中的正确位置.
+     * 然后采用递归的方式分别对前半部分和后半部分排序，当前半部分和后半部分均有序时该数组就自然有序了
+     *
+     * */
     private int[] quickSort(int[] a, int low, int high) {
         if (low < high) {
             int pivot = partition(a, low, high);
