@@ -8,7 +8,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.blankj.utilcode.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
+
 
 /**
  * Created by HK on 2017/6/7.

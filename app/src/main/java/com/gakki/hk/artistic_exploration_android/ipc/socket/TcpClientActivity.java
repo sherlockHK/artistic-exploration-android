@@ -12,9 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.blankj.utilcode.utils.LogUtils;
-import com.blankj.utilcode.utils.StringUtils;
-import com.blankj.utilcode.utils.TimeUtils;
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.gakki.hk.artistic_exploration_android.R;
 
 import java.io.BufferedReader;
@@ -117,7 +117,7 @@ public class TcpClientActivity extends Activity implements View.OnClickListener 
             String msgFromServer = in.readLine();
             LogUtils.i("receive msg from server:" + msgFromServer);
             if (!StringUtils.isEmpty(msgFromServer)){
-                String showedMsg = "server time " + TimeUtils.getCurTimeString() + msgFromServer + "\n";
+                String showedMsg = "server time " + TimeUtils.getNowString() + msgFromServer + "\n";
                 mHandler.obtainMessage(MESSAGE_RECEIVE_NEW_MSG, showedMsg).sendToTarget();
             }
         }
@@ -139,7 +139,7 @@ public class TcpClientActivity extends Activity implements View.OnClickListener 
                 }
             }.start();
             etSend.setText("");
-            String showedMsg = "client time:" + TimeUtils.getCurTimeString() + msg + "\n";
+            String showedMsg = "client time:" + TimeUtils.getNowString() + msg + "\n";
             chatContent.setText(chatContent.getText().toString() + showedMsg);
         }
     }

@@ -9,7 +9,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 
-import com.blankj.utilcode.utils.ToastUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.gakki.hk.artistic_exploration_android.R;
 
 /**
@@ -44,7 +44,7 @@ public class HandlerThreadActivity extends Activity implements View.OnClickListe
             @Override
             public void handleMessage(Message msg) {
                 //运行在handlerThread线程中
-                ToastUtils.showShortToast(HandlerThreadActivity.this, "handleMessage" + "msg: " + msg.what + "运行在线程:" + Thread.currentThread().getName());
+                ToastUtils.showShort( "handleMessage" + "msg: " + msg.what + "运行在线程:" + Thread.currentThread().getName());
             }
         };
     }

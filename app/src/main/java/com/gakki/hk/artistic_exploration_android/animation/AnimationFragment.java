@@ -21,9 +21,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.blankj.utilcode.utils.LogUtils;
-import com.blankj.utilcode.utils.SizeUtils;
-import com.blankj.utilcode.utils.ToastUtils;
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.SizeUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.gakki.hk.artistic_exploration_android.R;
 
 /**
@@ -118,22 +118,22 @@ public class AnimationFragment extends Fragment implements View.OnClickListener 
         animatorSet.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-                ToastUtils.showShortToast(getContext(), "onAnimationStart");
+                ToastUtils.showShort("onAnimationStart");
             }
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                ToastUtils.showShortToast(getContext(), "onAnimationEnd");
+                ToastUtils.showShort("onAnimationEnd");
             }
 
             @Override
             public void onAnimationCancel(Animator animation) {
-                ToastUtils.showShortToast(getContext(), "onAnimationCancel");
+                ToastUtils.showShort("onAnimationCancel");
             }
 
             @Override
             public void onAnimationRepeat(Animator animation) {
-                ToastUtils.showShortToast(getContext(), "onAnimationRepeat");
+                ToastUtils.showShort("onAnimationRepeat");
             }
         });
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(demo4, "translationX", 0, 200, 0);
@@ -155,7 +155,7 @@ public class AnimationFragment extends Fragment implements View.OnClickListener 
         animatorSet.setDuration(1000).start();
 
         //3.属性动画：改变button的width属性，但是button的setWidth方法不能真的改变width属性
-        ObjectAnimator.ofInt(new ViewWrapper(propertyAnimationBtn), "width", SizeUtils.dp2px(getContext(), 360)).setDuration(1000).start();
+        ObjectAnimator.ofInt(new ViewWrapper(propertyAnimationBtn), "width", SizeUtils.dp2px((360))).setDuration(1000).start();
     }
 
     private static class ViewWrapper{

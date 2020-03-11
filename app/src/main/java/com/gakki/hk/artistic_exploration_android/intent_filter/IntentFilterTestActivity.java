@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.blankj.utilcode.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.gakki.hk.artistic_exploration_android.R;
 
 import java.util.logging.Logger;

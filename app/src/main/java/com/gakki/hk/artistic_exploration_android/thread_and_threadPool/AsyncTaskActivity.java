@@ -11,9 +11,7 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.blankj.utilcode.utils.LogUtils;
-import com.blankj.utilcode.utils.TimeUtils;
-import com.blankj.utilcode.utils.ToastUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.gakki.hk.artistic_exploration_android.R;
 
 import java.lang.ref.WeakReference;
@@ -105,12 +103,10 @@ public class AsyncTaskActivity extends Activity implements View.OnClickListener 
 
         @Override
         protected void onPreExecute() {
-            ToastUtils.showShortToast(context, "onPreExecute");
         }
 
         @Override
         protected Boolean doInBackground(Integer... integers) {
-            ToastUtils.showShortToast(context, "doInBackground");
 
             Integer count = integers[0];
             int i;
@@ -127,18 +123,15 @@ public class AsyncTaskActivity extends Activity implements View.OnClickListener 
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-            ToastUtils.showShortToast(context, "onProgressUpdate: " + values[0]);
             seekBar.setProgress(values[0]);
         }
 
         @Override
         protected void onPostExecute(Boolean aBoolean) {
-            ToastUtils.showShortToast(context, "onPostExecute: " + aBoolean);
         }
 
         @Override
         protected void onCancelled(Boolean aBoolean) {
-            ToastUtils.showShortToast(context, "onCancelled");
         }
     }
 
@@ -159,9 +152,6 @@ public class AsyncTaskActivity extends Activity implements View.OnClickListener 
 
         @Override
         protected void onPostExecute(String s) {
-            String msg = s + "onPostExecute:" + TimeUtils.getCurTimeString() + "\n";
-            LogUtils.i(s, msg);
-            textview.append(msg);
         }
     }
 }

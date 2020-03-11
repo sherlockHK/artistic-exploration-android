@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.blankj.utilcode.utils.TimeUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.gakki.hk.artistic_exploration_android.R;
 
 /**
@@ -43,7 +43,7 @@ public class BookContentProviderActivity extends Activity implements View.OnClic
             case R.id.btn_insert:
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("_id", 4 + i);
-                contentValues.put("name", "Refactor" + TimeUtils.getCurTimeString());
+                contentValues.put("name", "Refactor" + TimeUtils.getNowString());
                 getContentResolver().insert(bookUri, contentValues);
                 i++;
                 break;

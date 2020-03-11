@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.blankj.utilcode.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.gakki.hk.artistic_exploration_android.R;
 
 /**

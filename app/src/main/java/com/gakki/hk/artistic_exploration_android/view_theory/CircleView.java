@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.blankj.utilcode.utils.SizeUtils;
+import com.blankj.utilcode.util.SizeUtils;
 import com.gakki.hk.artistic_exploration_android.R;
 
 /**
@@ -62,8 +62,8 @@ public class CircleView extends View {
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
-        int wrapContentWidth = SizeUtils.dp2px(context, 100f);
-        int wrapContentHeight = SizeUtils.dp2px(context, 100f);
+        int wrapContentWidth = SizeUtils.dp2px(100f);
+        int wrapContentHeight = SizeUtils.dp2px(100f);
         if (widthMode == MeasureSpec.AT_MOST && heightMode == MeasureSpec.AT_MOST){
             setMeasuredDimension(wrapContentWidth, wrapContentHeight);
         }else if (widthMode == MeasureSpec.AT_MOST){

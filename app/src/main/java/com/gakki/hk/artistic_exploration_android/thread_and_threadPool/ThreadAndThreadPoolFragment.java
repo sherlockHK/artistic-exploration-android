@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.blankj.utilcode.utils.LogUtils;
-import com.blankj.utilcode.utils.TimeUtils;
 import com.gakki.hk.artistic_exploration_android.R;
 
 import java.util.concurrent.ExecutorService;
@@ -58,28 +56,24 @@ public class ThreadAndThreadPoolFragment extends Fragment implements View.OnClic
         mRunnable1 = new Runnable() {
             @Override
             public void run() {
-                LogUtils.i("fixedThreadPool execute: " + TimeUtils.getCurTimeString());
                 SystemClock.sleep(3000);
             }
         };
         mRunnable2 = new Runnable() {
             @Override
             public void run() {
-                LogUtils.i("cachedThreadPool execute: " + TimeUtils.getCurTimeString());
                 SystemClock.sleep(3000);
             }
         };
         mRunnable3 = new Runnable() {
             @Override
             public void run() {
-                LogUtils.i("scheduledExecutorService execute: " + TimeUtils.getCurTimeString());
                 SystemClock.sleep(0);
             }
         };
         mRunnable4 = new Runnable() {
             @Override
             public void run() {
-                LogUtils.i("singleThreadExecutor execute: " + TimeUtils.getCurTimeString());
                 SystemClock.sleep(3000);
             }
         };

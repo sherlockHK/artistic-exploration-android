@@ -14,9 +14,9 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 
-import com.blankj.utilcode.utils.LogUtils;
-import com.blankj.utilcode.utils.TimeUtils;
-import com.blankj.utilcode.utils.ToastUtils;
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.TimeUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.gakki.hk.artistic_exploration_android.IBookManager;
 import com.gakki.hk.artistic_exploration_android.IOnNewBookArrivedListener;
 import com.gakki.hk.artistic_exploration_android.R;
@@ -102,7 +102,6 @@ public class AIDLBookManagerActivity extends Activity implements View.OnClickLis
             switch (msg.what){
                 case MSG_NEW_BOOK_ARRIVED:
                     Book book = (Book) msg.obj;
-                    ToastUtils.showLongToast(AIDLBookManagerActivity.this, "received new book:" + book.toString());
                     break;
             }
         }
@@ -112,7 +111,6 @@ public class AIDLBookManagerActivity extends Activity implements View.OnClickLis
         try {
             //服务端的方法如果是耗时操作，最好在子线程中调用，防止ANR
             List<Book> bookList = mRemoteBookManager.getBookList();
-            ToastUtils.showLongToast(this,"class: " +  bookList.getClass().getCanonicalName() + " size:" + bookList.size());
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -120,7 +118,7 @@ public class AIDLBookManagerActivity extends Activity implements View.OnClickLis
 
     private void addBook() {
         try {
-            mRemoteBookManager.addBook(new Book(3, "Android artistic exploration" + TimeUtils.getCurTimeString()));
+            mRemoteBookManager.addBook(new Book(3, "Android artistic exploration" + TimeUtils.getNowString()));
         } catch (RemoteException e) {
             e.printStackTrace();
         }
