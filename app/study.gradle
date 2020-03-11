@@ -1,0 +1,78 @@
+println '---------------配置阶段 执行build.gradle---------------'
+
+// 调用Project的dependencies(Closure c)声明项目依赖
+dependencies {
+    // 闭包中执行的代码
+    println 'dependencies中执行的代码'
+}
+
+// 创建一个Task
+task testConfiguration() {
+    println 'Task中的配置代码'
+    // 定义一个闭包
+    def a = {
+        println 'Task中的配置代码2'
+    }
+    // 执行闭包
+    a()
+    doFirst {
+        println '这段代码配置阶段不执行'
+    }
+}
+
+println '我是顺序执行的'
+
+
+println '---------------执行阶段 根据任务关系图执行task---------------'
+
+gradle.addListener(new TaskExecutionListener(){
+    @Override
+    void beforeExecute(Task task) {
+        println 'beforeExecute: ' + task.getName()
+    }
+
+    @Override
+    void afterExecute(Task task, TaskState state) {
+        println 'afterExecute: ' + task.getName()
+    }
+})
+
+gradle.taskGraph.afterTask { task ->
+    try {
+
+        StringBuffer taskDetails = new StringBuffer()
+        taskDetails << """"-------------
+name:$task.name group:$task.group : $task.description
+conv:$task.convention.plugins
+inputs:
+"""
+        task.inputs.files.each { it ->
+            taskDetails << " ${it.absolutePath}\n"
+        }
+        taskDetails << "outputs:\n"
+        task.outputs.files.each { it ->
+            taskDetails << " ${it.absolutePath}\n"
+        }
+
+        taskDetails << "-------------"
+        println taskDetails
+    }
+    catch (Exception e) {
+
+    }
+}
+
+gradle.taskGraph.whenReady {
+    project.tasks.all {
+        Task t = it
+        String taskName = it.name
+        println("--------taskName-----------:" + taskName + " :" + it.getPath())
+        it.getTaskDependencies().any {
+            println("-----------------taskName----dependsOn-----------------:")
+            it.getDependencies(t).findAll() {
+                println("----------------------------------:" + it.getPath())
+            }
+        }
+
+    }
+}
