@@ -5,7 +5,8 @@ import java.util.Arrays;
 /**
  * Created by kai on 2020/3/11
  * Email：kaihu1989@gmail.com
- * Feature:
+ *
+ * 参考文章：https://www.runoob.com/w3cnote/ten-sorting-algorithm.html
  */
 public class SortUtil {
     /**
@@ -70,7 +71,7 @@ public class SortUtil {
     }
 
     /**
-     * 插入排序：通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入
+     * 直接插入排序：通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入
      *
      * */
     public static void insertSort(int[] arr) {
@@ -91,11 +92,27 @@ public class SortUtil {
     }
 
     /**
-     * 希尔排序
+     * 希尔排序（优化的插入排序）:希尔排序是把记录按下标的一定增量分组，对每组使用直接插入排序算法排序；
+     * 随着增量逐渐减少，每组包含的关键词越来越多，当增量减至1时，整个文件恰被分成一组，算法便终止
+     * https://www.cnblogs.com/chengxiao/p/6104371.html
      *
      * */
     public static void shellSort(int[] arr) {
-
+        //增量gap, 每次除以2,直到为1
+        for (int gap = arr.length / 2; gap > 0; gap/=2) {
+            //从第gap个元素开始，对每组直接插入排序
+            for (int i = gap; i < arr.length; i++) {
+                int j = i;
+                int preIndex = j- gap;
+                //对单组元素，直接插入排序
+                while (preIndex >= 0 && arr[j] < arr[preIndex]){
+                    int tmp = arr[preIndex];
+                    arr[preIndex] = arr[j];
+                    arr[j] = tmp;
+                    j = preIndex;
+                }
+            }
+        }
     }
 
     /**
