@@ -41,12 +41,87 @@ public class ExampleUnitTest {
 
 
     /***排序算法***/
+    //冒泡排序
+    @Test
+    public void test_bubble_sort() throws Exception {
+        int[] arr = {8,4,5,7,1,3,6,2};
+        int[] arr1 = {8,4,5,7,1,3,6,2};
+        SortUtil.bubbleSort1(arr);
+        SortUtil.bubbleSort2(arr1);
+        System.out.println(Arrays.toString(arr));
+        System.out.println(Arrays.toString(arr1));
+    }
+
+    //选择排序
+    @Test
+    public void test_select_sort() throws Exception {
+        int[] arr = {8,4,5,7,1,3,6,2};
+        SortUtil.selectSort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    //插入排序
+    @Test
+    public void test_insert_sort() throws Exception {
+        int[] arr = {8,4,5,7,1,3,6,2};
+        SortUtil.insertSort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    //希尔排序
+    @Test
+    public void test_shell_sort() throws Exception {
+        int[] arr = {8,4,5,7,1,3,6,2};
+        SortUtil.shellSort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
     //归并排序
     @Test
     public void test_merge_sort() throws Exception {
         int[] arr = {8,4,5,7,1,3,6,2};
         int[] temp = new int[arr.length];
         SortUtil.mergeSort(arr, 0, arr.length -1 ,temp);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    //快速排序
+    @Test
+    public void test_quick_sort() throws Exception {
+        int[] arr = {8,4,5,7,1,3,6,2};
+        SortUtil.quickSort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    //堆排序
+    @Test
+    public void test_heap_sort() throws Exception {
+        int[] arr = {8,4,5,7,1,3,6,2};
+        SortUtil.heapSort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    //计数排序
+    @Test
+    public void test_counting_sort() throws Exception {
+        int[] arr = {8,4,5,7,1,3,6,2};
+        SortUtil.countingSort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    //桶排序
+    @Test
+    public void test_bucket_sort() throws Exception {
+        int[] arr = {8,4,5,7,1,3,6,2};
+        SortUtil.bucketSort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    //基数排序
+    @Test
+    public void test_radix_sort() throws Exception {
+        int[] arr = {8,4,5,7,1,3,6,2};
+        SortUtil.radixSort(arr);
         System.out.println(Arrays.toString(arr));
     }
 }

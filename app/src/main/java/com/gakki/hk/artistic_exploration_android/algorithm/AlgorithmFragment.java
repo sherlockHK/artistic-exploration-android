@@ -82,19 +82,8 @@ public class AlgorithmFragment extends Fragment {
     }
 
     private int[] bubbleSort(int[] a) {
-        boolean flag = true;
-        for (int i = 0; i < a.length && flag; i++) {
-            flag = false;
-            for (int j = i + 1; j < a.length; j++) {
-                if (a[i] > a[j]) {
-                    int temp = a[i];
-                    a[i] = a[j];
-                    a[j] = temp;
-                    flag = true;
-                }
-            }
-        }
-        return a;
+        //wrong
+        return null;
     }
 
     private int[] insertSort(int[] a) {
