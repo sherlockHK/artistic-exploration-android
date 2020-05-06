@@ -20,12 +20,23 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
 
     /***查找算法***/
-    //二分查找
+    //二分查找目标值
     @Test
     public void test_binary_search() throws Exception {
         int[] arr = {1,3,5,7,9,13};
-        int index = SearchUtil.binarySearch(arr, 7);
-        System.out.println(index);
+        int re1 = SearchUtil.binarySearch1(arr, 7);
+        int re2 = SearchUtil.binarySearch2(arr, 8);
+        System.out.println("re1：" + re1 + " | " + "re2：" + re2);
+    }
+
+    //二分查找第一个出现的值，返回下标
+    @Test
+    public void test_binary_search1() throws Exception {
+        int[] arr = {1,3,5,7,7,9,13};
+        int re1 = SearchUtil.binarySearch3(arr, 6);
+        int re2 = SearchUtil.binarySearch3(arr, 7);
+        int re3 = SearchUtil.binarySearch3(arr, 8);
+        System.out.println("re1：" + re1 + " | " + "re2：" + re2 + " | " + "re3：" + re3);
     }
 
 
