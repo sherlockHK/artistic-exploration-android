@@ -89,7 +89,7 @@ public class ExampleUnitTest {
     @Test
     public void test_quick_sort() throws Exception {
         int[] arr = {8,4,5,7,1,3,6,2};
-        SortUtil.quickSort(arr);
+        SortUtil.quickSort(arr, 0, arr.length -1);
         System.out.println(Arrays.toString(arr));
     }
 
