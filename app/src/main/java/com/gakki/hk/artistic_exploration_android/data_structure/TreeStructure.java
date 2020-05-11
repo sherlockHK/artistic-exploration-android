@@ -33,7 +33,7 @@ public class TreeStructure {
     /**
      * 二叉树定义
      */
-    static class BinaryTree {
+    public static class BinaryTree {
         //树的结点定义
         static class TreeNode {
             String data;
@@ -47,19 +47,19 @@ public class TreeStructure {
             }
         }
 
-        TreeNode root; //根结点
+        public TreeNode root; //根结点
 
-        BinaryTree() {
-            root = new TreeNode("A", null, null);
+        public BinaryTree() {
+            root = new TreeNode("1", null, null);
         }
 
-        void generateBinaryTree() {
-            TreeNode bNode = new TreeNode("B", null, null);
-            TreeNode cNode = new TreeNode("C", null, null);
-            TreeNode dNode = new TreeNode("D", null, null);
-            TreeNode eNode = new TreeNode("E", null, null);
-            TreeNode fNode = new TreeNode("F", null, null);
-            TreeNode gNode = new TreeNode("G", null, null);
+        public void generateBinaryTree() {
+            TreeNode bNode = new TreeNode("2", null, null);
+            TreeNode cNode = new TreeNode("3", null, null);
+            TreeNode dNode = new TreeNode("4", null, null);
+            TreeNode eNode = new TreeNode("5", null, null);
+            TreeNode fNode = new TreeNode("6", null, null);
+            TreeNode gNode = new TreeNode("7", null, null);
 
             root.lChild = bNode;
             root.rChild = cNode;
@@ -108,19 +108,95 @@ public class TreeStructure {
         * 前序遍历的非递归实现
         * */
         static void preOrderTravNoRecur(TreeNode node){
-            LinkedList<TreeNode> stack = new java.util.LinkedList<>();
-            TreeNode current = node;
-            while (current != null || !stack.isEmpty()){
-                //1.先遍历所有的左子树(左子树的左子树..)，然后放入栈中
-                while (current != null){
-                    Log.i("前序遍历非递归实现", current.data);
-                    stack.push(current);
-                    current = current.lChild;
+            LinkedList<TreeNode> stack = new LinkedList<>();
+            TreeNode p = node;
+            while (p != null || !stack.isEmpty()){
+                while (p != null){
+                    String data = p.data;
+                    stack.push(p);
+                    p = p.lChild;
                 }
-                //2.再处理右子树
-                current = stack.pop();
-                current = current.rChild;
+                p = stack.pop();
+                p = p.rChild;
             }
+        }
+
+        /**
+         * 前序遍历的非递归实现
+         * 1.p指向根节点
+         * 2.若p不为空，遍历p，p入栈，再将p指向p的左孩子，直到左孩子为空
+         * 3.堆栈中退出栈顶元素，将p指向它的右孩子
+         * 4.重复2，3过程
+         * */
+        public static List<String> preOrderTravNoRecur(TreeNode node, List<String> list){
+            LinkedList<TreeNode> stack = new LinkedList<>();
+            TreeNode p = node;
+            while (p != null || !stack.isEmpty()){
+                while (p != null){
+                    list.add(p.data);
+                    stack.push(p);
+                    p = p.lChild;
+                }
+                p = stack.pop();
+                p = p.rChild;
+            }
+            return list;
+        }
+
+        /**
+         * 中序遍历的非递归实现
+         * 1.p指向根节点
+         * 2.若p不为空，p入栈，再将p指向p的左孩子，直到左孩子为空
+         * 3.堆栈中退出栈顶元素，p指向栈顶元素，遍历p，将p指向它的右孩子
+         * 4.重复2，3过程
+         * */
+        public static List<String> midOrderTravNoRecur(TreeNode node, List<String> list){
+            LinkedList<TreeNode> stack = new LinkedList<>();
+            TreeNode p = node;
+            while (p != null || !stack.isEmpty()){
+                while (p != null){
+                    stack.push(p);
+                    p = p.lChild;
+                }
+                p = stack.pop();
+                list.add(p.data);
+                p = p.rChild;
+            }
+            return list;
+        }
+
+        /**
+         * 后序遍历的非递归实现
+         * 1.2个栈，1个存储需要遍历的节点，另一个存储节点是否已遍历过右子节点
+         * 2.若p不为空，p入栈，再将p指向p的左孩子，直到左孩子为空
+         * 3.堆栈1中退出栈顶元素，p指向栈顶元素，堆栈2退出栈顶元素，代表堆栈1栈顶节点是否已遍历过右子节点
+         * 4.已遍历，则读取p的值，p指向null
+         * 5.未遍历，将p入栈1，且true入栈2，说明p已遍历过右子节点，p指向p的右孩子，重复上述2,3,4,5过程
+         * */
+        public static List<String> postOrderTravNoRecur(TreeNode node, List<String> list){
+            LinkedList<TreeNode> stack = new LinkedList<>();
+            LinkedList<Boolean> flagS = new LinkedList<>();
+            TreeNode p = node;
+            int count = 0;
+            while (p != null || !stack.isEmpty()){
+                while (p != null){
+                    stack.push(p);
+                    flagS.push(p.rChild == null);
+                    p = p.lChild;
+                }
+                p = stack.pop();
+                System.out.println("遍历次数" + ++count);
+                boolean flag = flagS.pop();
+                if (flag){
+                    list.add(p.data);
+                    p = null;
+                }else {
+                    stack.push(p);
+                    flagS.push(true);
+                    p = p.rChild;
+                }
+            }
+            return list;
         }
 
         /*

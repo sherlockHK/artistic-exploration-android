@@ -4,10 +4,12 @@ import android.util.Log;
 
 import com.gakki.hk.artistic_exploration_android.algorithm.SearchUtil;
 import com.gakki.hk.artistic_exploration_android.algorithm.SortUtil;
+import com.gakki.hk.artistic_exploration_android.data_structure.TreeStructure;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.Assert.*;
@@ -123,5 +125,23 @@ public class ExampleUnitTest {
         int[] arr = {8,4,5,7,1,3,6,2};
         SortUtil.radixSort(arr);
         System.out.println(Arrays.toString(arr));
+    }
+
+    //二叉树遍历
+    @Test
+    public void test_traverse_binary_tree() {
+        TreeStructure.BinaryTree binaryTree = new TreeStructure.BinaryTree();
+        binaryTree.generateBinaryTree();
+        ArrayList<String> list = new ArrayList<>();
+        TreeStructure.BinaryTree.preOrderTravNoRecur(binaryTree.root, list);
+        System.out.println(list.toString());
+
+        ArrayList<String> list2 = new ArrayList<>();
+        TreeStructure.BinaryTree.midOrderTravNoRecur(binaryTree.root, list2);
+        System.out.println(list2.toString());
+
+        ArrayList<String> list3 = new ArrayList<>();
+        TreeStructure.BinaryTree.postOrderTravNoRecur(binaryTree.root, list3);
+        System.out.println(list3.toString());
     }
 }
