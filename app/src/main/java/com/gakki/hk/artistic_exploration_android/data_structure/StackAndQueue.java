@@ -11,16 +11,16 @@ public class StackAndQueue {
      * 栈：只能在头部插入和删除的线性表
      * */
     public static class Stack{
-        LinkedList.Node first; //栈顶元素
+        LinkedListCust.Node first; //栈顶元素
         int length;
 
         public Stack() {
-            this.first = new LinkedList.Node(1, null);
+            this.first = new LinkedListCust.Node(1, null);
             length = 1;
         }
 
         public void push(int data){
-            LinkedList.Node newNode = new LinkedList.Node(data, this.first);
+            LinkedListCust.Node newNode = new LinkedListCust.Node(data, this.first);
             first = newNode;
 
             length++;
@@ -31,7 +31,7 @@ public class StackAndQueue {
                 throw new Exception("length is 0");
             }
 
-            LinkedList.Node f = first;
+            LinkedListCust.Node f = first;
             first = first.next;
             length--;
             return f.data;
@@ -42,17 +42,17 @@ public class StackAndQueue {
      * 队列：只能在一端插入，另一端删除的线性表
      * */
     public static class Queue{
-        LinkedList.Node front, rear;
+        LinkedListCust.Node front, rear;
         int length;
 
         public Queue() {
-            front = rear = new LinkedList.Node(1, null);
+            front = rear = new LinkedListCust.Node(1, null);
             length = 1;
         }
 
         //从尾部入队列
         public void enqueue(int data){
-            LinkedList.Node newNode = new LinkedList.Node(data, null);
+            LinkedListCust.Node newNode = new LinkedListCust.Node(data, null);
             rear.next = newNode;
             rear = newNode;
 
@@ -61,7 +61,7 @@ public class StackAndQueue {
 
         public int dequeue(){
             int data = front.data;
-            LinkedList.Node next =front.next;
+            LinkedListCust.Node next =front.next;
             front = next;
 
             length--;

@@ -5,7 +5,7 @@ package com.gakki.hk.artistic_exploration_android.data_structure;
  * Email: kaihu1989@gmail.com.
  */
 
-public class LinkedList {
+public class LinkedListCust {
 
     /**
      * 结点定义
