@@ -8,7 +8,7 @@ import java.util.List;
  * Email：kaihu1989@gmail.com
  * Feature:
  */
-public class LeetCodeUtil {
+public class LcUtil {
     public static class Solution {
         List<List<Integer>> output = new LinkedList();
         LinkedList<Integer> curr = new LinkedList<>();

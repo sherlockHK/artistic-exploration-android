@@ -1,27 +1,20 @@
 package com.gakki.hk.artistic_exploration_android;
 
-import android.util.Log;
-
-import com.gakki.hk.artistic_exploration_android.algorithm.LeetCodeUtil;
+import com.gakki.hk.artistic_exploration_android.algorithm.LcUtil;
 import com.gakki.hk.artistic_exploration_android.algorithm.SearchUtil;
 import com.gakki.hk.artistic_exploration_android.algorithm.SortUtil;
 import com.gakki.hk.artistic_exploration_android.data_structure.TreeStructure;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 /**
- * Example local unit test, which will execute on the development machine (host).
  *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class CommonTest {
 
     /***查找算法***/
     //二分查找目标值
@@ -145,11 +138,5 @@ public class ExampleUnitTest {
         ArrayList<String> list3 = new ArrayList<>();
         TreeStructure.BinaryTree.postOrderTravNoRecur(binaryTree.root, list3);
         System.out.println(list3.toString());
-    }
-
-    @Test
-    public void test_get_k_combines_in_n_numbers() {
-        LeetCodeUtil.Solution s = new LeetCodeUtil.Solution();
-        List<List<Integer>> combine = s.combine(4, 2);
     }
 }
