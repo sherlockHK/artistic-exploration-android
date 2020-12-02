@@ -2,6 +2,7 @@ package com.gakki.hk.artistic_exploration_android;
 
 import com.gakki.hk.artistic_exploration_android.algorithm.LcUtil;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
@@ -14,7 +15,13 @@ import java.util.List;
 public class LcTest {
     @Test
     public void test_get_k_combines_in_n_numbers() {
-        LcUtil.Solution s = new LcUtil.Solution();
+        LcUtil.Solution1 s = new LcUtil.Solution1();
         List<List<Integer>> combine = s.combine(4, 2);
+    }
+
+    @Test
+    public void test_1() {
+        int repeatNumber = LcUtil.findRepeatNumber(new int[]{2, 3, 1, 0, 2, 5, 3});
+        Assert.assertEquals(repeatNumber, 2);
     }
 }
