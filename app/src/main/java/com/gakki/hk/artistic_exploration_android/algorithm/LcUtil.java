@@ -1,5 +1,7 @@
 package com.gakki.hk.artistic_exploration_android.algorithm;
 
+import com.gakki.hk.artistic_exploration_android.data_structure.ListNode;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,7 +44,7 @@ public class LcUtil {
     }
 
     /**
-     * 在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。
+     * 3.在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。
      * 数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。
      * 输入：
      * [2, 3, 1, 0, 2, 5, 3]
@@ -57,6 +59,202 @@ public class LcUtil {
             m.put(i, true);
         }
         return -1;
+    }
+
+    /**
+     * 4.二维数组中的查找
+     * 在一个 n * m 的二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。
+     * 请完成一个高效的函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。
+     * 示例:
+     * 现有矩阵 matrix 如下：
+     * [
+     *   [1,   4,  7, 11, 15],
+     *   [2,   5,  8, 12, 19],
+     *   [3,   6,  9, 16, 22],
+     *   [10, 13, 14, 17, 24],
+     *   [18, 21, 23, 26, 30]
+     * ]
+     * 给定 target = 5，返回 true。
+     * 给定 target = 20，返回 false。
+     * 限制：
+     * 0 <= n <= 1000
+     * 0 <= m <= 1000
+     * tips：从最右上侧看（15），就是二叉搜索树
+     * */
+    public static boolean findNumberIn2DArray(int[][] matrix, int target){
+        int x = 0;
+        int y = matrix[0].length -1;
+        while (x<matrix.length && y >=0){
+            if (matrix[x][y] > target){
+                y--;
+            }else if (matrix[x][y] < target){
+                x++;
+            }else {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * 5.替换空格
+     * 请实现一个函数，把字符串 s 中的每个空格替换成"%20"。
+     * 示例 1：
+     * 输入：s = "We are happy." 输出："We%20are%20happy."
+     * */
+    public static String replaceStr(String s){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == ' '){
+                sb.append("%20");
+            }else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 6.从尾到头打印链表
+     * 输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。
+     * 示例 1：
+     * 输入：head = [1,3,2] 输出：[2,3,1]
+     * */
+    public static int[] reversePrint(ListNode head){
+        if (head == null) return new int[0];
+        int length = 1;
+        ListNode tmp = head;
+        while(tmp.next != null){
+            tmp = tmp.next;
+            length++;
+        }
+        int[] res = new int[length];
+        printNode(head, res);
+        return res;
+    }
+    private static int pos1 = 0;
+    private static void printNode(ListNode n, int[] res){
+        if (n == null) return;
+        printNode(n.next, res);
+        res[pos1] = n.val;
+        pos1++;
+    }
+
+    /**
+     * 9.用两个栈实现一个队列。
+     * 队列的声明如下，请实现它的两个函数 appendTail 和 deleteHead ，分别完成在队列尾部插入整数和在队列头部删除整数的功能。
+     * (若队列中没有元素，deleteHead 操作返回 -1 )
+     * */
+    class CQueue {
+
+        public CQueue() {
+
+        }
+
+        public void appendTail(int value) {
+
+        }
+
+        public int deleteHead() {
+
+        }
+    }
+
+    /**
+     * 10-1.斐波那契数列
+     * 写一个函数，输入 n ，求斐波那契（Fibonacci）数列的第 n 项。斐波那契数列的定义如下：
+     * F(0) = 0,   F(1) = 1
+     * F(N) = F(N - 1) + F(N - 2), 其中 N > 1.
+     * 斐波那契数列由 0 和 1 开始，之后的斐波那契数就是由之前的两数相加而得出。
+     * 答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。
+     * 示例 1： 输入：n = 2  输出：1
+     * 示例 2： 输入：n = 5  输出：5
+     * */
+    public int fib(int n) {
+
+    }
+
+    /**
+     * 10-2.青蛙跳台阶问题
+     * 一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶。求该青蛙跳上一个 n 级的台阶总共有多少种跳法。
+     * 答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。
+     * 示例 1：输入：n = 2 输出：2
+     * 示例 2：输入：n = 7 输出：21
+     * 示例 3：输入：n = 0 输出：1
+     * */
+    public int numWays(int n) {
+
+    }
+
+    /**
+     * 11.旋转数组的最小数字
+     * 把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。
+     * 输入一个递增排序的数组的一个旋转，输出旋转数组的最小元素。
+     * 例如，数组 [3,4,5,1,2] 为 [1,2,3,4,5] 的一个旋转，该数组的最小值为1。  
+     * 示例 1：输入：[3,4,5,1,2] 输出：1
+     * 示例 2：输入：[2,2,2,0,1] 输出：0
+     * */
+    public int minArray(int[] numbers) {
+
+    }
+
+    /**
+     * 12.矩阵中的路径
+     * 请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。
+     * 路径可以从矩阵中的任意一格开始，每一步可以在矩阵中向左、右、上、下移动一格。如果一条路径经过了矩阵的某一格，那么该路径不能再次进入该格子。
+     * 例如，在下面的3×4的矩阵中包含一条字符串“bfce”的路径（路径中的字母用加粗标出）。
+     * [["a","b","c","e"],
+     * ["s","f","c","s"],
+     * ["a","d","e","e"]]
+     * 但矩阵中不包含字符串“abfb”的路径，因为字符串的第一个字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入这个格子。
+     * 示例 1：输入：board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"  输出：true
+     * 示例 2：输入：board = [["a","b"],["c","d"]], word = "abcd"  输出：false
+     * */
+    public boolean exist(char[][] board, String word) {
+
+    }
+
+    /**
+     * 13.机器人的运动范围
+     * 地上有一个m行n列的方格，从坐标 [0,0] 到坐标 [m-1,n-1] 。
+     * 一个机器人从坐标 [0, 0] 的格子开始移动，它每次可以向左、右、上、下移动一格（不能移动到方格外），也不能进入行坐标和列坐标的数位之和大于k的格子。
+     * 例如，当k为18时，机器人能够进入方格 [35, 37] ，因为3+5+3+7=18。但它不能进入方格 [35, 38]，因为3+5+3+8=19。请问该机器人能够到达多少个格子？
+     * 示例 1：输入：m = 2, n = 3, k = 1  输出：3
+     * 示例 2：输入：m = 3, n = 1, k = 0  输出：1
+     * */
+    public int movingCount(int m, int n, int k) {
+
+    }
+
+    /**
+     * 15.二进制中1的个数
+     * 请实现一个函数，输入一个整数（以二进制串形式），输出该数二进制表示中 1 的个数。
+     * 例如，把 9 表示成二进制是 1001，有 2 位是 1。因此，如果输入 9，则该函数输出 2。
+     * */
+    public int hammingWeight(int n) {
+
+    }
+
+    /**
+     * 16.数值的整数次方
+     * 实现函数double Power(double base, int exponent)，求base的exponent次方。不得使用库函数，同时不需要考虑大数问题。
+     * 示例 1: 输入: 2.00000, 10  输出: 1024.00000
+     * 示例 2: 输入: 2.10000, 3  输出: 9.26100
+     * 示例 3: 输入: 2.00000, -2 输出: 0.25000  解释: 2-2 = 1/22 = 1/4 = 0.25
+     * */
+    public double myPow(double x, int n) {
+
+    }
+
+    /**
+     * 17.打印从1到最大的n位数
+     * 输入数字 n，按顺序打印出从 1 到最大的 n 位十进制数。比如输入 3，则打印出 1、2、3 一直到最大的 3 位数 999。
+     * 示例 1: 输入: n = 1 输出: [1,2,3,4,5,6,7,8,9]
+     * */
+    public int[] printNumbers(int n) {
+
     }
 
 }
