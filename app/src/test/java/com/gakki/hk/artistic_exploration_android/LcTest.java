@@ -118,10 +118,31 @@ public class LcTest {
     }
 
     @Test
-    public void test_12() {}
+    public void test_12() {
+        char[][] matrix = new char[][]{
+                new char[]{'a','b','c','e'},
+                new char[]{'s','f','c','s'},
+                new char[]{'a','d','e','e'}};
+        boolean re1 = LcUtil.exist(matrix, "abce");
+        boolean re2 = LcUtil.exist(matrix, "sfcs");
+        boolean re3 = LcUtil.exist(matrix, "bfce");
+        boolean re4 = LcUtil.exist(matrix, "bfcf");
+        boolean re5 = LcUtil.exist(matrix, "bfcd");
+        Assert.assertTrue(re1);
+        Assert.assertTrue(re2);
+        Assert.assertTrue(re3);
+        Assert.assertFalse(re4);
+        Assert.assertFalse(re5);
+    }
 
     @Test
     public void test_13() {}
+
+    @Test
+    public void test_14_1() {}
+
+    @Test
+    public void test_14_2() {}
 
     @Test
     public void test_15() {}
