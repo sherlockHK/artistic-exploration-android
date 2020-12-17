@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 /**
  * Created by kai on 2020/5/14
@@ -147,18 +148,30 @@ public class LcUtil {
      * 队列的声明如下，请实现它的两个函数 appendTail 和 deleteHead ，分别完成在队列尾部插入整数和在队列头部删除整数的功能。
      * (若队列中没有元素，deleteHead 操作返回 -1 )
      * */
-    class CQueue {
-
+    public static class CQueue {
+        private final LinkedList<Integer> stack1;
+        private final LinkedList<Integer> stack2;
         public CQueue() {
-
+           stack1 = new LinkedList<>();
+           stack2 = new LinkedList<>();
         }
 
         public void appendTail(int value) {
-
+            stack1.push(value);
         }
 
         public int deleteHead() {
-
+            if (!stack2.isEmpty()){
+                return stack2.pop();
+            }
+            if (stack1.isEmpty()){
+                return -1;
+            }
+            while (!stack1.isEmpty()){
+                Integer pop = stack1.pop();
+                stack2.push(pop);
+            }
+            return stack2.pop();
         }
     }
 
@@ -168,24 +181,25 @@ public class LcUtil {
      * F(0) = 0,   F(1) = 1
      * F(N) = F(N - 1) + F(N - 2), 其中 N > 1.
      * 斐波那契数列由 0 和 1 开始，之后的斐波那契数就是由之前的两数相加而得出。
-     * 答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。
      * 示例 1： 输入：n = 2  输出：1
      * 示例 2： 输入：n = 5  输出：5
      * */
-    public int fib(int n) {
-
+    public static int fib(int n) {
+        if (n==0)return 0;
+        if (n==1)return 1;
+        return fib(n-1) + fib(n-2);
     }
 
     /**
      * 10-2.青蛙跳台阶问题
      * 一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶。求该青蛙跳上一个 n 级的台阶总共有多少种跳法。
-     * 答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。
      * 示例 1：输入：n = 2 输出：2
      * 示例 2：输入：n = 7 输出：21
      * 示例 3：输入：n = 0 输出：1
      * */
-    public int numWays(int n) {
-
+    public static int numWays(int n) {
+        if (n==0 || n==1) return 1;
+        return numWays(n-1) + numWays(n-2);
     }
 
     /**
@@ -196,8 +210,38 @@ public class LcUtil {
      * 示例 1：输入：[3,4,5,1,2] 输出：1
      * 示例 2：输入：[2,2,2,0,1] 输出：0
      * */
-    public int minArray(int[] numbers) {
+    //O(n)
+    public static int minArray1(int[] numbers) {
+        if (numbers == null || numbers.length == 0) return -1;
+        if (numbers.length == 1) return numbers[0];
+        for (int i = 1; i < numbers.length; i++) {
+            int n = numbers[i];
+            if (n < numbers[i-1]){
+                return n;
+            }
+        }
+        return -1;
+    }
 
+    //O(Log2n)
+    //tips：排序数字优先考虑二分法，可将"遍历法"的"线性时间"复杂度降低至"对数级别"
+    public static int minArray2(int[] numbers) {
+        int l = 0;
+        int r = numbers.length -1;
+        while(l<r){
+            int mid = l + (r -l)/2;
+            if(numbers[mid] > numbers[r]){
+                //在左序列
+                l = mid + 1;
+            }else if(numbers[mid] < numbers[r]){
+                //在右序列
+                r = mid;
+            }else{
+                //无法判断是左序列还是右序列，缩小判断范围，eg:[1,0,1,1,1]  [1,1,1,0,1]
+                r--;
+            }
+        }
+        return numbers[l];
     }
 
     /**
@@ -212,8 +256,8 @@ public class LcUtil {
      * 示例 1：输入：board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"  输出：true
      * 示例 2：输入：board = [["a","b"],["c","d"]], word = "abcd"  输出：false
      * */
-    public boolean exist(char[][] board, String word) {
-
+    public static boolean exist(char[][] board, String word) {
+        return false;
     }
 
     /**
@@ -224,8 +268,8 @@ public class LcUtil {
      * 示例 1：输入：m = 2, n = 3, k = 1  输出：3
      * 示例 2：输入：m = 3, n = 1, k = 0  输出：1
      * */
-    public int movingCount(int m, int n, int k) {
-
+    public static int movingCount(int m, int n, int k) {
+        return -1;
     }
 
     /**
@@ -233,8 +277,8 @@ public class LcUtil {
      * 请实现一个函数，输入一个整数（以二进制串形式），输出该数二进制表示中 1 的个数。
      * 例如，把 9 表示成二进制是 1001，有 2 位是 1。因此，如果输入 9，则该函数输出 2。
      * */
-    public int hammingWeight(int n) {
-
+    public static int hammingWeight(int n) {
+        return -1;
     }
 
     /**
@@ -244,8 +288,8 @@ public class LcUtil {
      * 示例 2: 输入: 2.10000, 3  输出: 9.26100
      * 示例 3: 输入: 2.00000, -2 输出: 0.25000  解释: 2-2 = 1/22 = 1/4 = 0.25
      * */
-    public double myPow(double x, int n) {
-
+    public static double myPow(double x, int n) {
+        return -1;
     }
 
     /**
@@ -253,8 +297,8 @@ public class LcUtil {
      * 输入数字 n，按顺序打印出从 1 到最大的 n 位十进制数。比如输入 3，则打印出 1、2、3 一直到最大的 3 位数 999。
      * 示例 1: 输入: n = 1 输出: [1,2,3,4,5,6,7,8,9]
      * */
-    public int[] printNumbers(int n) {
-
+    public static int[] printNumbers(int n) {
+        return null;
     }
 
 }

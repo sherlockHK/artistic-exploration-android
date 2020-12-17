@@ -63,8 +63,73 @@ public class LcTest {
     public void test_7() {}
 
     @Test
-    public void test_9() {}
+    public void test_9() {
+        LcUtil.CQueue cQueue = new LcUtil.CQueue();
+        cQueue.appendTail(1);
+        cQueue.appendTail(2);
+        cQueue.appendTail(3);
+        int re1 = cQueue.deleteHead();
+        int re2 = cQueue.deleteHead();
+        int re3 = cQueue.deleteHead();
+        int re4 = cQueue.deleteHead();
+        Assert.assertEquals(re1,1);
+        Assert.assertEquals(re2,2);
+        Assert.assertEquals(re3,3);
+        Assert.assertEquals(re4,-1);
+    }
 
     @Test
-    public void test_10_1() {}
+    public void test_10_1() {
+        int re1 = LcUtil.fib(0);
+        int re2 = LcUtil.fib(1);
+        int re3 = LcUtil.fib(2);
+        int re4 = LcUtil.fib(5);
+        Assert.assertEquals(re1,0);
+        Assert.assertEquals(re2,1);
+        Assert.assertEquals(re3,1);
+        Assert.assertEquals(re4,5);
+    }
+
+    @Test
+    public void test_10_2() {
+        int re1 = LcUtil.numWays(0);
+        int re2 = LcUtil.numWays(2);
+        int re3 = LcUtil.numWays(7);
+        Assert.assertEquals(re1,1);
+        Assert.assertEquals(re2,2);
+        Assert.assertEquals(re3,21);
+    }
+
+    @Test
+    public void test_11() {
+        int re1 = LcUtil.minArray1(new int[]{3, 4, 5, 1, 2});
+        int re2 = LcUtil.minArray1(new int[]{2, 2, 2, 0, 1});
+        int re3 = LcUtil.minArray1(new int[]{1,0,1,1,1});
+        Assert.assertEquals(re1, 1);
+        Assert.assertEquals(re2, 0);
+        Assert.assertEquals(re3, 0);
+
+        int re4 = LcUtil.minArray2(new int[]{3, 4, 5, 1, 2});
+        int re5 = LcUtil.minArray2(new int[]{2, 2, 2, 0, 1});
+        int re6 = LcUtil.minArray2(new int[]{1,0,1,1,1});
+        Assert.assertEquals(re4, 1);
+        Assert.assertEquals(re5, 0);
+        Assert.assertEquals(re6, 0);
+    }
+
+    @Test
+    public void test_12() {}
+
+    @Test
+    public void test_13() {}
+
+    @Test
+    public void test_15() {}
+
+    @Test
+    public void test_16() {}
+
+    @Test
+    public void test_17() {}
+
 }
