@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 
 /**
  * Created by kai on 2020/5/14
@@ -263,22 +262,20 @@ public class LcUtil {
      * 示例 2：输入：board = [
      * ["a","b"],
      * ["c","d"]], word = "abcd"  输出：false
-     * <p>
-     * ans：
-     * 典型的矩阵搜索问题，可使用 深度优先搜索（DFS）+ 剪枝 解决。
-     * 深度优先搜索： 可以理解为暴力法遍历矩阵中所有字符串可能性。DFS 通过递归，先朝一个方向搜到底，再回溯至上个节点，沿另一个方向搜索，以此类推。
-     * 剪枝： 在搜索中，遇到这条路不可能和目标字符串匹配成功的情况（例如：此矩阵元素和目标字符不同、此元素已被访问），则应立即返回，称之为可行性剪枝。
-     * DFS 解析：
-     * 递归参数： 当前元素在矩阵 board 中的行列索引 i 和 j ，当前目标字符在 word 中的索引 k 。
-     * 终止条件：
-     * 返回 false ： (1) 行或列索引越界 或 (2) 当前矩阵元素与目标字符不同 或 (3) 当前矩阵元素已访问过 （ (3) 可合并至 (2) ） 。
-     * 返回 true ： k = len(word) - 1 ，即字符串 word 已全部匹配。
-     * 递推工作：
-     * 标记当前矩阵元素： 将 board[i][j] 修改为 空字符 '' ，代表此元素已访问过，防止之后搜索时重复访问。
-     * 搜索下一单元格： 朝当前元素的 上、下、左、右 四个方向开启下层递归，使用 或 连接 （代表只需找到一条可行路径就直接返回，不再做后续 DFS ），并记录结果至 res 。
-     * 还原当前矩阵元素： 将 board[i][j] 元素还原至初始值，即 word[k] 。
-     * 返回值： 返回布尔量res，代表是否搜索到目标字符串。
      */
+    // 典型的矩阵搜索问题，可使用 深度优先搜索（DFS）+ 剪枝 解决。
+    // 深度优先搜索： 可以理解为暴力法遍历矩阵中所有字符串可能性。DFS 通过递归，先朝一个方向搜到底，再回溯至上个节点，沿另一个方向搜索，以此类推。
+    // 剪枝： 在搜索中，遇到这条路不可能和目标字符串匹配成功的情况（例如：此矩阵元素和目标字符不同、此元素已被访问），则应立即返回，称之为可行性剪枝。
+    // DFS 解析：
+    // 递归参数： 当前元素在矩阵 board 中的行列索引 i 和 j ，当前目标字符在 word 中的索引 k 。
+    // 终止条件：
+    // 返回 false ： (1) 行或列索引越界 或 (2) 当前矩阵元素与目标字符不同 或 (3) 当前矩阵元素已访问过 （ (3) 可合并至 (2) ） 。
+    // 返回 true ： k = len(word) - 1 ，即字符串 word 已全部匹配。
+    // 递推工作：
+    // 标记当前矩阵元素： 将 board[i][j] 修改为 空字符 '' ，代表此元素已访问过，防止之后搜索时重复访问。
+    // 搜索下一单元格： 朝当前元素的 上、下、左、右 四个方向开启下层递归，使用 或 连接 （代表只需找到一条可行路径就直接返回，不再做后续 DFS ），并记录结果至 res 。
+    // 还原当前矩阵元素： 将 board[i][j] 元素还原至初始值，即 word[k] 。
+    // 返回值： 返回布尔量res，代表是否搜索到目标字符串。
     public static boolean exist(char[][] board, String word) {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
@@ -319,7 +316,26 @@ public class LcUtil {
      * 示例 2：输入：m = 3, n = 1, k = 0  输出：1
      */
     public static int movingCount(int m, int n, int k) {
-        return -1;
+        boolean[][] visited = new boolean[n][m];
+        return moving_dfs(m, n, 0, 0, k, visited);
+    }
+
+    //递归
+    //参数：坐标x、y，横列坐标数值之和的最大值k，矩阵宽高m、n
+    //终止条件 ：
+    //返回0 1、x、y越界 2、x、y数位之和大于k  3、已访问过
+    //返回1+上下左右dfs的返回值
+    //记录已访问过的坐标，存入boolean[][]
+    //
+    private static int moving_dfs(int m, int n, int x, int y, int k, boolean[][] visited) {
+        if (x < 0 || x >= n || y < 0 || y >= m) return 0;
+        if (x / 10 + x % 10 + y / 10 + y % 10 > k) return 0;
+        if (visited[x][y]) return 0;
+        visited[x][y] = true;
+        return 1 + moving_dfs(m, n, x + 1, y, k, visited)
+                + moving_dfs(m, n, x - 1, y, k, visited)
+                + moving_dfs(m, n, x, y + 1, k, visited)
+                + moving_dfs(m, n, x, y - 1, k, visited);
     }
 
     /**
@@ -328,7 +344,7 @@ public class LcUtil {
      * 请问 k[0]*k[1]*...*k[m-1] 可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。
      * 示例 1： 输入: 2 输出: 1 解释: 2 = 1 + 1, 1 × 1 = 1
      * 示例 2:  输入: 10 输出: 36 解释: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36
-     * */
+     */
     public int cuttingRope1(int n) {
         return -1;
     }
@@ -340,7 +356,7 @@ public class LcUtil {
      * 答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。
      * 示例 1：输入: 2 输出: 1 解释: 2 = 1 + 1, 1 × 1 = 1
      * 示例 2: 输入: 10 输出: 36 解释: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36
-     * */
+     */
     public int cuttingRope2(int n) {
         return -1;
     }

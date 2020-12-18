@@ -136,7 +136,12 @@ public class LcTest {
     }
 
     @Test
-    public void test_13() {}
+    public void test_13() {
+        int re1 = LcUtil.movingCount(2, 3, 1);
+        int re2 = LcUtil.movingCount(3, 1, 0);
+        Assert.assertEquals(re1, 3);
+        Assert.assertEquals(re2, 1);
+    }
 
     @Test
     public void test_14_1() {}
