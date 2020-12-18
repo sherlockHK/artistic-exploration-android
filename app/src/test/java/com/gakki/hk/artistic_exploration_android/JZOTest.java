@@ -138,10 +138,22 @@ public class JZOTest {
     }
 
     @Test
-    public void test_14_1() {}
+    public void test_14_1() {
+        int re1 = JZO.cuttingRope1(2);
+        int re2 = JZO.cuttingRope1(10);
+        Assert.assertEquals(re1, 1);
+        Assert.assertEquals(re2, 36);
+    }
 
     @Test
-    public void test_14_2() {}
+    public void test_14_2() {
+        int re1 = JZO.cuttingRope2(2);
+        int re2 = JZO.cuttingRope2(5);
+        int re3 = JZO.cuttingRope2(10);
+        Assert.assertEquals(re1, 1);
+        Assert.assertEquals(re2, 6);
+        Assert.assertEquals(re3, 36);
+    }
 
     @Test
     public void test_15() {}

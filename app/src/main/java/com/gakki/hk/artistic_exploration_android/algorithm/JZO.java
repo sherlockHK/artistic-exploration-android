@@ -4,7 +4,6 @@ import com.gakki.hk.artistic_exploration_android.data_structure.ListNode;
 
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -169,9 +168,16 @@ public class JZO {
      * 示例 2：输入：n = 7 输出：21
      * 示例 3：输入：n = 0 输出：1
      */
+    //动态规划，非递归方式，避免重复计算
     public static int numWays(int n) {
-        if (n == 0 || n == 1) return 1;
-        return numWays(n - 1) + numWays(n - 2);
+        if (n<=1) return 1;
+        int[] dp = new int[n+1];
+        dp[0] = 1;
+        dp[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+        return dp[n];
     }
 
     /**
@@ -314,21 +320,32 @@ public class JZO {
      * 请问 k[0]*k[1]*...*k[m-1] 可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。
      * 示例 1： 输入: 2 输出: 1 解释: 2 = 1 + 1, 1 × 1 = 1
      * 示例 2:  输入: 10 输出: 36 解释: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36
+     * tips：
+     * dp三要素：1、重叠子问题 2、最优子结构（子问题无相关性） 3、状态转移方程
+     * dp套路：1、明确base case 2、明确状态 3、明确选择 4、定义dp函数/数组
      */
-    public int cuttingRope1(int n) {
-        return -1;
+    //dp数组，dp[i]代表i拆分后的最大乘积，j是i拆分出来第一个数，状态转移方程：dp[i] = Max(j * (i-j), j*dp[i-j]) (遍历1<=j<i，取最大值)，使用动态规划求解
+    public static int cuttingRope1(int n) {
+        int[] dp = new int[n+1];
+        for (int i = 2; i <= n; i++) {
+            for (int j = 1; j < i; j++) {
+                int restNum = i - j;
+                dp[i] = Math.max(dp[i], Math.max(j * (restNum), j * dp[restNum]));
+            }
+        }
+        return dp[n];
     }
 
-    /**
-     * 14-2.剪绳子2(mid)
-     * 给你一根长度为 n 的绳子，请把绳子剪成整数长度的 m 段（m、n都是整数，n>1并且m>1），每段绳子的长度记为 k[0],k[1]...k[m - 1] 。
-     * 请问 k[0]*k[1]*...*k[m - 1] 可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。
-     * 答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。
-     * 示例 1：输入: 2 输出: 1 解释: 2 = 1 + 1, 1 × 1 = 1
-     * 示例 2: 输入: 10 输出: 36 解释: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36
-     */
-    public int cuttingRope2(int n) {
-        return -1;
+    //dp函数：长度为n的最大乘积
+    public static int cuttingRope2(int n) {
+        //base case
+        if (n < 2) return n;
+        int res = 0;
+        //明确选择
+        for (int j = 1; j < n; j++) {
+            res = Math.max(res, j * Math.max(n - j, cuttingRope2(n - j)));
+        }
+        return res;
     }
 
     /**
