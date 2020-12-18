@@ -156,7 +156,12 @@ public class JZOTest {
     }
 
     @Test
-    public void test_15() {}
+    public void test_15() {
+        int re1 = JZO.hammingWeight(9);
+        int re2 = JZO.hammingWeight(7);
+        Assert.assertEquals(re1, 2);
+        Assert.assertEquals(re2, 3);
+    }
 
     @Test
     public void test_16() {}

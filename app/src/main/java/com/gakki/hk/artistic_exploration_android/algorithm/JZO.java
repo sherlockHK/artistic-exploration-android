@@ -352,9 +352,15 @@ public class JZO {
      * 15.二进制中1的个数
      * 请实现一个函数，输入一个整数（以二进制串形式），输出该数二进制表示中 1 的个数。
      * 例如，把 9 表示成二进制是 1001，有 2 位是 1。因此，如果输入 9，则该函数输出 2。
+     * Tips：n & (n-1)可以把整数（二进制形式）最右边1变成0，eg：1001 & 1000 = 1000, 1000 & 0111 = 0000
      */
     public static int hammingWeight(int n) {
-        return -1;
+        int count =0;
+        while (n >0){
+            n = n & (n-1);
+            count++;
+        }
+        return count;
     }
 
     /**
@@ -362,7 +368,7 @@ public class JZO {
      * 实现函数double Power(double base, int exponent)，求base的exponent次方。不得使用库函数，同时不需要考虑大数问题。
      * 示例 1: 输入: 2.00000, 10  输出: 1024.00000
      * 示例 2: 输入: 2.10000, 3  输出: 9.26100
-     * 示例 3: 输入: 2.00000, -2 输出: 0.25000  解释: 2-2 = 1/22 = 1/4 = 0.25
+     * 示例 3: 输入: 2.00000, -2 输出: 0.25000  解释: (2)^-2 = (1/2)^2 = 1/4 = 0.25
      */
     public static double myPow(double x, int n) {
         return -1;
