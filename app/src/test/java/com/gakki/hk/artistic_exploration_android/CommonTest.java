@@ -1,6 +1,5 @@
 package com.gakki.hk.artistic_exploration_android;
 
-import com.gakki.hk.artistic_exploration_android.algorithm.LcUtil;
 import com.gakki.hk.artistic_exploration_android.algorithm.SearchUtil;
 import com.gakki.hk.artistic_exploration_android.algorithm.SortUtil;
 import com.gakki.hk.artistic_exploration_android.data_structure.TreeStructure;
@@ -9,7 +8,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  *
