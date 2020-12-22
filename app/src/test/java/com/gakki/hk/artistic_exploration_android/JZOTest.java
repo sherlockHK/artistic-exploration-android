@@ -164,9 +164,110 @@ public class JZOTest {
     }
 
     @Test
-    public void test_16() {}
+    public void test_16() {
+        double re1 = JZO.myPow(2.0, 10);
+        double re2 = JZO.myPow(2.1, 3);
+        double re3 = JZO.myPow(2.0, -2);
+        Assert.assertEquals(String.valueOf(re1), "1024.0");
+        Assert.assertEquals(String.valueOf(re2), "9.261000000000001");
+        Assert.assertEquals(String.valueOf(re3), "0.25");
+    }
 
     @Test
-    public void test_17() {}
+    public void test_17() {
+        int[] re1 = JZO.printNumbers(1);
+        int[] re2 = JZO.printNumbers(2);
+        int[] re3 = JZO.printNumbers(3);
+        Assert.assertEquals(re1.length, 9);
+        Assert.assertEquals(re2.length, 99);
+        Assert.assertEquals(re2[re2.length -1], 99);
+        Assert.assertEquals(re3.length, 999);
+        Assert.assertEquals(re3[re3.length -1], 999);
+    }
+
+    @Test
+    public void test_18() {
+        ListNode head = new ListNode(4);
+        ListNode node2 = new ListNode(5);
+        ListNode node3 = new ListNode(1);
+        ListNode node4 = new ListNode(9);
+        head.next =node2;
+        node2.next =node3;
+        node3.next =node4;
+        ListNode re1 = JZO.deleteNode(head, 5);
+        Assert.assertEquals(re1.val, 4);
+        Assert.assertEquals(re1.next.val, 1);
+        ListNode re2 = JZO.deleteNode(head, 4);
+        Assert.assertEquals(re2.val, 1);
+        Assert.assertEquals(re2.next.val, 9);
+    }
+
+    @Test
+    public void test_20() {}
+
+    @Test
+    public void test_21() {
+        int[] nums1 = {1, 2, 3, 4};
+        int[] re1 = JZO.exchange(nums1);
+        Assert.assertEquals(re1[0], 3);
+        Assert.assertEquals(re1[1], 1);
+        Assert.assertEquals(re1[2], 2);
+        Assert.assertEquals(re1[3], 4);
+
+        int[] nums2 = {2, 2, 3, 5, 6, 1, 8, 10};
+        int[] re2 = JZO.exchange(nums2);
+        Assert.assertEquals(re2[0]%2, 1);
+        Assert.assertEquals(re2[1]%2, 1);
+        Assert.assertEquals(re2[2]%2, 1);
+        Assert.assertEquals(re2[3]%2, 0);
+        Assert.assertEquals(re2[4]%2, 0);
+        Assert.assertEquals(re2[5]%2, 0);
+        Assert.assertEquals(re2[6]%2, 0);
+        Assert.assertEquals(re2[7]%2, 0);
+    }
+
+    @Test
+    public void test_22() {
+        ListNode n1 = new ListNode(1);
+        ListNode n2 = new ListNode(2);
+        ListNode n3 = new ListNode(3);
+        ListNode n4 = new ListNode(4);
+        ListNode n5 = new ListNode(5);
+        n1.next = n2;
+        n2.next = n3;
+        n3.next = n4;
+        n4.next = n5;
+        ListNode head1 = n1;
+        ListNode re1 = JZO.getKthFromEnd(head1, 2);
+        Assert.assertEquals(re1.val, 4);
+        ListNode head2 = n1;
+        ListNode re2 = JZO.getKthFromEnd(head2, 1);
+        Assert.assertEquals(re2.val, 5);
+
+    }
+
+    @Test
+    public void test_24() {
+        ListNode n1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4))));
+        ListNode re1 = JZO.reverseList(n1);
+        Assert.assertEquals(re1.val, 4);
+        Assert.assertEquals(re1.next.val, 3);
+        Assert.assertEquals(re1.next.next.val, 2);
+        Assert.assertEquals(re1.next.next.next.val, 1);
+    }
+
+    @Test
+    public void test_25() {
+        ListNode n1 = new ListNode(1, new ListNode(3, new ListNode(6, new ListNode(8))));
+        ListNode a1 = new ListNode(2, new ListNode(5, new ListNode(8)));
+        ListNode re = JZO.mergeTwoLists(n1, a1);
+        Assert.assertEquals(re.val, 1);
+        Assert.assertEquals(re.next.val, 2);
+        Assert.assertEquals(re.next.next.val, 3);
+        Assert.assertEquals(re.next.next.next.val, 5);
+        Assert.assertEquals(re.next.next.next.next.val, 6);
+        Assert.assertEquals(re.next.next.next.next.next.val, 8);
+        Assert.assertEquals(re.next.next.next.next.next.next.val, 8);
+    }
 
 }

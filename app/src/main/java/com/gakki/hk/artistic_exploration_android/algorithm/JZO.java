@@ -369,9 +369,19 @@ public class JZO {
      * 示例 1: 输入: 2.00000, 10  输出: 1024.00000
      * 示例 2: 输入: 2.10000, 3  输出: 9.26100
      * 示例 3: 输入: 2.00000, -2 输出: 0.25000  解释: (2)^-2 = (1/2)^2 = 1/4 = 0.25
+     * Tips：负数取倒数，m为奇偶数时分别处理
      */
     public static double myPow(double x, int n) {
-        return -1;
+        if (n == 0) return 1;
+        if (n < 0){
+            x = 1/x;
+            n = -n;
+        }
+        if (n % 2 == 0){
+            return myPow(x, n/2) * myPow(x, n/2);
+        }else {
+            return x * myPow(x, n/2) * myPow(x, n/2);
+        }
     }
 
     /**
@@ -380,7 +390,147 @@ public class JZO {
      * 示例 1: 输入: n = 1 输出: [1,2,3,4,5,6,7,8,9]
      */
     public static int[] printNumbers(int n) {
-        return null;
+        int total = (int) Math.pow(10, n) - 1;
+        int[] re = new int[total];
+        while (total > 0){
+            re[total-1] = total;
+            total--;
+        }
+        return re;
+    }
+
+    /**
+     * 18.删除链表的节点
+     * 给定单向链表的头指针和一个要删除的节点的值，定义一个函数删除该节点。
+     * 返回删除后的链表的头节点。
+     * 示例 1: 输入: head = [4,5,1,9], val = 5 输出: [4,1,9] 解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -> 1 -> 9.
+     * 示例 2:输入: head = [4,5,1,9], val = 1 输出: [4,5,9] 解释: 给定你链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -> 5 -> 9.
+     * */
+    public static ListNode deleteNode(ListNode head, int val) {
+        if (head == null) return null;
+        if (head.val == val) return head.next;
+        ListNode p = head;
+        while (p.next != null){
+            if (p.next.val == val){
+                p.next = p.next.next;
+                break;
+            }
+            p = p.next;
+        }
+        return head;
+    }
+
+    /**
+     * 20.表示数值的字符串(mid)
+     * 请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。
+     * 例如，字符串"+100"、"5e2"、"-123"、"3.1416"、"-1E-16"、"0123"都表示数值，但"12e"、"1a3.14"、"1.2.3"、"+-5"及"12e+5.4"都不是。
+     * Tips：有限状态自动机
+     * */
+    public static boolean isNumber(String s) {
+        return false;
+    }
+
+    /**
+     * 21. 调整数组顺序使奇数位于偶数前面
+     * 输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有奇数位于数组的前半部分，所有偶数位于数组的后半部分。
+     * 示例：输入：nums = [1,2,3,4] 输出：[1,3,2,4]
+     * 注：[3,1,2,4] 也是正确的答案之一。
+     * Tips：利用快速排序思想，partition()函数可以将数组以某种条件分成2部分
+     * */
+    public static int[] exchange(int[] nums) {
+        int l =0;
+        int r = nums.length -1;
+        while (l<r){
+            while (l<r && nums[r] % 2 == 0){
+                r--;
+            }
+            swap(nums, l, r);
+            while (l<r && nums[l] % 2 != 0){
+                l++;
+            }
+            swap(nums,l,r);
+        }
+        return nums;
+    }
+
+    private static void swap(int[] nums, int l, int r) {
+        int tmp = nums[l];
+        nums[l] = nums[r];
+        nums[r] = tmp;
+    }
+
+    /**
+     * 22.链表中倒数第k个节点
+     * 输入一个链表，输出该链表中倒数第k个节点。为了符合大多数人的习惯，本题从1开始计数，即链表的尾节点是倒数第1个节点。
+     * 例如，一个链表有6个节点，从头节点开始，它们的值依次是1、2、3、4、5、6。这个链表的倒数第3个节点是值为4的节点。
+     * 示例：给定一个链表: 1->2->3->4->5, 和 k = 2. 返回链表 4->5.
+     * */
+    public static ListNode getKthFromEnd(ListNode head, int k) {
+        ListNode first = head;
+        while (k>1){
+            first = first.next;
+            k--;
+        }
+        while (first.next != null){
+            first = first.next;
+            head = head.next;
+        }
+        return head;
+    }
+
+    /**
+     * 24.翻转链表
+     * 定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。
+     * 示例:
+     * 输入: 1->2->3->4->5->NULL
+     * 输出: 5->4->3->2->1->NULL
+     * */
+    public static ListNode reverseList(ListNode head) {
+        if (head == null) return null;
+        if (head.next == null) return head;
+        ListNode p = head;
+        ListNode q = p.next;
+        while (q != null){
+            ListNode tmp = q.next;
+            q.next = p;
+            p = q;
+            q = tmp;
+        }
+        return p;
+    }
+
+    /**
+     * 25.合并两个排序的链表
+     * 输入两个递增排序的链表，合并这两个链表并使新链表中的节点仍然是递增排序的。
+     * 示例1：
+     * 输入：1->2->4, 1->3->4
+     * 输出：1->1->2->3->4->4
+     * Tips:双指针
+     * */
+    public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode p = new ListNode(-1);
+        ListNode re = p;
+        while (l1 != null && l2 != null){
+            if (l1.val <= l2.val){
+                p.next = l1;
+                l1 = l1.next;
+            }else {
+                p.next = l2;
+                l2 = l2.next;
+            }
+            p = p.next;
+        }
+        while (l1 != null){
+            p.next = l1;
+            p = p.next;
+            l1 = l1.next;
+        }
+        while (l2 != null){
+            p.next = l2;
+            p = p.next;
+            l2 = l2.next;
+        }
+        return re.next;
     }
 
 }
