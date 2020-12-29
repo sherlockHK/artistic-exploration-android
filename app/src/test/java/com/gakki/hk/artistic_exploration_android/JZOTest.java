@@ -2,6 +2,7 @@ package com.gakki.hk.artistic_exploration_android;
 
 import com.gakki.hk.artistic_exploration_android.algorithm.JZO;
 import com.gakki.hk.artistic_exploration_android.data_structure.ListNode;
+import com.gakki.hk.artistic_exploration_android.data_structure.TreeNode;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -228,15 +229,7 @@ public class JZOTest {
 
     @Test
     public void test_22() {
-        ListNode n1 = new ListNode(1);
-        ListNode n2 = new ListNode(2);
-        ListNode n3 = new ListNode(3);
-        ListNode n4 = new ListNode(4);
-        ListNode n5 = new ListNode(5);
-        n1.next = n2;
-        n2.next = n3;
-        n3.next = n4;
-        n4.next = n5;
+        ListNode n1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
         ListNode head1 = n1;
         ListNode re1 = JZO.getKthFromEnd(head1, 2);
         Assert.assertEquals(re1.val, 4);
@@ -268,6 +261,87 @@ public class JZOTest {
         Assert.assertEquals(re.next.next.next.next.val, 6);
         Assert.assertEquals(re.next.next.next.next.next.val, 8);
         Assert.assertEquals(re.next.next.next.next.next.next.val, 8);
+    }
+
+    @Test
+    public void test_26() {
+        TreeNode A = new TreeNode(3, new TreeNode(4, new TreeNode(1), new TreeNode(2)), new TreeNode(5));
+        TreeNode B = new TreeNode(4, new TreeNode(1), null);
+        boolean re = JZO.isSubStructure(A, B);
+        Assert.assertTrue(re);
+    }
+
+    @Test
+    public void test_27() {
+        TreeNode root = new TreeNode(4);
+        TreeNode treeNode1 = new TreeNode(2);
+        TreeNode treeNode2 = new TreeNode(7);
+        TreeNode treeNode3 = new TreeNode(1);
+        TreeNode treeNode4 = new TreeNode(3);
+        TreeNode treeNode5 = new TreeNode(6);
+        TreeNode treeNode6 = new TreeNode(9);
+        root.left = treeNode1;
+        root.right = treeNode2;
+        treeNode1.left = treeNode3;
+        treeNode1.right = treeNode4;
+        treeNode2.left = treeNode5;
+        treeNode2.right = treeNode6;
+        JZO.mirrorTree(root);
+        Assert.assertEquals(root.left.val, 7);
+        Assert.assertEquals(root.right.val, 2);
+        Assert.assertEquals(root.left.left.val, 9);
+        Assert.assertEquals(root.left.right.val, 6);
+        Assert.assertEquals(root.right.left.val, 3);
+        Assert.assertEquals(root.right.right.val, 1);
+    }
+
+    @Test
+    public void test_28() {
+        TreeNode root = new TreeNode(1);
+        TreeNode treeNode1 = new TreeNode(2);
+        TreeNode treeNode2 = new TreeNode(2);
+        TreeNode treeNode3 = new TreeNode(3);
+        TreeNode treeNode4 = new TreeNode(4);
+        TreeNode treeNode5 = new TreeNode(4);
+        TreeNode treeNode6 = new TreeNode(3);
+        root.left = treeNode1;
+        root.right = treeNode2;
+        treeNode1.left = treeNode3;
+        treeNode1.right = treeNode4;
+        treeNode2.left = treeNode5;
+        treeNode2.right = treeNode6;
+        boolean re = JZO.isSymmetric(root);
+        Assert.assertTrue(re);
+    }
+
+    @Test
+    public void test_29() {
+        int[][] matrix = new int[][]{
+                new int[]{1, 2, 3, 4},
+                new int[]{12, 13, 14, 5},
+                new int[]{11, 16, 15, 6},
+                new int[]{10, 9, 8, 7}};
+        int[] re = JZO.spiralOrder(matrix);
+        Assert.assertEquals(re[0], 1);
+        Assert.assertEquals(re[3], 4);
+        Assert.assertEquals(re[8], 9);
+        Assert.assertEquals(re[12], 13);
+        Assert.assertEquals(re[15], 16);
+    }
+
+    @Test
+    public void test_30() {
+        JZO.MinStack minStack = new JZO.MinStack();
+        minStack.push(-2);
+        minStack.push(0);
+        minStack.push(-3);
+        int min1 = minStack.min();
+        minStack.pop();
+        int top = minStack.top();
+        int min2 = minStack.min();
+        Assert.assertEquals(min1, -3);
+        Assert.assertEquals(top, 0);
+        Assert.assertEquals(min2, -2);
     }
 
 }
