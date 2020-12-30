@@ -344,4 +344,85 @@ public class JZOTest {
         Assert.assertEquals(min2, -2);
     }
 
+    @Test
+    public void test_31() {
+        boolean re1 = JZO.validateStackSequences(new int[]{1, 2, 3, 4, 5}, new int[]{4, 5, 3, 2, 1});
+        boolean re2 = JZO.validateStackSequences(new int[]{1, 2, 3, 4, 5}, new int[]{2, 1, 4, 3, 5});
+        boolean re3 = JZO.validateStackSequences(new int[]{1, 2, 3, 4, 5}, new int[]{4, 5, 3, 1, 2});
+        Assert.assertTrue(re1);
+        Assert.assertTrue(re2);
+        Assert.assertFalse(re3);
+    }
+
+    @Test
+    public void test_32_1() {
+        TreeNode A = new TreeNode(3, new TreeNode(9), new TreeNode(20, new TreeNode(15), new TreeNode(7)));
+        int[] re = JZO.levelOrder1(A);
+        Assert.assertEquals(re[0], 3);
+        Assert.assertEquals(re[1], 9);
+        Assert.assertEquals(re[2], 20);
+        Assert.assertEquals(re[3], 15);
+        Assert.assertEquals(re[4], 7);
+    }
+
+    @Test
+    public void test_32_2() {
+        TreeNode A = new TreeNode(3, new TreeNode(9), new TreeNode(20, new TreeNode(15), new TreeNode(7)));
+        List<List<Integer>> re = JZO.levelOrder2(A);
+        int re1 = re.get(0).get(0);
+        int re2 = re.get(1).get(0);
+        int re3 = re.get(1).get(1);
+        int re4 = re.get(2).get(0);
+        int re5 = re.get(2).get(1);
+        Assert.assertEquals( re1, 3);
+        Assert.assertEquals( re2, 9);
+        Assert.assertEquals( re3, 20);
+        Assert.assertEquals( re4, 15);
+        Assert.assertEquals( re5, 7);
+    }
+
+    @Test
+    public void test_32_3() {
+        TreeNode A = new TreeNode(3, new TreeNode(9), new TreeNode(20, new TreeNode(15), new TreeNode(7)));
+        List<List<Integer>> re = JZO.levelOrder3(A);
+        int re1 = re.get(0).get(0);
+        int re2 = re.get(1).get(0);
+        int re3 = re.get(1).get(1);
+        int re4 = re.get(2).get(0);
+        int re5 = re.get(2).get(1);
+        Assert.assertEquals( re1, 3);
+        Assert.assertEquals( re2, 20);
+        Assert.assertEquals( re3, 9);
+        Assert.assertEquals( re4, 15);
+        Assert.assertEquals( re5, 7);
+    }
+
+    @Test
+    public void test_33() {
+    }
+
+    @Test
+    public void test_34() {
+    }
+
+    @Test
+    public void test_35() {
+    }
+
+    @Test
+    public void test_36() {
+    }
+
+    @Test
+    public void test_38() {
+    }
+
+    @Test
+    public void test_39() {
+    }
+
+    @Test
+    public void test_40() {
+    }
+
 }

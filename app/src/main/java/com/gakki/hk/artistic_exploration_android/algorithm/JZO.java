@@ -3,10 +3,12 @@ package com.gakki.hk.artistic_exploration_android.algorithm;
 import com.gakki.hk.artistic_exploration_android.data_structure.ListNode;
 import com.gakki.hk.artistic_exploration_android.data_structure.TreeNode;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 /**
  * Created by kai on 2020/5/14
@@ -558,19 +560,19 @@ public class JZO {
     public static boolean isSubStructure(TreeNode A, TreeNode B) {
         if (A == null || B == null) return false;
         boolean re = false;
-        if (A.val == B.val){
-            re =isSub(A, B);
+        if (A.val == B.val) {
+            re = isSub(A, B);
         }
-        if (!re){
-            re =isSub(A.left, B);
+        if (!re) {
+            re = isSub(A.left, B);
         }
-        if (!re){
+        if (!re) {
             re = isSub(A.right, B);
         }
         return re;
     }
 
-    private static boolean isSub(TreeNode t1, TreeNode t2){
+    private static boolean isSub(TreeNode t1, TreeNode t2) {
         if (t2 == null) return true;
         if (t1 == null || t1.val != t2.val) return false;
         return isSub(t1.left, t2.left) && isSub(t1.right, t2.right);
@@ -626,9 +628,9 @@ public class JZO {
         return isMirrorTree(root.left, root.right);
     }
 
-    public static boolean isMirrorTree(TreeNode t1, TreeNode t2){
+    public static boolean isMirrorTree(TreeNode t1, TreeNode t2) {
         if (t1 == null && t2 == null) return true;
-        if (t1 != null && t2 != null){
+        if (t1 != null && t2 != null) {
             return t1.val == t2.val && isMirrorTree(t1.left, t2.right) && isMirrorTree(t1.right, t2.left);
         }
         return false;
@@ -679,10 +681,11 @@ public class JZO {
      * minStack.top();      --> 返回 0.
      * minStack.min();   --> 返回 -2.
      * Tips: 用2个栈实现
-     * */
+     */
     public static class MinStack {
         private LinkedList<Integer> l1;
         private LinkedList<Integer> l2;
+
         public MinStack() {
             l1 = new LinkedList<>();
             l2 = new LinkedList<>();
@@ -690,9 +693,9 @@ public class JZO {
 
         public void push(int x) {
             l1.push(x);
-            if (l2.isEmpty() || x < l2.peek()){
+            if (l2.isEmpty() || x < l2.peek()) {
                 l2.push(x);
-            }else {
+            } else {
                 l2.push(l2.peek());
             }
         }
@@ -716,75 +719,133 @@ public class JZO {
      * 输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。
      * 假设压入栈的所有数字均不相等。
      * 例如，序列 {1,2,3,4,5} 是某栈的压栈序列，序列 {4,5,3,2,1} 是该压栈序列对应的一个弹出序列，但 {4,3,5,1,2} 就不可能是该压栈序列的弹出序列。
-     * */
+     * Tips:用辅助栈，模拟入栈出栈操作
+     */
     public static boolean validateStackSequences(int[] pushed, int[] popped) {
-        return false;
+        LinkedList<Integer> stack = new LinkedList<>();
+        int j=0;
+        for (int i: pushed) {
+            stack.push(i);
+            while (!stack.isEmpty() && stack.peek() == popped[j]){
+                stack.pop();
+                j++;
+            }
+        }
+        return stack.isEmpty();
     }
 
     /**
      * 32-1.从上到下打印二叉树（mid）
      * 从上到下打印出二叉树的每个节点，同一层的节点按照从左到右的顺序打印。
-     * 例如:
-     * 给定二叉树: [3,9,20,null,null,15,7],
-     *     3
-     *    / \
-     *   9  20
-     *     /  \
-     *    15   7
+     * 例如: 给定二叉树: [3,9,20,null,null,15,7],
+     *  3
+     * / \
+     * 9  20
+     *   /  \
+     *   15   7
      * 返回：[3,9,20,15,7]
-     * */
+     * Tips:层序遍历，BFS，通常借助队列的先入先出特性来实现。
+     */
     public static int[] levelOrder1(TreeNode root) {
-        return null;
+        List<Integer> list = new ArrayList<>();
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+        while (!q.isEmpty()){
+            TreeNode n = q.poll();
+            list.add(n.val);
+            if (n.left != null) q.offer(n.left);
+            if (n.right != null) q.offer(n.right);
+        }
+        int[] re = new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            re[i] = list.get(i);
+        }
+        return re;
     }
 
     /**
      * 32-2.从上到下打印二叉树
      * 从上到下按层打印二叉树，同一层的节点按从左到右的顺序打印，每一层打印到一行。
      * 例如:给定二叉树: [3,9,20,null,null,15,7],
-     *     3
-     *    / \
-     *   9  20
-     *     /  \
-     *    15   7
+     *  3
+     * / \
+     * 9  20
+     * /  \
+     * 15   7
      * 返回其层次遍历结果：
      * [[3],
-     *  [9,20],
-     *  [15,7]]
-     * */
+     * [9,20],
+     * [15,7]]
+     */
     public static List<List<Integer>> levelOrder2(TreeNode root) {
-        return null;
+        List<List<Integer>> re = new ArrayList<>();
+        if (root == null) return re;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+        while (!q.isEmpty()){
+            List<Integer> list = new ArrayList<>();
+            for (int i = q.size(); i > 0; i--) {
+                TreeNode n = q.poll();
+                list.add(n.val);
+                if (n.left != null) q.offer(n.left);
+                if (n.right != null) q.offer(n.right);
+            }
+            re.add(list);
+        }
+        return re;
     }
 
     /**
      * 32-3.从上到下打印二叉树(mid)
      * 请实现一个函数按照之字形顺序打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右到左的顺序打印，第三行再按照从左到右的顺序打印，其他行以此类推。
      * 例如:给定二叉树: [3,9,20,null,null,15,7],
-     *     3
-     *    / \
-     *   9  20
-     *     /  \
-     *    15   7
+     *  3
+     * / \
+     * 9  20
+     * /  \
+     * 15   7
      * 返回其层次遍历结果：
      * [[3],
-     *  [20,9],
-     *  [15,7]]
-     * */
+     * [20,9],
+     * [15,7]]
+     * Tips: 队列中插入flag，标记层级
+     */
     public static List<List<Integer>> levelOrder3(TreeNode root) {
-        return null;
+        List<List<Integer>> re = new ArrayList<>();
+        if (root == null) return re;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+        while (!q.isEmpty()){
+            LinkedList<Integer> tmp = new LinkedList<>();
+            for (int i = q.size(); i >0 ; i--) {
+                TreeNode n = q.poll();
+                if (re.size() % 2 == 0) {
+                    //奇数层
+                    tmp.addLast(n.val);
+                }else {
+                    //偶数层
+                    tmp.addFirst(n.val);
+                }
+                if (n.left != null) q.offer(n.left);
+                if (n.right != null) q.offer(n.right);
+            }
+            re.add(tmp);
+        }
+        return re;
     }
 
     /**
      * 33.二叉搜索树的后序遍历序列(mid)
      * 输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历结果。如果是则返回 true，否则返回 false。假设输入的数组的任意两个数字都互不相同。
      * 参考以下这颗二叉搜索树：
-     *      5
-     *     / \
-     *    2   6
-     *   / \
-     *  1   3
+     * 5
+     * / \
+     * 2   6
+     * / \
+     * 1   3
      * 示例 1：输入: [1,6,3,2,5]  输出: false
      * 示例 2：输入: [1,3,2,6,5]  输出: true
-     * */
+     */
     public static boolean verifyPostorder(int[] postorder) {
         return false;
     }
@@ -794,17 +855,17 @@ public class JZO {
      * 输入一棵二叉树和一个整数，打印出二叉树中节点值的和为输入整数的所有路径。从树的根节点开始往下一直到叶节点所经过的节点形成一条路径。
      * 示例:
      * 给定如下二叉树，以及目标和 sum = 22，
-     *               5
-     *              / \
-     *             4   8
-     *            /   / \
-     *           11  13  4
-     *          /  \    / \
-     *         7    2  5   1
+     * 5
+     * / \
+     * 4   8
+     * /   / \
+     * 11  13  4
+     * /  \    / \
+     * 7    2  5   1
      * 返回:
      * [[5,4,11,2],
-     *  [5,8,4,5]]
-     * */
+     * [5,8,4,5]]
+     */
     public static List<List<Integer>> pathSum(TreeNode root, int sum) {
         return null;
     }
@@ -825,7 +886,7 @@ public class JZO {
      * 输入：head = []
      * 输出：[]
      * 解释：给定的链表为空（空指针），因此返回 null。
-     * */
+     */
     public static class RandomNode {
         int val;
         RandomNode next;
@@ -837,6 +898,7 @@ public class JZO {
             this.random = null;
         }
     }
+
     public static RandomNode copyRandomList(RandomNode head) {
         return null;
     }
@@ -844,7 +906,7 @@ public class JZO {
     /**
      * 36.二叉搜索树与双向链表(mid)
      * 输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的循环双向链表。要求不能创建任何新的节点，只能调整树中节点指针的指向。
-     * */
+     */
     public static TreeNode treeToDoublyList(TreeNode root) {
         return null;
     }
@@ -854,7 +916,7 @@ public class JZO {
      * 输入一个字符串，打印出该字符串中字符的所有排列。
      * 你可以以任意顺序返回这个字符串数组，但里面不能有重复元素。
      * 示例: 输入：s = "abc"  输出：["abc","acb","bac","bca","cab","cba"]
-     * */
+     */
     public static String[] permutation(String s) {
         return null;
     }
@@ -864,7 +926,7 @@ public class JZO {
      * 数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。
      * 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
      * 示例 1: 输入: [1, 2, 3, 2, 2, 2, 5, 4, 2]  输出: 2
-     * */
+     */
     public static int majorityElement(int[] nums) {
         return -1;
     }
@@ -878,7 +940,7 @@ public class JZO {
      * 示例 2：
      * 输入：arr = [0,1,2,1], k = 1
      * 输出：[0]
-     * */
+     */
     public static int[] getLeastNumbers(int[] arr, int k) {
         return null;
     }
