@@ -403,6 +403,26 @@ public class JZOTest {
 
     @Test
     public void test_34() {
+        TreeNode A = new TreeNode(5, new TreeNode(4, new TreeNode(11, new TreeNode(7), new TreeNode(2)), null), new TreeNode(8, new TreeNode(13), new TreeNode(4, new TreeNode(5), new TreeNode(1))));
+        List<List<Integer>> lists = JZO.pathSum(A, 22);
+        Assert.assertEquals(lists.size(), 2);
+        int re1 = lists.get(0).get(0);
+        int re2 = lists.get(0).get(1);
+        int re3 = lists.get(0).get(2);
+        int re4 = lists.get(0).get(3);
+        int re5 = lists.get(1).get(0);
+        int re6 = lists.get(1).get(1);
+        int re7 = lists.get(1).get(2);
+        int re8 = lists.get(1).get(3);
+        Assert.assertEquals(lists.size(), 2);
+        Assert.assertEquals(re1, 5);
+        Assert.assertEquals(re2, 4);
+        Assert.assertEquals(re3, 11);
+        Assert.assertEquals(re4, 2);
+        Assert.assertEquals(re5, 5);
+        Assert.assertEquals(re6, 8);
+        Assert.assertEquals(re7, 4);
+        Assert.assertEquals(re8, 5);
     }
 
     @Test
@@ -411,18 +431,49 @@ public class JZOTest {
 
     @Test
     public void test_36() {
+        TreeNode tree = new TreeNode(5, new TreeNode(3, new TreeNode(1), new TreeNode(4)), new TreeNode(8, new TreeNode(6), new TreeNode(9)));
+        TreeNode re = JZO.treeToDoublyList(tree);
+        Assert.assertEquals(re.val, 1);
+        Assert.assertEquals(re.left.val, 9);
+        Assert.assertEquals(re.right.val, 3);
+        Assert.assertEquals(re.right.right.val, 4);
     }
 
     @Test
     public void test_38() {
+        String[] re = JZO.permutation("abc");
+        Assert.assertEquals(re.length, 6);
+        Assert.assertEquals(re[0], "abc");
+        Assert.assertEquals(re[1], "acb");
+        Assert.assertEquals(re[2], "bac");
+        Assert.assertEquals(re[3], "bca");
+        Assert.assertEquals(re[4], "cba");
+        Assert.assertEquals(re[5], "cab");
     }
 
     @Test
     public void test_39() {
+        int re1 = JZO.majorityElement(new int[]{1, 2, 3, 2, 2, 2, 5, 4, 2});
+        int re2 = JZO.majorityElement(new int[]{2});
+        int re3 = JZO.majorityElement(new int[]{1,1,1,2,2});
+        Assert.assertEquals(re1,2);
+        Assert.assertEquals(re2,2);
+        Assert.assertEquals(re3,1);
     }
 
     @Test
     public void test_40() {
+        int[] re = JZO.getLeastNumbers(new int[]{5, 3, 1, 7, 8, 2, 10, 4, 5}, 4);
+        Assert.assertTrue(re[0] <=4 );
+        Assert.assertTrue(re[1] <=4 );
+        Assert.assertTrue(re[2] <=4 );
+        Assert.assertTrue(re[3] <=4 );
+
+        int[] re1 = JZO.getLeastNumbers(new int[]{1, 3, 2, 1, 3, 2, 1, 3, 2}, 4);
+        Assert.assertTrue(re1[0] <=2 );
+        Assert.assertTrue(re1[1] <=2 );
+        Assert.assertTrue(re1[2] <=2 );
+        Assert.assertTrue(re1[3] <=2 );
     }
 
 }

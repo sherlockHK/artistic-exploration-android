@@ -1,5 +1,7 @@
 package com.gakki.hk.artistic_exploration_android.algorithm;
 
+import android.text.TextUtils;
+
 import com.gakki.hk.artistic_exploration_android.data_structure.ListNode;
 import com.gakki.hk.artistic_exploration_android.data_structure.TreeNode;
 
@@ -723,10 +725,10 @@ public class JZO {
      */
     public static boolean validateStackSequences(int[] pushed, int[] popped) {
         LinkedList<Integer> stack = new LinkedList<>();
-        int j=0;
-        for (int i: pushed) {
+        int j = 0;
+        for (int i : pushed) {
             stack.push(i);
-            while (!stack.isEmpty() && stack.peek() == popped[j]){
+            while (!stack.isEmpty() && stack.peek() == popped[j]) {
                 stack.pop();
                 j++;
             }
@@ -738,11 +740,11 @@ public class JZO {
      * 32-1.从上到下打印二叉树（mid）
      * 从上到下打印出二叉树的每个节点，同一层的节点按照从左到右的顺序打印。
      * 例如: 给定二叉树: [3,9,20,null,null,15,7],
-     *  3
+     * 3
      * / \
      * 9  20
-     *   /  \
-     *   15   7
+     * /  \
+     * 15   7
      * 返回：[3,9,20,15,7]
      * Tips:层序遍历，BFS，通常借助队列的先入先出特性来实现。
      */
@@ -750,7 +752,7 @@ public class JZO {
         List<Integer> list = new ArrayList<>();
         Queue<TreeNode> q = new LinkedList<>();
         q.offer(root);
-        while (!q.isEmpty()){
+        while (!q.isEmpty()) {
             TreeNode n = q.poll();
             list.add(n.val);
             if (n.left != null) q.offer(n.left);
@@ -767,7 +769,7 @@ public class JZO {
      * 32-2.从上到下打印二叉树
      * 从上到下按层打印二叉树，同一层的节点按从左到右的顺序打印，每一层打印到一行。
      * 例如:给定二叉树: [3,9,20,null,null,15,7],
-     *  3
+     * 3
      * / \
      * 9  20
      * /  \
@@ -782,7 +784,7 @@ public class JZO {
         if (root == null) return re;
         Queue<TreeNode> q = new LinkedList<>();
         q.offer(root);
-        while (!q.isEmpty()){
+        while (!q.isEmpty()) {
             List<Integer> list = new ArrayList<>();
             for (int i = q.size(); i > 0; i--) {
                 TreeNode n = q.poll();
@@ -799,7 +801,7 @@ public class JZO {
      * 32-3.从上到下打印二叉树(mid)
      * 请实现一个函数按照之字形顺序打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右到左的顺序打印，第三行再按照从左到右的顺序打印，其他行以此类推。
      * 例如:给定二叉树: [3,9,20,null,null,15,7],
-     *  3
+     * 3
      * / \
      * 9  20
      * /  \
@@ -815,14 +817,14 @@ public class JZO {
         if (root == null) return re;
         Queue<TreeNode> q = new LinkedList<>();
         q.offer(root);
-        while (!q.isEmpty()){
+        while (!q.isEmpty()) {
             LinkedList<Integer> tmp = new LinkedList<>();
-            for (int i = q.size(); i >0 ; i--) {
+            for (int i = q.size(); i > 0; i--) {
                 TreeNode n = q.poll();
                 if (re.size() % 2 == 0) {
                     //奇数层
                     tmp.addLast(n.val);
-                }else {
+                } else {
                     //偶数层
                     tmp.addFirst(n.val);
                 }
@@ -853,22 +855,42 @@ public class JZO {
     /**
      * 34. 二叉树中和为某一值的路径(mid)
      * 输入一棵二叉树和一个整数，打印出二叉树中节点值的和为输入整数的所有路径。从树的根节点开始往下一直到叶节点所经过的节点形成一条路径。
-     * 示例:
-     * 给定如下二叉树，以及目标和 sum = 22，
+     * 示例:给定如下二叉树，以及目标和 sum = 22，
      * 5
      * / \
      * 4   8
      * /   / \
      * 11  13  4
      * /  \    / \
-     * 7    2  5   1
+     * 7   2  5   1
      * 返回:
      * [[5,4,11,2],
      * [5,8,4,5]]
+     * Tips：DFS+剪枝，前序遍历+记录节点
      */
+    private static LinkedList<Integer> stackPath = new LinkedList<>();
+    private static final List<List<Integer>> pathSumRe = new ArrayList<>();
+
     public static List<List<Integer>> pathSum(TreeNode root, int sum) {
-        return null;
+        if (root == null || sum < 0) {
+            return pathSumRe;
+        }
+        traverseTree(root, sum);
+        return pathSumRe;
     }
+
+    private static void traverseTree(TreeNode root, int tar) {
+        if (root == null) return;
+        stackPath.addLast(root.val);
+        tar -= root.val;
+        if (tar == 0 && root.left == null && root.right == null) {
+            pathSumRe.add(new LinkedList<>(stackPath));
+        }
+        traverseTree(root.left, tar);
+        traverseTree(root.right, tar);
+        stackPath.removeLast();
+    }
+
 
     /**
      * 35.复杂链表的复制(mid)
@@ -906,9 +928,35 @@ public class JZO {
     /**
      * 36.二叉搜索树与双向链表(mid)
      * 输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的循环双向链表。要求不能创建任何新的节点，只能调整树中节点指针的指向。
+     * eg:  5
+     * / \
+     * 3   8
+     * / \ / \
+     * 1  4 6  9
+     * ->  1345689
+     * Tips：二叉搜索树中序遍历是递增序列，使用额外空间保存前一个节点和头节点
      */
+    private static TreeNode pre, head;
+
     public static TreeNode treeToDoublyList(TreeNode root) {
-        return null;
+        if (root == null) return null;
+        dfs_ttd(root);
+        head.left = pre;
+        pre.right = head;
+        return head;
+    }
+
+    private static void dfs_ttd(TreeNode cur) {
+        if (cur == null) return;
+        dfs_ttd(cur.left);
+        if (pre == null) {
+            head = cur;
+        } else {
+            pre.right = cur;
+        }
+        cur.left = pre;
+        pre = cur;
+        dfs_ttd(cur.right);
     }
 
     /**
@@ -916,9 +964,35 @@ public class JZO {
      * 输入一个字符串，打印出该字符串中字符的所有排列。
      * 你可以以任意顺序返回这个字符串数组，但里面不能有重复元素。
      * 示例: 输入：s = "abc"  输出：["abc","acb","bac","bca","cab","cba"]
+     * Tips：共有n*(n-1)*...1种排列，分别固定a、b、c到第一位，然后固定第2、3位，用数组交换的方式
+     * DFS+剪枝
      */
+    private static char[] arr_p;
+    private static List<String> res_p = new ArrayList<>();
+
     public static String[] permutation(String s) {
-        return null;
+        if (s == null || s.length() == 0) return null;
+        arr_p = s.toCharArray();
+        dfs_permutation(0);
+        return res_p.toArray(new String[res_p.size()]);
+    }
+
+    private static void dfs_permutation(int x) {
+        if (x == arr_p.length - 1) {
+            res_p.add(String.valueOf(arr_p));
+            return;
+        }
+        for (int i = x; i < arr_p.length; i++) {
+            swap_p(arr_p, x, i);
+            dfs_permutation(x + 1);
+            swap_p(arr_p, x, i);
+        }
+    }
+
+    private static void swap_p(char[] nums, int l, int r) {
+        char tmp = nums[l];
+        nums[l] = nums[r];
+        nums[r] = tmp;
     }
 
     /**
@@ -926,9 +1000,25 @@ public class JZO {
      * 数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。
      * 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
      * 示例 1: 输入: [1, 2, 3, 2, 2, 2, 5, 4, 2]  输出: 2
+     * Tips：摩尔投票法，每次从数组中找出一对不同元素删除，因为一定存在超过一半的数字，遍历完数组剩下的就是出现超过一半的数字
+     * 延伸：
+     * 1.出现超过1/3的数字，则每次找出3个不同元素删除
+     * 2.出现超过1/k的数字，则每次找出k个不同元素删除
      */
     public static int majorityElement(int[] nums) {
-        return -1;
+        int re = 0, count = 0;
+        for (int x : nums) {
+            if (count == 0) {
+                //初始化
+                re = x;
+                count = 1;
+            } else if (re == x) {
+                count++;
+            } else {
+                count--;
+            }
+        }
+        return re;
     }
 
     /**
@@ -940,9 +1030,38 @@ public class JZO {
      * 示例 2：
      * 输入：arr = [0,1,2,1], k = 1
      * 输出：[0]
+     * Tips：利用快排"划分"的思想，每次划分，都有index，index左边比index小，右边比index大，当index=k时，取左边结果
      */
     public static int[] getLeastNumbers(int[] arr, int k) {
-        return null;
+        if (arr == null || arr.length == 0 || k <= 0) return null;
+        if (k >= arr.length) return arr;
+        int l = 0;
+        int h = arr.length - 1;
+        int index = partition_getLeastNumbers(arr, l, h);
+        while (index != k) {
+            if (index > k) {
+                h = index - 1;
+            } else {
+                l = index + 1;
+            }
+            index = partition_getLeastNumbers(arr, l, h);
+        }
+        int[] re = new int[k];
+        for (int i = 0; i < k; i++) {
+            re[i] = arr[i];
+        }
+        return re;
+    }
+
+    private static int partition_getLeastNumbers(int[] arr, int low, int high) {
+        int tmp = arr[low];
+        while (low < high) {
+            while (low < high && arr[high] >= tmp) high--;
+            swap(arr, low, high);
+            while (low < high && arr[low] <= tmp) low++;
+            swap(arr, low, high);
+        }
+        return low;
     }
 
 }

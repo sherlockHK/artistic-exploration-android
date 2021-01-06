@@ -174,14 +174,9 @@ public class SortUtil {
         //取一个值为参考值
         int tmp = arr[l];
         while (l < r) {
-            while (l < r && arr[r] >= tmp) {
-                r--;
-            }
+            while (l < r && arr[r] >= tmp) r--;
             swap(arr, l ,r);
-
-            while (l < r && arr[l] <= tmp) {
-                l++;
-            }
+            while (l < r && arr[l] <= tmp) l++;
             swap(arr, l ,r);
         }
         return l;
