@@ -1,7 +1,5 @@
 package com.gakki.hk.artistic_exploration_android.algorithm;
 
-import android.text.TextUtils;
-
 import com.gakki.hk.artistic_exploration_android.data_structure.ListNode;
 import com.gakki.hk.artistic_exploration_android.data_structure.TreeNode;
 
@@ -1062,6 +1060,472 @@ public class JZO {
             swap(arr, low, high);
         }
         return low;
+    }
+
+    /**
+     * 42. 连续子数组的最大和
+     * 输入一个整型数组，数组中的一个或连续多个整数组成一个子数组。求所有子数组的和的最大值。
+     * 要求时间复杂度为O(n)。
+     * 示例1:
+     * 输入: nums = [-2,1,-3,4,-1,2,1,-5,4]
+     * 输出: 6
+     * 解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
+     * Tip： dp
+     */
+    public static int maxSubArray(int[] nums) {
+        if (nums == null || nums.length == 0) return -1;
+        int count = 0;
+        int max = nums[0];
+        for (int cur : nums) {
+            if (count < 0) {
+                count = cur;
+            } else {
+                count += cur;
+            }
+            if (count > max) {
+                max = count;
+            }
+        }
+        return max;
+    }
+
+    /**
+     * 47. 礼物的最大价值(mid)
+     * 在一个 m*n 的棋盘的每一格都放有一个礼物，每个礼物都有一定的价值（价值大于 0）。
+     * 你可以从棋盘的左上角开始拿格子里的礼物，并每次向右或者向下移动一格、直到到达棋盘的右下角。
+     * 给定一个棋盘及其上面的礼物的价值，请计算你最多能拿到多少价值的礼物？
+     * 示例 1:
+     * 输入:
+     * [[1,3,1],
+     *  [1,5,1],
+     *  [4,2,1]]
+     * 输出: 12
+     * 解释: 路径 1→3→5→2→1 可以拿到最多价值的礼物
+     * Tips：dp(i,j)：从棋盘左上到(i,j)能拿到的礼物最大值，状态转移方程： d(i,j) = Max(d(i-1,j), d(i,j-1)) + cur(i,j)
+     */
+    public static int maxValue(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        //初始化第一行
+        for (int i = 1; i < n; i++) {
+            grid[0][i] += grid[0][i - 1];
+        }
+        //初始化第一列
+        for (int i = 1; i < m; i++) {
+            grid[i][0] += grid[i - 1][0];
+        }
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                grid[i][j] = Math.max(grid[i - 1][j], grid[i][j - 1]) + grid[i][j];
+            }
+        }
+        return grid[m - 1][n - 1];
+    }
+
+    /**
+     * 48. 最长不含重复字符的子字符串(mid)
+     * 请从字符串中找出一个最长的不包含重复字符的子字符串，计算该最长子字符串的长度。
+     * 示例 1: 输入: "abcabcbb" 输出: 3
+     * 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+     * 示例 2: 输入: "bbbbb" 输出: 1
+     * 解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
+     * 示例 3: 输入: "pwwkew" 输出: 3
+     * 解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
+     * 请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
+     * Tips：滑动窗口（双指针）
+     */
+    public static int lengthOfLongestSubstring(String s) {
+        if (s == null || s.length() == 0) return 0;
+        int i = 0, max = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        for (int j = 0; j < s.length(); j++) {
+            char key = s.charAt(j);
+            if (map.containsKey(key)) {
+                i = Math.max(i, map.get(key) + 1);
+            }
+            map.put(key, j);
+            max = Math.max(max, j - i + 1);
+        }
+        return max;
+    }
+
+    /**
+     * 50. 第一个只出现一次的字符
+     * 在字符串 s 中找出第一个只出现一次的字符。如果没有，返回一个单空格。 s 只包含小写字母。
+     * 示例:
+     * s = "abaccdeff" 返回 "b"
+     * s = "" 返回 " "
+     * Tips：1.利用哈希表或有序哈希表 2.利用char的值作为数组的下标
+     */
+    public static char firstUniqChar(String s) {
+        int[] letters = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            //优化：c-'a'减少letters占用空间
+            letters[c - 'a'] += 1;
+        }
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (letters[c - 'a'] == 1) {
+                return c;
+            }
+        }
+        return ' ';
+    }
+
+    /**
+     * 52. 两个链表的第一个公共节点
+     * 输入两个链表，找出它们的第一个公共节点。
+     * 输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3
+     * 输出：Reference of the node with value = 8
+     * 输入解释：相交节点的值为 8 （注意，如果两个列表相交则不能为 0）。
+     * 从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。
+     * Tips：双指针，相遇
+     */
+    public static ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode a = headA;
+        ListNode b = headB;
+        while (a != b) {
+            a = a == null ? headB : a.next;
+            b = b == null ? headA : b.next;
+        }
+        return a;
+    }
+
+    /**
+     * 53-1. 在排序数组中查找数字
+     * 统计一个数字在排序数组中出现的次数。
+     * 示例 1:
+     * 输入: nums = [5,7,7,8,8,10], target = 8
+     * 输出: 2
+     * 示例 2:
+     * 输入: nums = [5,7,7,8,8,10], target = 6
+     * 输出: 0
+     * Tips:有序数组查找，二分法查找从左和从右target第一次出现的位置
+     */
+    public static int search_53(int[] nums, int target) {
+        if (nums == null || nums.length == 0) return 0;
+        int i = 0, j = nums.length - 1;
+        while (i <= j) {
+            int m = (i + j) / 2;
+            if (nums[m] > target) {
+                j = m - 1;
+            } else {
+                i = m + 1;
+            }
+        }
+        int right = j;
+        i = 0;
+        j = nums.length - 1;
+        while (i <= j) {
+            int m = (i + j) / 2;
+            if (nums[m] < target) {
+                i = m + 1;
+            } else {
+                j = m - 1;
+            }
+        }
+        int left = i;
+        return right - left + 1;
+    }
+
+    /**
+     * 53-2. 0～n-1中缺失的数字
+     * 一个长度为n-1的递增排序数组中的所有数字都是唯一的，并且每个数字都在范围0～n-1之内。
+     * 在范围0～n-1内的n个数字中有且只有一个数字不在该数组中，请找出这个数字。
+     * 示例 1: 输入: [0,1,3] 输出: 2
+     * 示例 2: 输入: [0,1,2,3,4,5,6,7,9] 输出: 8
+     * Tips:有序数组，二分法
+     */
+    public static int missingNumber(int[] nums) {
+        return -1;
+    }
+
+    /**
+     * 54. 二叉搜索树的第k大节点
+     * 给定一棵二叉搜索树，请找出其中第k大的节点。
+     * 示例 1:
+     * 输入: root = [3,1,4,null,2], k = 1
+     * 3
+     * / \
+     * 1   4
+     * \
+     *  2
+     * 输出: 4
+     * 示例 2:
+     * 输入: root = [5,3,6,2,4,null,null,1], k = 3
+     * 5
+     * / \
+     * 3   6
+     * / \
+     * 2   4
+     * /
+     * 1
+     * 输出: 4
+     */
+    public static int kthLargest(TreeNode root, int k) {
+        if (root == null || k <= 0) return -1;
+        List<Integer> re = new ArrayList<>();
+        traverse_kth(root, re);
+        return re.get(k - 1);
+    }
+
+    private static void traverse_kth(TreeNode t, List<Integer> re) {
+        if (t == null) return;
+        traverse_kth(t.right, re);
+        re.add(t.val);
+        traverse_kth(t.left, re);
+    }
+
+    /**
+     * 55-1.二叉树的深度
+     * 输入一棵二叉树的根节点，求该树的深度。从根节点到叶节点依次经过的节点（含根、叶节点）形成树的一条路径，最长路径的长度为树的深度。
+     * 例如：
+     * 给定二叉树 [3,9,20,null,null,15,7]，
+     * 3
+     * / \
+     * 9  20
+     * /  \
+     * 15   7
+     * 返回它的最大深度 3 。
+     * Tips: 使用递归
+     */
+    public static int maxDepth(TreeNode root) {
+        if (root == null) return 0;
+        return Math.max(maxDepth(root.left), maxDepth((root.right))) + 1;
+    }
+
+    /**
+     * 55-2. 平衡二叉树
+     * 输入一棵二叉树的根节点，判断该树是不是平衡二叉树。如果某二叉树中任意节点的左右子树的深度相差不超过1，那么它就是一棵平衡二叉树。
+     * 示例 1:
+     * 给定二叉树 [3,9,20,null,null,15,7]
+     * 3
+     * / \
+     * 9  20
+     * /  \
+     * 15   7
+     * 返回 true 。
+     * 示例 2:
+     * 给定二叉树 [1,2,2,3,3,null,null,4,4]
+     * 1
+     * / \
+     * 2   2
+     * / \
+     * 3   3
+     * / \
+     * 4   4
+     * 返回 false 。
+     */
+    public static boolean isBalanced(TreeNode root) {
+        if (root == null) return true;
+        return Math.abs(maxDepth(root.left) - maxDepth(root.right)) <= 1 && isBalanced(root.left) && isBalanced(root.right);
+    }
+
+    /**
+     * 56-I. 数组中数字出现的次数(mid)
+     * 一个整型数组 nums 里除两个数字之外，其他数字都出现了两次。
+     * 请写程序找出这两个只出现一次的数字。要求时间复杂度是O(n)，空间复杂度是O(1)。
+     * 示例 1：
+     * 输入：nums = [4,1,4,6]
+     * 输出：[1,6] 或 [6,1]
+     * 示例 2：
+     * 输入：nums = [1,2,10,4,1,4,3,3]
+     * 输出：[2,10] 或 [10,2]
+     */
+    public static int[] singleNumbers(int[] nums) {
+        return null;
+    }
+
+    /**
+     * 56-II. 数组中数字出现的次数 II(mid)
+     * 在一个数组 nums 中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。
+     * 示例 1：
+     * 输入：nums = [3,4,3,3]
+     * 输出：4
+     * 示例 2：
+     * 输入：nums = [9,1,7,9,7,9,7]
+     * 输出：1
+     */
+    public static int singleNumber(int[] nums) {
+        return -1;
+    }
+
+
+    /**
+     * 57 - I.. 和为s的两个数字
+     * 输入一个递增排序的数组和一个数字s，在数组中查找两个数，使得它们的和正好是s。如果有多对数字的和等于s，则输出任意一对即可。
+     * 示例 1：
+     * 输入：nums = [2,7,11,15], target = 9
+     * 输出：[2,7] 或者 [7,2]
+     * 示例 2：
+     * 输入：nums = [10,26,30,31,47,60], target = 40
+     * 输出：[10,30] 或者 [30,10]
+     */
+    public static int[] twoSum(int[] nums, int target) {
+        return null;
+    }
+
+
+    /**
+     * 57 - II. 和为s的连续正数序列
+     * 输入一个正整数 target ，输出所有和为 target 的连续正整数序列（至少含有两个数）。
+     * 序列内的数字由小到大排列，不同序列按照首个数字从小到大排列。
+     * 示例 1：
+     * 输入：target = 9
+     * 输出：[[2,3,4],[4,5]]
+     * 示例 2：
+     * 输入：target = 15
+     * 输出：[[1,2,3,4,5],[4,5,6],[7,8]]
+     */
+    public static int[][] findContinuousSequence(int target) {
+        return null;
+    }
+
+    /**
+     * 58 - I. 翻转单词顺序
+     * 输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。为简单起见，标点符号和普通字母一样处理。例如输入字符串"I am a student. "，则输出"student. a am I"。
+     * 示例 1：
+     * 输入: "the sky is blue"
+     * 输出: "blue is sky the"
+     * 示例 2：
+     * 输入: "  hello world!  "
+     * 输出: "world! hello"
+     * 解释: 输入字符串可以在前面或者后面包含多余的空格，但是反转后的字符不能包括。
+     * 示例 3：
+     * 输入: "a good   example"
+     * 输出: "example good a"
+     * 解释: 如果两个单词间有多余的空格，将反转后单词间的空格减少到只含一个。
+     */
+    public static String reverseWords(String s) {
+        return null;
+    }
+
+    /**
+     * 58 - II. 左旋转字符串
+     * 字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。请定义一个函数实现字符串左旋转操作的功能。
+     * 比如，输入字符串"abcdefg"和数字2，该函数将返回左旋转两位得到的结果"cdefgab"。
+     * 示例 1：
+     * 输入: s = "abcdefg", k = 2
+     * 输出: "cdefgab"
+     * 示例 2：
+     * 输入: s = "lrloseumgh", k = 6
+     * 输出: "umghlrlose"
+     */
+    public static String reverseLeftWords(String s, int n) {
+        return null;
+    }
+
+    /**
+     * 59 - I. 滑动窗口的最大值
+     * 给定一个数组 nums 和滑动窗口的大小 k，请找出所有滑动窗口里的最大值。
+     * 示例:
+     * 输入: nums = [1,3,-1,-3,5,3,6,7], 和 k = 3
+     * 输出: [3,3,5,5,6,7]
+     * 解释:
+     * 滑动窗口的位置                最大值
+     * ---------------               -----
+     * [1  3  -1] -3  5  3  6  7       3
+     * 1 [3  -1  -3] 5  3  6  7       3
+     * 1  3 [-1  -3  5] 3  6  7       5
+     * 1  3  -1 [-3  5  3] 6  7       5
+     * 1  3  -1  -3 [5  3  6] 7       6
+     * 1  3  -1  -3  5 [3  6  7]      7
+     */
+    public static int[] maxSlidingWindow(int[] nums, int k) {
+        return null;
+    }
+
+    /**
+     * 59 - II. 队列的最大值(mid)
+     * 请定义一个队列并实现函数 max_value 得到队列里的最大值，要求函数max_value、push_back 和 pop_front 的均摊时间复杂度都是O(1)。
+     * 若队列为空，pop_front 和 max_value 需要返回 -1
+     * 示例 1：
+     * 输入:
+     * ["MaxQueue","push_back","push_back","max_value","pop_front","max_value"]
+     * [[],[1],[2],[],[],[]]
+     * 输出: [null,null,null,2,1,2]
+     * 示例 2：
+     * 输入:
+     * ["MaxQueue","pop_front","max_value"]
+     * [[],[],[]]
+     * 输出: [null,-1,-1]
+     */
+    static class MaxQueue {
+
+        public MaxQueue() {
+
+        }
+
+        public int max_value() {
+            return -1;
+        }
+
+        public void push_back(int value) {
+
+        }
+
+        public int pop_front() {
+            return -1;
+        }
+    }
+
+    /**
+     * 61. 扑克牌中的顺子
+     * 从扑克牌中随机抽5张牌，判断是不是一个顺子，即这5张牌是不是连续的。
+     * 2～10为数字本身，A为1，J为11，Q为12，K为13，而大、小王为 0 ，可以看成任意数字。A 不能视为 14。
+     * 示例 1: 输入: [1,2,3,4,5]  输出: True
+     * 示例 2: 输入: [0,0,1,2,5]  输出: True
+     */
+    public static boolean isStraight(int[] nums) {
+        return false;
+    }
+
+    /**
+     * 62. 圆圈中最后剩下的数字
+     * 0,1,,n-1这n个数字排成一个圆圈，从数字0开始，每次从这个圆圈里删除第m个数字。求出这个圆圈里剩下的最后一个数字。
+     * 例如，0、1、2、3、4这5个数字组成一个圆圈，从数字0开始每次删除第3个数字，则删除的前4个数字依次是2、0、4、1，因此最后剩下的数字是3。
+     * 示例 1： 输入: n = 5, m = 3  输出: 3
+     * 示例 2： 输入: n = 10, m = 17 输出: 2
+     */
+    public static int lastRemaining(int n, int m) {
+        return -1;
+    }
+
+    /**
+     * 63. 股票的最大利润(mid)
+     * 假设把某股票的价格按照时间先后顺序存储在数组中，请问买卖该股票一次可能获得的最大利润是多少？
+     * 示例 1:
+     * 输入: [7,1,5,3,6,4]
+     * 输出: 5
+     * 解释: 在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。
+     * 注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格。
+     * 示例 2:
+     * 输入: [7,6,4,3,1]
+     * 输出: 0
+     * 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。
+     */
+    public static int maxProfit(int[] prices) {
+        return -1;
+    }
+
+    /**
+     * 64. 求1+2+…+n(mid)
+     * 求 1+2+...+n ，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。
+     * 示例 1： 输入: n = 3 输出: 6
+     * 示例 2： 输入: n = 9 输出: 45
+     */
+    public static int sumNums(int n) {
+        return -1;
+    }
+
+    /**
+     * 65. 不用加减乘除做加法
+     * 写一个函数，求两个整数之和，要求在函数体内不得使用 “+”、“-”、“*”、“/” 四则运算符号。
+     * 示例: 输入: a = 1, b = 1 输出: 2
+     */
+    public static int add(int a, int b) {
+        return -1;
     }
 
 }

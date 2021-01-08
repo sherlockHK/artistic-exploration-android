@@ -55,7 +55,8 @@ public class JZOTest {
     }
 
     @Test
-    public void test_7() {}
+    public void test_7() {
+    }
 
     @Test
     public void test_9() {
@@ -67,10 +68,10 @@ public class JZOTest {
         int re2 = cQueue.deleteHead();
         int re3 = cQueue.deleteHead();
         int re4 = cQueue.deleteHead();
-        Assert.assertEquals(re1,1);
-        Assert.assertEquals(re2,2);
-        Assert.assertEquals(re3,3);
-        Assert.assertEquals(re4,-1);
+        Assert.assertEquals(re1, 1);
+        Assert.assertEquals(re2, 2);
+        Assert.assertEquals(re3, 3);
+        Assert.assertEquals(re4, -1);
     }
 
     @Test
@@ -79,10 +80,10 @@ public class JZOTest {
         int re2 = JZO.fib(1);
         int re3 = JZO.fib(2);
         int re4 = JZO.fib(5);
-        Assert.assertEquals(re1,0);
-        Assert.assertEquals(re2,1);
-        Assert.assertEquals(re3,1);
-        Assert.assertEquals(re4,5);
+        Assert.assertEquals(re1, 0);
+        Assert.assertEquals(re2, 1);
+        Assert.assertEquals(re3, 1);
+        Assert.assertEquals(re4, 5);
     }
 
     @Test
@@ -90,23 +91,23 @@ public class JZOTest {
         int re1 = JZO.numWays(0);
         int re2 = JZO.numWays(2);
         int re3 = JZO.numWays(7);
-        Assert.assertEquals(re1,1);
-        Assert.assertEquals(re2,2);
-        Assert.assertEquals(re3,21);
+        Assert.assertEquals(re1, 1);
+        Assert.assertEquals(re2, 2);
+        Assert.assertEquals(re3, 21);
     }
 
     @Test
     public void test_11() {
         int re1 = JZO.minArray1(new int[]{3, 4, 5, 1, 2});
         int re2 = JZO.minArray1(new int[]{2, 2, 2, 0, 1});
-        int re3 = JZO.minArray1(new int[]{1,0,1,1,1});
+        int re3 = JZO.minArray1(new int[]{1, 0, 1, 1, 1});
         Assert.assertEquals(re1, 1);
         Assert.assertEquals(re2, 0);
         Assert.assertEquals(re3, 0);
 
         int re4 = JZO.minArray2(new int[]{3, 4, 5, 1, 2});
         int re5 = JZO.minArray2(new int[]{2, 2, 2, 0, 1});
-        int re6 = JZO.minArray2(new int[]{1,0,1,1,1});
+        int re6 = JZO.minArray2(new int[]{1, 0, 1, 1, 1});
         Assert.assertEquals(re4, 1);
         Assert.assertEquals(re5, 0);
         Assert.assertEquals(re6, 0);
@@ -115,9 +116,9 @@ public class JZOTest {
     @Test
     public void test_12() {
         char[][] matrix = new char[][]{
-                new char[]{'a','b','c','e'},
-                new char[]{'s','f','c','s'},
-                new char[]{'a','d','e','e'}};
+                new char[]{'a', 'b', 'c', 'e'},
+                new char[]{'s', 'f', 'c', 's'},
+                new char[]{'a', 'd', 'e', 'e'}};
         boolean re1 = JZO.exist(matrix, "abce");
         boolean re2 = JZO.exist(matrix, "sfcs");
         boolean re3 = JZO.exist(matrix, "bfce");
@@ -181,9 +182,9 @@ public class JZOTest {
         int[] re3 = JZO.printNumbers(3);
         Assert.assertEquals(re1.length, 9);
         Assert.assertEquals(re2.length, 99);
-        Assert.assertEquals(re2[re2.length -1], 99);
+        Assert.assertEquals(re2[re2.length - 1], 99);
         Assert.assertEquals(re3.length, 999);
-        Assert.assertEquals(re3[re3.length -1], 999);
+        Assert.assertEquals(re3[re3.length - 1], 999);
     }
 
     @Test
@@ -192,9 +193,9 @@ public class JZOTest {
         ListNode node2 = new ListNode(5);
         ListNode node3 = new ListNode(1);
         ListNode node4 = new ListNode(9);
-        head.next =node2;
-        node2.next =node3;
-        node3.next =node4;
+        head.next = node2;
+        node2.next = node3;
+        node3.next = node4;
         ListNode re1 = JZO.deleteNode(head, 5);
         Assert.assertEquals(re1.val, 4);
         Assert.assertEquals(re1.next.val, 1);
@@ -204,7 +205,8 @@ public class JZOTest {
     }
 
     @Test
-    public void test_20() {}
+    public void test_20() {
+    }
 
     @Test
     public void test_21() {
@@ -217,14 +219,14 @@ public class JZOTest {
 
         int[] nums2 = {2, 2, 3, 5, 6, 1, 8, 10};
         int[] re2 = JZO.exchange(nums2);
-        Assert.assertEquals(re2[0]%2, 1);
-        Assert.assertEquals(re2[1]%2, 1);
-        Assert.assertEquals(re2[2]%2, 1);
-        Assert.assertEquals(re2[3]%2, 0);
-        Assert.assertEquals(re2[4]%2, 0);
-        Assert.assertEquals(re2[5]%2, 0);
-        Assert.assertEquals(re2[6]%2, 0);
-        Assert.assertEquals(re2[7]%2, 0);
+        Assert.assertEquals(re2[0] % 2, 1);
+        Assert.assertEquals(re2[1] % 2, 1);
+        Assert.assertEquals(re2[2] % 2, 1);
+        Assert.assertEquals(re2[3] % 2, 0);
+        Assert.assertEquals(re2[4] % 2, 0);
+        Assert.assertEquals(re2[5] % 2, 0);
+        Assert.assertEquals(re2[6] % 2, 0);
+        Assert.assertEquals(re2[7] % 2, 0);
     }
 
     @Test
@@ -374,11 +376,11 @@ public class JZOTest {
         int re3 = re.get(1).get(1);
         int re4 = re.get(2).get(0);
         int re5 = re.get(2).get(1);
-        Assert.assertEquals( re1, 3);
-        Assert.assertEquals( re2, 9);
-        Assert.assertEquals( re3, 20);
-        Assert.assertEquals( re4, 15);
-        Assert.assertEquals( re5, 7);
+        Assert.assertEquals(re1, 3);
+        Assert.assertEquals(re2, 9);
+        Assert.assertEquals(re3, 20);
+        Assert.assertEquals(re4, 15);
+        Assert.assertEquals(re5, 7);
     }
 
     @Test
@@ -390,11 +392,11 @@ public class JZOTest {
         int re3 = re.get(1).get(1);
         int re4 = re.get(2).get(0);
         int re5 = re.get(2).get(1);
-        Assert.assertEquals( re1, 3);
-        Assert.assertEquals( re2, 20);
-        Assert.assertEquals( re3, 9);
-        Assert.assertEquals( re4, 15);
-        Assert.assertEquals( re5, 7);
+        Assert.assertEquals(re1, 3);
+        Assert.assertEquals(re2, 20);
+        Assert.assertEquals(re3, 9);
+        Assert.assertEquals(re4, 15);
+        Assert.assertEquals(re5, 7);
     }
 
     @Test
@@ -455,25 +457,156 @@ public class JZOTest {
     public void test_39() {
         int re1 = JZO.majorityElement(new int[]{1, 2, 3, 2, 2, 2, 5, 4, 2});
         int re2 = JZO.majorityElement(new int[]{2});
-        int re3 = JZO.majorityElement(new int[]{1,1,1,2,2});
-        Assert.assertEquals(re1,2);
-        Assert.assertEquals(re2,2);
-        Assert.assertEquals(re3,1);
+        int re3 = JZO.majorityElement(new int[]{1, 1, 1, 2, 2});
+        Assert.assertEquals(re1, 2);
+        Assert.assertEquals(re2, 2);
+        Assert.assertEquals(re3, 1);
     }
 
     @Test
     public void test_40() {
         int[] re = JZO.getLeastNumbers(new int[]{5, 3, 1, 7, 8, 2, 10, 4, 5}, 4);
-        Assert.assertTrue(re[0] <=4 );
-        Assert.assertTrue(re[1] <=4 );
-        Assert.assertTrue(re[2] <=4 );
-        Assert.assertTrue(re[3] <=4 );
+        Assert.assertTrue(re[0] <= 4);
+        Assert.assertTrue(re[1] <= 4);
+        Assert.assertTrue(re[2] <= 4);
+        Assert.assertTrue(re[3] <= 4);
 
         int[] re1 = JZO.getLeastNumbers(new int[]{1, 3, 2, 1, 3, 2, 1, 3, 2}, 4);
-        Assert.assertTrue(re1[0] <=2 );
-        Assert.assertTrue(re1[1] <=2 );
-        Assert.assertTrue(re1[2] <=2 );
-        Assert.assertTrue(re1[3] <=2 );
+        Assert.assertTrue(re1[0] <= 2);
+        Assert.assertTrue(re1[1] <= 2);
+        Assert.assertTrue(re1[2] <= 2);
+        Assert.assertTrue(re1[3] <= 2);
     }
+
+    @Test
+    public void test_42() {
+        int re = JZO.maxSubArray(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4});
+        Assert.assertEquals(re, 6);
+    }
+
+    @Test
+    public void test_47() {
+        int[][] matrix = new int[][]{
+                new int[]{1, 3, 1},
+                new int[]{1, 5, 1},
+                new int[]{4, 2, 1}};
+        int re = JZO.maxValue(matrix);
+        Assert.assertEquals(re, 12);
+    }
+
+    @Test
+    public void test_48() {
+        int re1 = JZO.lengthOfLongestSubstring("abcabcbb");
+        int re2 = JZO.lengthOfLongestSubstring("bbbbb");
+        int re3 = JZO.lengthOfLongestSubstring("abba");
+        int re4 = JZO.lengthOfLongestSubstring("abc");
+        Assert.assertEquals(re1, 3);
+        Assert.assertEquals(re2, 1);
+        Assert.assertEquals(re3, 2);
+        Assert.assertEquals(re4, 3);
+    }
+
+    @Test
+    public void test_50() {
+        char re1 = JZO.firstUniqChar("abaccdeff");
+        char re2 = JZO.firstUniqChar("aadadaad");
+        char re3 = JZO.firstUniqChar("cc");
+        Assert.assertEquals(re1, 'b');
+        Assert.assertEquals(re2, ' ');
+        Assert.assertEquals(re3, ' ');
+    }
+
+    @Test
+    public void test_52() {
+        ListNode sameNode = new ListNode(8, new ListNode(4, new ListNode(5)));
+        ListNode headA = new ListNode(4, new ListNode(1, sameNode));
+        ListNode headB = new ListNode(5, new ListNode(0, new ListNode(1, sameNode)));
+        ListNode re = JZO.getIntersectionNode(headA, headB);
+        Assert.assertEquals(re, sameNode);
+    }
+
+    @Test
+    public void test_53_1() {
+        int re1 = JZO.search_53(new int[]{5, 7, 7, 8, 8, 10}, 7);
+        int re2 = JZO.search_53(new int[]{5, 7, 7, 8, 8, 10}, 8);
+        int re3 = JZO.search_53(new int[]{5, 7, 7, 8, 8, 10}, 10);
+        int re4 = JZO.search_53(new int[]{5, 7, 7, 8, 8, 10}, 6);
+        Assert.assertEquals(re1, 2);
+        Assert.assertEquals(re2, 2);
+        Assert.assertEquals(re3, 1);
+        Assert.assertEquals(re4, 0);
+    }
+
+    @Test
+    public void test_53_2() {
+    }
+
+    @Test
+    public void test_54() {
+        TreeNode root = new TreeNode(5, new TreeNode(3, new TreeNode(2, new TreeNode(1), null), new TreeNode(4)), new TreeNode(6));
+        int re1 = JZO.kthLargest(root, 1);
+        int re2 = JZO.kthLargest(root, 2);
+        int re3 = JZO.kthLargest(root, 3);
+        Assert.assertEquals(re1, 6);
+        Assert.assertEquals(re2, 5);
+        Assert.assertEquals(re3, 4);
+    }
+
+    @Test
+    public void test_55_1() {
+        TreeNode root = new TreeNode(5, new TreeNode(3, new TreeNode(2, new TreeNode(1), null), new TreeNode(4)), new TreeNode(6));
+        int re = JZO.maxDepth(root);
+        Assert.assertEquals(re, 4);
+    }
+
+    @Test
+    public void test_55_2() {
+        TreeNode t1 = new TreeNode(1, new TreeNode(2, new TreeNode(3, new TreeNode(4), new TreeNode(4)), new TreeNode(3)), new TreeNode(2));
+        TreeNode t2 = new TreeNode(5, new TreeNode(3, new TreeNode(2), new TreeNode(4)), new TreeNode(6));
+        boolean re1 = JZO.isBalanced(t1);
+        boolean re2 = JZO.isBalanced(t2);
+        Assert.assertFalse(re1);
+        Assert.assertTrue(re2);
+    }
+
+    @Test
+    public void test_56_1() {}
+
+    @Test
+    public void test_56_2() {}
+
+    @Test
+    public void test_57_1() {}
+
+    @Test
+    public void test_57_2() {}
+
+    @Test
+    public void test_58_1() {}
+
+    @Test
+    public void test_58_2() {}
+
+    @Test
+    public void test_59_1() {}
+
+    @Test
+    public void test_59_2() {}
+
+    @Test
+    public void test_61() {}
+
+    @Test
+    public void test_62() {}
+
+    @Test
+    public void test_63() {}
+
+    @Test
+    public void test_64() {}
+
+    @Test
+    public void test_65() {}
+
 
 }

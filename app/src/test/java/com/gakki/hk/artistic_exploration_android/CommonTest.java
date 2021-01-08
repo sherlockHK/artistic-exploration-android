@@ -4,6 +4,7 @@ import com.gakki.hk.artistic_exploration_android.algorithm.SearchUtil;
 import com.gakki.hk.artistic_exploration_android.algorithm.SortUtil;
 import com.gakki.hk.artistic_exploration_android.data_structure.TreeStructure;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -28,10 +29,12 @@ public class CommonTest {
     @Test
     public void test_binary_search1() throws Exception {
         int[] arr = {1,3,5,7,7,9,13};
-        int re1 = SearchUtil.binarySearch3(arr, 6);
+        int re1 = SearchUtil.binarySearch3(arr, 3);
         int re2 = SearchUtil.binarySearch3(arr, 7);
-        int re3 = SearchUtil.binarySearch3(arr, 8);
-        System.out.println("re1：" + re1 + " | " + "re2：" + re2 + " | " + "re3：" + re3);
+        int re3 = SearchUtil.binarySearch3(arr, 9);
+        Assert.assertEquals(re1, 1);
+        Assert.assertEquals(re2, 3);
+        Assert.assertEquals(re3, 5);
     }
 
 

@@ -58,15 +58,15 @@ public class SearchUtil {
      */
     public static int binarySearch3(int[] arr, int target) {
         int l = 0;
-        int h = arr.length;
+        int h = arr.length -1;
         int mid;
-        while (l < h) {
+        while (l <= h) {
             mid = l + (h-l)/2;
             //中位数比目标值小，左边界移到中位数右1位
             if (arr[mid] < target){
                 l = mid + 1;
             }else {
-                h = mid;
+                h = mid -1;
             }
         }
         return l;
