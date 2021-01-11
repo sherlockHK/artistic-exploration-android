@@ -4,6 +4,7 @@ import com.gakki.hk.artistic_exploration_android.data_structure.ListNode;
 import com.gakki.hk.artistic_exploration_android.data_structure.TreeNode;
 
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -1353,7 +1354,7 @@ public class JZO {
 
 
     /**
-     * 57 - I.. 和为s的两个数字
+     * 57.和为s的两个数字
      * 输入一个递增排序的数组和一个数字s，在数组中查找两个数，使得它们的和正好是s。如果有多对数字的和等于s，则输出任意一对即可。
      * 示例 1：
      * 输入：nums = [2,7,11,15], target = 9
@@ -1362,8 +1363,33 @@ public class JZO {
      * 输入：nums = [10,26,30,31,47,60], target = 40
      * 输出：[10,30] 或者 [30,10]
      */
-    public static int[] twoSum(int[] nums, int target) {
-        return null;
+    //时间复杂度O(n),空间复杂度O(n)
+    public static int[] twoSum1(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        int[] re = new int[2];
+        for (int i = 0; i < nums.length; i++) {
+            int num = nums[i];
+            if (map.containsKey(num)) {
+                re[0] = target - num;
+                re[1] = num;
+                break;
+            } else {
+                map.put(target - num, i);
+            }
+        }
+        return re;
+    }
+
+    //Tips：对撞双指针，时间复杂度O(n),空间复杂度O(1)
+    public static int[] twoSum2(int[] nums, int target) {
+        int i = 0, j = nums.length - 1;
+        while (i < j) {
+            int count = nums[i] + nums[j];
+            if (count > target) j--;
+            else if (count < target) i++;
+            else return new int[]{nums[i], nums[j]};
+        }
+        return new int[0];
     }
 
 
@@ -1377,19 +1403,38 @@ public class JZO {
      * 示例 2：
      * 输入：target = 15
      * 输出：[[1,2,3,4,5],[4,5,6],[7,8]]
+     * Tips：滑动窗口
      */
     public static int[][] findContinuousSequence(int target) {
-        return null;
+        int i = 1, j = 2;
+        List<int[]> re = new ArrayList<>();
+        while (i < j) {
+            int count = (i + j) * (j - i + 1) / 2;
+            if (count < target) {
+                j++;
+            } else if (count > target) {
+                i++;
+            } else {
+                int[] arr = new int[j - i + 1];
+                for (int k = i; k <= j; k++) {
+                    arr[k - i] = k;
+                }
+                re.add(arr);
+                i++;
+            }
+        }
+        return re.toArray(new int[re.size()][]);
     }
 
     /**
      * 58 - I. 翻转单词顺序
-     * 输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。为简单起见，标点符号和普通字母一样处理。例如输入字符串"I am a student. "，则输出"student. a am I"。
+     * 输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。为简单起见，标点符号和普通字母一样处理。
+     * 例如输入字符串"I am a student. "，则输出"student. a am I"。
      * 示例 1：
      * 输入: "the sky is blue"
      * 输出: "blue is sky the"
      * 示例 2：
-     * 输入: "  hello world!  "
+     * 输入: "  hello world!  "
      * 输出: "world! hello"
      * 解释: 输入字符串可以在前面或者后面包含多余的空格，但是反转后的字符不能包括。
      * 示例 3：
@@ -1398,7 +1443,16 @@ public class JZO {
      * 解释: 如果两个单词间有多余的空格，将反转后单词间的空格减少到只含一个。
      */
     public static String reverseWords(String s) {
-        return null;
+        s = s.trim();
+        StringBuilder sb = new StringBuilder();
+        int j = s.length() - 1, i = j;
+        while (i >= 0) {
+            while (i >= 0 && s.charAt(i) != ' ') i--;
+            sb.append(s.substring(i + 1, j + 1)).append(" ");
+            while (i >= 0 && s.charAt(i) == ' ') i--;
+            j = i;
+        }
+        return sb.toString().trim();
     }
 
     /**
@@ -1413,7 +1467,18 @@ public class JZO {
      * 输出: "umghlrlose"
      */
     public static String reverseLeftWords(String s, int n) {
-        return null;
+        if (s == null || s.length() ==0) return "";
+        int i = 0, j = i + n;
+        StringBuilder sb = new StringBuilder();
+        while (j < s.length()){
+            sb.append(s.charAt(j));
+            j++;
+        }
+        while (i<n){
+            sb.append(s.charAt(i));
+            i++;
+        }
+        return sb.toString();
     }
 
     /**
@@ -1431,9 +1496,27 @@ public class JZO {
      * 1  3  -1 [-3  5  3] 6  7       5
      * 1  3  -1  -3 [5  3  6] 7       6
      * 1  3  -1  -3  5 [3  6  7]      7
+     * Tips: 关键点利用双端队列实现O（1）获取最大值
      */
     public static int[] maxSlidingWindow(int[] nums, int k) {
-        return null;
+        if(nums.length == 0 || k == 0) return new int[0];
+        Deque<Integer> deque = new LinkedList<>();
+        int[] res = new int[nums.length - k + 1];
+        for(int i = 0; i < k; i++) { // 未形成窗口
+            while(!deque.isEmpty() && deque.peekLast() < nums[i])
+                deque.removeLast();
+            deque.addLast(nums[i]);
+        }
+        res[0] = deque.peekFirst();
+        for(int i = k; i < nums.length; i++) { // 形成窗口后
+            if(deque.peekFirst() == nums[i - k])
+                deque.removeFirst();
+            while(!deque.isEmpty() && deque.peekLast() < nums[i])
+                deque.removeLast();
+            deque.addLast(nums[i]);
+            res[i - k + 1] = deque.peekFirst();
+        }
+        return res;
     }
 
     /**
@@ -1452,19 +1535,11 @@ public class JZO {
      * 输出: [null,-1,-1]
      */
     static class MaxQueue {
-
-        public MaxQueue() {
-
-        }
-
+        public MaxQueue() {}
         public int max_value() {
             return -1;
         }
-
-        public void push_back(int value) {
-
-        }
-
+        public void push_back(int value) {}
         public int pop_front() {
             return -1;
         }
@@ -1504,9 +1579,23 @@ public class JZO {
      * 输入: [7,6,4,3,1]
      * 输出: 0
      * 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。
+     * Tips：暴力法时间复杂度O（n^2），考虑用dp降低时间复杂度，状态转移方程：dp(i) = Max(dp(i-1), price[i]-min(0:i))
      */
     public static int maxProfit(int[] prices) {
-        return -1;
+        if (prices == null || prices.length <= 1) return 0;
+        int[] dp = new int[prices.length];
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < prices.length; i++) {
+            if (i == 0) {
+                dp[i] = 0;
+            } else {
+                dp[i] = Math.max(dp[i - 1], prices[i] - min);
+            }
+            if (prices[i] < min) {
+                min = prices[i];
+            }
+        }
+        return dp[prices.length - 1];
     }
 
     /**
@@ -1514,18 +1603,11 @@ public class JZO {
      * 求 1+2+...+n ，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。
      * 示例 1： 输入: n = 3 输出: 6
      * 示例 2： 输入: n = 9 输出: 45
+     * Tip: 利用短路效应终止递归 (n>1不成立则右侧表达式不会执行)
      */
     public static int sumNums(int n) {
-        return -1;
-    }
-
-    /**
-     * 65. 不用加减乘除做加法
-     * 写一个函数，求两个整数之和，要求在函数体内不得使用 “+”、“-”、“*”、“/” 四则运算符号。
-     * 示例: 输入: a = 1, b = 1 输出: 2
-     */
-    public static int add(int a, int b) {
-        return -1;
+        boolean x = n > 1 && ( n += sumNums(n - 1)) > 0;
+        return n;
     }
 
 }

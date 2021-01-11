@@ -576,19 +576,61 @@ public class JZOTest {
     public void test_56_2() {}
 
     @Test
-    public void test_57_1() {}
+    public void test_57_1() {
+        int[] re1 = JZO.twoSum1(new int[]{2,7,11,15}, 9);
+        int[] re2 = JZO.twoSum1(new int[]{10, 26, 30, 31, 47, 60}, 40);
+        Assert.assertEquals(re1[0], 2);
+        Assert.assertEquals(re1[1], 7);
+        Assert.assertEquals(re2[0], 10);
+        Assert.assertEquals(re2[1], 30);
+
+        int[] re3 = JZO.twoSum2(new int[]{2,7,11,15}, 9);
+        int[] re4 = JZO.twoSum2(new int[]{10, 26, 30, 31, 47, 60}, 40);
+        Assert.assertEquals(re3[0], 2);
+        Assert.assertEquals(re3[1], 7);
+        Assert.assertEquals(re4[0], 10);
+        Assert.assertEquals(re4[1], 30);
+    }
 
     @Test
-    public void test_57_2() {}
+    public void test_57_2() {
+        int[][] re1 = JZO.findContinuousSequence(15);
+        Assert.assertEquals(re1[0][0], 1);
+        Assert.assertEquals(re1[0][4], 5);
+        Assert.assertEquals(re1[1][0], 4);
+        Assert.assertEquals(re1[1][2], 6);
+        Assert.assertEquals(re1[2][0], 7);
+        Assert.assertEquals(re1[2][1], 8);
+    }
 
     @Test
-    public void test_58_1() {}
+    public void test_58_1() {
+        String re1 = JZO.reverseWords("the sky is blue");
+        String re2 = JZO.reverseWords("  hello world!  ");
+        String re3 = JZO.reverseWords("a good  example");
+        Assert.assertEquals(re1, "blue is sky the");
+        Assert.assertEquals(re2, "world! hello");
+        Assert.assertEquals(re3, "example good a");
+    }
 
     @Test
-    public void test_58_2() {}
+    public void test_58_2() {
+        String re1 = JZO.reverseLeftWords("abcdefg", 2);
+        String re2 = JZO.reverseLeftWords("lrloseumgh", 6);
+        Assert.assertEquals(re1, "cdefgab");
+        Assert.assertEquals(re2, "umghlrlose");
+    }
 
     @Test
-    public void test_59_1() {}
+    public void test_59_1() {
+        int[] re = JZO.maxSlidingWindow(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 3);
+        Assert.assertEquals(re[0], 3);
+        Assert.assertEquals(re[1], 3);
+        Assert.assertEquals(re[2], 5);
+        Assert.assertEquals(re[3], 5);
+        Assert.assertEquals(re[4], 6);
+        Assert.assertEquals(re[5], 7);
+    }
 
     @Test
     public void test_59_2() {}
@@ -600,13 +642,19 @@ public class JZOTest {
     public void test_62() {}
 
     @Test
-    public void test_63() {}
+    public void test_63() {
+        int re1 = JZO.maxProfit(new int[]{7, 1, 5, 3, 6, 4});
+        int re2 = JZO.maxProfit(new int[]{7,6,4,3,1});
+        Assert.assertEquals(re1, 5);
+        Assert.assertEquals(re2, 0);
+    }
 
     @Test
-    public void test_64() {}
-
-    @Test
-    public void test_65() {}
-
+    public void test_64() {
+        int re1 = JZO.sumNums(3);
+        int re2 = JZO.sumNums(9);
+        Assert.assertEquals(re1, 6);
+        Assert.assertEquals(re2, 45);
+    }
 
 }
