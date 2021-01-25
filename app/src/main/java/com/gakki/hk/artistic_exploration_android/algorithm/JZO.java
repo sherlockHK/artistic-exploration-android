@@ -212,13 +212,13 @@ public class JZO {
         int l = 0;
         int r = numbers.length - 1;
         while (l < r) {
-            int mid = l + (r - l) / 2;
-            if (numbers[mid] > numbers[r]) {
+            int m = l + (r - l) / 2;
+            if (numbers[m] > numbers[r]) {
                 //在左序列
-                l = mid + 1;
-            } else if (numbers[mid] < numbers[r]) {
+                l = m + 1;
+            } else if (numbers[m] < numbers[r]) {
                 //在右序列
-                r = mid;
+                r = m;
             } else {
                 //无法判断是左序列还是右序列，缩小判断范围，eg:[1,0,1,1,1]  [1,1,1,0,1]
                 r--;
@@ -638,7 +638,7 @@ public class JZO {
     }
 
     /**
-     * 29.顺时针打印矩阵
+     * 29.顺时针打印矩阵（螺旋矩阵）
      * 输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字。
      * 示例 1：输入：matrix = [[1,2,3],[4,5,6],[7,8,9]] 输出：[1,2,3,6,9,8,7,4,5]
      * 示例 2：输入：matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]] 输出：[1,2,3,4,8,12,11,10,9,5,6,7]
@@ -869,7 +869,6 @@ public class JZO {
      */
     private static LinkedList<Integer> stackPath = new LinkedList<>();
     private static final List<List<Integer>> pathSumRe = new ArrayList<>();
-
     public static List<List<Integer>> pathSum(TreeNode root, int sum) {
         if (root == null || sum < 0) {
             return pathSumRe;
@@ -877,7 +876,6 @@ public class JZO {
         traverseTree(root, sum);
         return pathSumRe;
     }
-
     private static void traverseTree(TreeNode root, int tar) {
         if (root == null) return;
         stackPath.addLast(root.val);
