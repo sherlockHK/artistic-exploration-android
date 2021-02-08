@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.gakki.hk.artistic_exploration_android.intent_filter.IntentFilterTestActivity">
+        <activity android:name=".android.intent_filter.IntentFilterTestActivity">
             <intent-filter>
                 <action android:name="artistic_exploration_android" />
                 <action android:name="artistic_exploration_android_1" />
@@ -43,40 +43,40 @@
         </activity>
 
         <activity
-            android:name="com.gakki.hk.artistic_exploration_android.ipc.IpcTestActivity"
+            android:name=".android.ipc.IpcTestActivity"
             android:process="com.gakki.hk.artistic_exploration_android.remote" />
 
-        <activity android:name=".ipc.messenger.MessengerActivity" />
-        <activity android:name=".ipc.AIDL.AIDLBookManagerActivity" />
-        <activity android:name=".ipc.content_provider.BookContentProviderActivity"/>
-        <activity android:name=".ipc.socket.TcpClientActivity" />
-        <activity android:name=".view_event_mechanism.BasicScrollActivity" />
-        <activity android:name=".view_event_mechanism.ScrollConflictActivity" />
-        <activity android:name=".thread_and_threadPool.HandlerThreadActivity" />
-        <activity android:name=".thread_and_threadPool.AsyncTaskActivity" />
-        <activity android:name=".thread_and_threadPool.IntentServiceActivity" />
-        <activity android:name=".ipc.AIDL.RemoteServiceActivity" />
+        <activity android:name=".android.ipc.messenger.MessengerActivity" />
+        <activity android:name=".android.ipc.AIDL.AIDLBookManagerActivity" />
+        <activity android:name=".android.ipc.content_provider.BookContentProviderActivity"/>
+        <activity android:name=".android.ipc.socket.TcpClientActivity" />
+        <activity android:name=".android.view_event_mechanism.BasicScrollActivity" />
+        <activity android:name=".android.view_event_mechanism.ScrollConflictActivity" />
+        <activity android:name=".android.thread_and_threadPool.HandlerThreadActivity" />
+        <activity android:name=".android.thread_and_threadPool.AsyncTaskActivity" />
+        <activity android:name=".android.thread_and_threadPool.IntentServiceActivity" />
+        <activity android:name=".android.ipc.AIDL.RemoteServiceActivity" />
 
         <service
-            android:name=".ipc.messenger.MessengerService"
+            android:name=".android.ipc.messenger.MessengerService"
             android:process=":remote" />
 
         <service
-            android:name=".ipc.AIDL.AIDLBookManagerService"
+            android:name=".android.ipc.AIDL.AIDLBookManagerService"
             android:process=":remote" />
 
-        <service android:name=".ipc.socket.TcpServerService"
+        <service android:name=".android.ipc.socket.TcpServerService"
             android:process=":tcpServer"/>
 
-        <service android:name=".thread_and_threadPool.IntentServiceActivity$MyIntentService" />
+        <service android:name=".android.thread_and_threadPool.IntentServiceActivity$MyIntentService" />
 
-        <service android:name=".ipc.AIDL.MyRemoteService"
+        <service android:name=".android.ipc.AIDL.MyRemoteService"
             android:process=":DaemonService"
             android:exported="false"
             android:description="@string/remote_service_desc"/>
 
         <provider
-            android:name=".ipc.content_provider.BookContentProvider"
+            android:name=".android.ipc.content_provider.BookContentProvider"
             android:authorities="com.gakki.hk.artistic_exploration_android.provider"
             android:permission="com.gakki.hk.artistic_exploration_android.permission"
             android:process=":provider"/>

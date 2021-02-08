@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:text="1.自定义视图：继承view，重写onDraw()" />
 
-    <com.gakki.hk.artistic_exploration_android.view_theory.CircleView
+    <com.gakki.hk.artistic_exploration_android.android.view_theory.CircleView
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:layout_margin="20dp"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:text="2.自定义布局: 继承viewGroup，重写onMeasure(), onLayout()" />
 
-    <com.gakki.hk.artistic_exploration_android.view_theory.CustomLayout
+    <com.gakki.hk.artistic_exploration_android.android.view_theory.CustomLayout
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_gravity="center"
@@ -57,5 +57,5 @@
             android:gravity="center"
             android:text="欧阳锋" />
 
-    </com.gakki.hk.artistic_exploration_android.view_theory.CustomLayout>
+    </com.gakki.hk.artistic_exploration_android.android.view_theory.CustomLayout>
 </LinearLayout>

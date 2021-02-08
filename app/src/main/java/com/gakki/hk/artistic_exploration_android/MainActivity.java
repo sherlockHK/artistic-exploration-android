@@ -13,14 +13,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.gakki.hk.artistic_exploration_android.algorithm.AlgorithmFragment;
-import com.gakki.hk.artistic_exploration_android.animation.AnimationFragment;
+import com.gakki.hk.artistic_exploration_android.android.animation.AnimationFragment;
 import com.gakki.hk.artistic_exploration_android.data_structure.DataStructureFragment;
-import com.gakki.hk.artistic_exploration_android.handler.HandlerMechanismFragment;
-import com.gakki.hk.artistic_exploration_android.intent_filter.IntentFilterFragment;
-import com.gakki.hk.artistic_exploration_android.ipc.IpcFragment;
-import com.gakki.hk.artistic_exploration_android.thread_and_threadPool.ThreadAndThreadPoolFragment;
-import com.gakki.hk.artistic_exploration_android.view_event_mechanism.ViewEventMechanismFragment;
-import com.gakki.hk.artistic_exploration_android.view_theory.ViewTheoryFragment;
+import com.gakki.hk.artistic_exploration_android.android.handler.HandlerMechanismFragment;
+import com.gakki.hk.artistic_exploration_android.android.intent_filter.IntentFilterFragment;
+import com.gakki.hk.artistic_exploration_android.android.ipc.IpcFragment;
+import com.gakki.hk.artistic_exploration_android.android.thread_and_threadPool.ThreadAndThreadPoolFragment;
+import com.gakki.hk.artistic_exploration_android.android.view_event_mechanism.ViewEventMechanismFragment;
+import com.gakki.hk.artistic_exploration_android.android.view_theory.ViewTheoryFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
