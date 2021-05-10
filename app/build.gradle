@@ -2,12 +2,11 @@ apply plugin: 'com.android.application'
 //apply from: './study.gradle'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    compileSdkVersion 30
     defaultConfig {
         applicationId "com.gakki.hk.artistic_exploration_android"
         minSdkVersion 18
-        targetSdkVersion 28
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
