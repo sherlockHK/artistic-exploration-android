@@ -2,7 +2,7 @@ package com.gakki.hk.artistic_exploration_android.android.view_event_mechanism;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.gakki.hk.artistic_exploration_android.R;
 
