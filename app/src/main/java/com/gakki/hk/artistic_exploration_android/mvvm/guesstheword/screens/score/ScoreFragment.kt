@@ -52,9 +52,12 @@ class ScoreFragment : Fragment() {
         )
         viewModelFactory = ScoreViewModelFactory(ScoreFragmentArgs.fromBundle(requireArguments()).score)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ScoreViewModel::class.java)
-        viewModel.score.observe(viewLifecycleOwner, Observer { newScore->
-            binding.scoreText.text = newScore.toString()
-        })
+        binding.scoreViewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
+//        viewModel.score.observe(viewLifecycleOwner, Observer { newScore->
+//            binding.scoreText.text = newScore.toString()
+//        })
         // Navigates back to game when button is pressed
         viewModel.eventPlayAgain.observe(viewLifecycleOwner, Observer { playAgain ->
             if (playAgain) {
