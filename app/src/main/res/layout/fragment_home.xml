@@ -12,4 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="intent-filter"/>
+
+    <Button
+        android:id="@+id/btn_mvvm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="mvvm"/>
 </LinearLayout>

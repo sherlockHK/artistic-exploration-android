@@ -81,6 +81,8 @@
             android:permission="com.gakki.hk.artistic_exploration_android.permission"
             android:process=":provider"/>
 
+        <activity android:name=".mvvm.guesstheword.MVVMMainActivity"/>
     </application>
+
 
 </manifest>
